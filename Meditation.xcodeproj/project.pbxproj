@@ -21,6 +21,8 @@
 		446B7F8A278EAE17002B38DD /* Alegreya-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7F278EAE17002B38DD /* Alegreya-Black.ttf */; };
 		446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */; };
 		446B7F8D278EAE17002B38DD /* Alegreya-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */; };
+		44BAE2F8278EBFD0002FFFCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BAE2F7278EBFD0002FFFCE /* LaunchScreen.storyboard */; };
+		44BAE2FA278EC2DD002FFFCE /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAE2F9278EC2DC002FFFCE /* WelcomeScreen.swift */; };
 		6AA6ECC53F0F3AEA0FE1B306 /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Regular.ttf"; sourceTree = "<group>"; };
 		446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Medium.ttf"; sourceTree = "<group>"; };
 		446B7F8E278EAE8E002B38DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		44BAE2F7278EBFD0002FFFCE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		44BAE2F9278EC2DC002FFFCE /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
 		875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meditation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.debug.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,7 +68,6 @@
 				CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */,
 				6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -72,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				446B7F67278E94D0002B38DD /* Meditation */,
+				44BAE2F7278EBFD0002FFFCE /* LaunchScreen.storyboard */,
 				446B7F66278E94D0002B38DD /* Products */,
 				2E1E4DA5B02E25A172B6B646 /* Pods */,
 				BA47FBFDB8B807CDC3845D30 /* Frameworks */,
@@ -89,12 +93,14 @@
 		446B7F67278E94D0002B38DD /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
-				446B7F8E278EAE8E002B38DD /* Info.plist */,
-				446B7F76278EADFD002B38DD /* Fonts */,
-				446B7F68278E94D0002B38DD /* MeditationApp.swift */,
 				446B7F6A278E94D0002B38DD /* ContentView.swift */,
+				44BAE2FB278EC67F002FFFCE /* Welcome Screen */,
+				446B7F8E278EAE8E002B38DD /* Info.plist */,
+				446B7F68278E94D0002B38DD /* MeditationApp.swift */,
 				446B7F6C278E94D1002B38DD /* Assets.xcassets */,
+				44BAE2FC278EC688002FFFCE /* Common */,
 				446B7F6E278E94D1002B38DD /* Preview Content */,
+				446B7F76278EADFD002B38DD /* Fonts */,
 			);
 			path = Meditation;
 			sourceTree = "<group>";
@@ -130,6 +136,21 @@
 				446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */,
 			);
 			path = Alegreya;
+			sourceTree = "<group>";
+		};
+		44BAE2FB278EC67F002FFFCE /* Welcome Screen */ = {
+			isa = PBXGroup;
+			children = (
+				44BAE2F9278EC2DC002FFFCE /* WelcomeScreen.swift */,
+			);
+			path = "Welcome Screen";
+			sourceTree = "<group>";
+		};
+		44BAE2FC278EC688002FFFCE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		BA47FBFDB8B807CDC3845D30 /* Frameworks */ = {
@@ -207,6 +228,7 @@
 				446B7F85278EAE17002B38DD /* Alegreya-MediumItalic.ttf in Resources */,
 				446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */,
 				446B7F70278E94D1002B38DD /* Preview Assets.xcassets in Resources */,
+				44BAE2F8278EBFD0002FFFCE /* LaunchScreen.storyboard in Resources */,
 				446B7F84278EAE17002B38DD /* Alegreya-ExtraBold.ttf in Resources */,
 				446B7F86278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf in Resources */,
 				446B7F6D278E94D1002B38DD /* Assets.xcassets in Resources */,
@@ -264,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BAE2FA278EC2DD002FFFCE /* WelcomeScreen.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
 			);
@@ -404,6 +427,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -435,6 +459,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
