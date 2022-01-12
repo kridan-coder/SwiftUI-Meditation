@@ -11,6 +11,17 @@
 		446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446B7F6A278E94D0002B38DD /* ContentView.swift */; };
 		446B7F6D278E94D1002B38DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F6C278E94D1002B38DD /* Assets.xcassets */; };
 		446B7F70278E94D1002B38DD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F6F278E94D1002B38DD /* Preview Assets.xcassets */; };
+		446B7F83278EAE17002B38DD /* Alegreya-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F78278EAE17002B38DD /* Alegreya-Italic.ttf */; };
+		446B7F84278EAE17002B38DD /* Alegreya-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F79278EAE17002B38DD /* Alegreya-ExtraBold.ttf */; };
+		446B7F85278EAE17002B38DD /* Alegreya-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7A278EAE17002B38DD /* Alegreya-MediumItalic.ttf */; };
+		446B7F86278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7B278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf */; };
+		446B7F87278EAE17002B38DD /* Alegreya-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7C278EAE17002B38DD /* Alegreya-Bold.ttf */; };
+		446B7F88278EAE17002B38DD /* Alegreya-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7D278EAE17002B38DD /* Alegreya-BlackItalic.ttf */; };
+		446B7F89278EAE17002B38DD /* Alegreya-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7E278EAE17002B38DD /* Alegreya-BoldItalic.ttf */; };
+		446B7F8A278EAE17002B38DD /* Alegreya-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7F278EAE17002B38DD /* Alegreya-Black.ttf */; };
+		446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */; };
+		446B7F8D278EAE17002B38DD /* Alegreya-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */; };
+		6AA6ECC53F0F3AEA0FE1B306 /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +30,20 @@
 		446B7F6A278E94D0002B38DD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		446B7F6C278E94D1002B38DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		446B7F6F278E94D1002B38DD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		446B7F78278EAE17002B38DD /* Alegreya-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Italic.ttf"; sourceTree = "<group>"; };
+		446B7F79278EAE17002B38DD /* Alegreya-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-ExtraBold.ttf"; sourceTree = "<group>"; };
+		446B7F7A278EAE17002B38DD /* Alegreya-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-MediumItalic.ttf"; sourceTree = "<group>"; };
+		446B7F7B278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		446B7F7C278EAE17002B38DD /* Alegreya-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Bold.ttf"; sourceTree = "<group>"; };
+		446B7F7D278EAE17002B38DD /* Alegreya-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-BlackItalic.ttf"; sourceTree = "<group>"; };
+		446B7F7E278EAE17002B38DD /* Alegreya-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-BoldItalic.ttf"; sourceTree = "<group>"; };
+		446B7F7F278EAE17002B38DD /* Alegreya-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Black.ttf"; sourceTree = "<group>"; };
+		446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Regular.ttf"; sourceTree = "<group>"; };
+		446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Medium.ttf"; sourceTree = "<group>"; };
+		446B7F8E278EAE8E002B38DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
+		875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meditation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.debug.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +51,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AA6ECC53F0F3AEA0FE1B306 /* Pods_Meditation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E1E4DA5B02E25A172B6B646 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */,
+				6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		446B7F5C278E94D0002B38DD = {
 			isa = PBXGroup;
 			children = (
 				446B7F67278E94D0002B38DD /* Meditation */,
 				446B7F66278E94D0002B38DD /* Products */,
+				2E1E4DA5B02E25A172B6B646 /* Pods */,
+				BA47FBFDB8B807CDC3845D30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,6 +89,8 @@
 		446B7F67278E94D0002B38DD /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				446B7F8E278EAE8E002B38DD /* Info.plist */,
+				446B7F76278EADFD002B38DD /* Fonts */,
 				446B7F68278E94D0002B38DD /* MeditationApp.swift */,
 				446B7F6A278E94D0002B38DD /* ContentView.swift */,
 				446B7F6C278E94D1002B38DD /* Assets.xcassets */,
@@ -67,6 +107,39 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		446B7F76278EADFD002B38DD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				446B7F77278EAE17002B38DD /* Alegreya */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		446B7F77278EAE17002B38DD /* Alegreya */ = {
+			isa = PBXGroup;
+			children = (
+				446B7F78278EAE17002B38DD /* Alegreya-Italic.ttf */,
+				446B7F79278EAE17002B38DD /* Alegreya-ExtraBold.ttf */,
+				446B7F7A278EAE17002B38DD /* Alegreya-MediumItalic.ttf */,
+				446B7F7B278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf */,
+				446B7F7C278EAE17002B38DD /* Alegreya-Bold.ttf */,
+				446B7F7D278EAE17002B38DD /* Alegreya-BlackItalic.ttf */,
+				446B7F7E278EAE17002B38DD /* Alegreya-BoldItalic.ttf */,
+				446B7F7F278EAE17002B38DD /* Alegreya-Black.ttf */,
+				446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */,
+				446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */,
+			);
+			path = Alegreya;
+			sourceTree = "<group>";
+		};
+		BA47FBFDB8B807CDC3845D30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 446B7F73278E94D1002B38DD /* Build configuration list for PBXNativeTarget "Meditation" */;
 			buildPhases = (
+				DD7EE75F838F8F3848D9CF69 /* [CP] Check Pods Manifest.lock */,
 				446B7F61278E94D0002B38DD /* Sources */,
 				446B7F62278E94D0002B38DD /* Frameworks */,
 				446B7F63278E94D0002B38DD /* Resources */,
+				8770D66B04249AF252AA0F28 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,12 +200,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				446B7F83278EAE17002B38DD /* Alegreya-Italic.ttf in Resources */,
+				446B7F8D278EAE17002B38DD /* Alegreya-Medium.ttf in Resources */,
+				446B7F89278EAE17002B38DD /* Alegreya-BoldItalic.ttf in Resources */,
+				446B7F8A278EAE17002B38DD /* Alegreya-Black.ttf in Resources */,
+				446B7F85278EAE17002B38DD /* Alegreya-MediumItalic.ttf in Resources */,
+				446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */,
 				446B7F70278E94D1002B38DD /* Preview Assets.xcassets in Resources */,
+				446B7F84278EAE17002B38DD /* Alegreya-ExtraBold.ttf in Resources */,
+				446B7F86278EAE17002B38DD /* Alegreya-ExtraBoldItalic.ttf in Resources */,
 				446B7F6D278E94D1002B38DD /* Assets.xcassets in Resources */,
+				446B7F88278EAE17002B38DD /* Alegreya-BlackItalic.ttf in Resources */,
+				446B7F87278EAE17002B38DD /* Alegreya-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8770D66B04249AF252AA0F28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meditation/Pods-Meditation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Meditation/Pods-Meditation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meditation/Pods-Meditation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD7EE75F838F8F3848D9CF69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Meditation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		446B7F61278E94D0002B38DD /* Sources */ = {
@@ -263,6 +390,7 @@
 		};
 		446B7F74278E94D1002B38DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -272,6 +400,7 @@
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -292,6 +421,7 @@
 		};
 		446B7F75278E94D1002B38DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,6 +431,7 @@
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
