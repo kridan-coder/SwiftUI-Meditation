@@ -21,8 +21,12 @@
 		446B7F8A278EAE17002B38DD /* Alegreya-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F7F278EAE17002B38DD /* Alegreya-Black.ttf */; };
 		446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */; };
 		446B7F8D278EAE17002B38DD /* Alegreya-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */; };
+		449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449E21EA278FFCD300464D7E /* Placeholder.swift */; };
 		44BAE2F8278EBFD0002FFFCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BAE2F7278EBFD0002FFFCE /* LaunchScreen.storyboard */; };
 		44BAE2FA278EC2DD002FFFCE /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAE2F9278EC2DC002FFFCE /* WelcomeScreen.swift */; };
+		44BAE304278EDFC4002FFFCE /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAE303278EDFC4002FFFCE /* RegisterScreen.swift */; };
+		44BAE306278EE41E002FFFCE /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAE305278EE41D002FFFCE /* LoginScreen.swift */; };
+		44BAE30B278EE4F9002FFFCE /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAE30A278EE4F9002FFFCE /* CustomButton.swift */; };
 		6AA6ECC53F0F3AEA0FE1B306 /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +47,12 @@
 		446B7F81278EAE17002B38DD /* Alegreya-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Regular.ttf"; sourceTree = "<group>"; };
 		446B7F82278EAE17002B38DD /* Alegreya-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alegreya-Medium.ttf"; sourceTree = "<group>"; };
 		446B7F8E278EAE8E002B38DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		449E21EA278FFCD300464D7E /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		44BAE2F7278EBFD0002FFFCE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44BAE2F9278EC2DC002FFFCE /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		44BAE303278EDFC4002FFFCE /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		44BAE305278EE41D002FFFCE /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		44BAE30A278EE4F9002FFFCE /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6C60FD9B50BD38526638F152 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
 		875CD4D6F9C830D9BAB95941 /* Pods_Meditation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meditation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2DDFE0712916AFCC50B99C /* Pods-Meditation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.debug.xcconfig"; path = "Target Support Files/Pods-Meditation/Pods-Meditation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +79,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		44641BC72791139A00BF1815 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		446B7F5C278E94D0002B38DD = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +108,10 @@
 		446B7F67278E94D0002B38DD /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				44641BC72791139A00BF1815 /* New Group */,
+				44BAE309278EE4E9002FFFCE /* Common */,
+				44BAE302278EDFB5002FFFCE /* Login Screen */,
+				44BAE301278EDFAA002FFFCE /* Register Screen */,
 				446B7F6A278E94D0002B38DD /* ContentView.swift */,
 				44BAE2FB278EC67F002FFFCE /* Welcome Screen */,
 				446B7F8E278EAE8E002B38DD /* Info.plist */,
@@ -149,6 +168,31 @@
 		44BAE2FC278EC688002FFFCE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		44BAE301278EDFAA002FFFCE /* Register Screen */ = {
+			isa = PBXGroup;
+			children = (
+				44BAE303278EDFC4002FFFCE /* RegisterScreen.swift */,
+			);
+			path = "Register Screen";
+			sourceTree = "<group>";
+		};
+		44BAE302278EDFB5002FFFCE /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				44BAE305278EE41D002FFFCE /* LoginScreen.swift */,
+			);
+			path = "Login Screen";
+			sourceTree = "<group>";
+		};
+		44BAE309278EE4E9002FFFCE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				44BAE30A278EE4F9002FFFCE /* CustomButton.swift */,
+				449E21EA278FFCD300464D7E /* Placeholder.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -286,9 +330,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BAE304278EDFC4002FFFCE /* RegisterScreen.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeScreen.swift in Sources */,
+				44BAE30B278EE4F9002FFFCE /* CustomButton.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
+				44BAE306278EE41E002FFFCE /* LoginScreen.swift in Sources */,
+				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +478,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,6 +511,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
