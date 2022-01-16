@@ -7,29 +7,27 @@
 
 import SwiftUI
 
-struct CustomButtonStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    configuration.label
-      .frame(minWidth: 0,
-             maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-      .foregroundColor(.white)
-      .background(Color("ButtonColor"))
-      .cornerRadius(10)
-      .font(.custom("Alegreya-Medium", size: 25))
-
+struct CustomButtonView: View {
+  var text: String
+  var textColor: Color = .white
+  var backgroundColor: Color = Color("ButtonColor")
+  var cornerRadius: CGFloat = 10
+  var font: Font = .custom("Alegreya-Medium", size: 25)
+  var body: some View {
+    GeometryReader { view in
+      Text(text)
+        .foregroundColor(textColor)
+        .font(font)
+        .frame(width: view.size.width, height: view.size.height)
+        .background(backgroundColor)
+        .cornerRadius(cornerRadius)
+    }
   }
 }
 
-struct CustomButton: View {
-    var body: some View {
-      Button("Test") {}
-        .frame(width: 200, height: 200)
-        .buttonStyle(CustomButtonStyle())
-    }
-}
-
 struct CustomButton_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomButton()
-    }
+  static var previews: some View {
+    CustomButtonView(text: "Press!")
+      .frame(width: 200, height: 50)
+  }
 }

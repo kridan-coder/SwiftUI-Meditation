@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,20 +12,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="obG-Y5-kRd">
-                                <rect key="frame" x="0.0" y="1160" width="820" height="0.0"/>
+                                <rect key="frame" x="0.0" y="716" width="414" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Hqt-Hn-GiZ">
-                                <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lmi-Xl-4AB">
-                                <rect key="frame" x="41" y="363.5" width="738" height="453"/>
+                                <rect key="frame" x="103.66666666666669" y="169" width="207" height="398"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
@@ -33,7 +33,7 @@
                         <constraints>
                             <constraint firstItem="Hqt-Hn-GiZ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="20R-L4-EMv"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="obG-Y5-kRd" secondAttribute="centerX" id="5cz-MP-9tL"/>
-                            <constraint firstItem="Lmi-Xl-4AB" firstAttribute="width" secondItem="Hqt-Hn-GiZ" secondAttribute="width" multiplier="0.9" id="Jxk-0S-ta8"/>
+                            <constraint firstItem="Lmi-Xl-4AB" firstAttribute="width" secondItem="Hqt-Hn-GiZ" secondAttribute="width" multiplier="0.5" id="Jxk-0S-ta8"/>
                             <constraint firstAttribute="trailing" secondItem="Hqt-Hn-GiZ" secondAttribute="trailing" id="PL7-N5-qmG"/>
                             <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" symbolic="YES" id="SfN-ll-jLj"/>
                             <constraint firstItem="Hqt-Hn-GiZ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Ugj-5h-gKJ"/>
@@ -51,6 +51,6 @@
     </scenes>
     <resources>
         <image name="Background" width="375" height="812"/>
-        <image name="Logo" width="375" height="453"/>
+        <image name="Logo" width="382" height="398"/>
     </resources>
 </document>

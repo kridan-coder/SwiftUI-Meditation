@@ -40,9 +40,8 @@ struct WelcomeScreen: View {
             NavigationLink {
               LoginScreen()
             } label: {
-              Button("Войти в аккаунт") {}
+              CustomButtonView(text: "Войти в аккаунт")
             }
-            .buttonStyle(CustomButtonStyle())
             .frame(width: geometry.size.width * 0.9, height: 65)
             
             HStack(alignment: .center) {

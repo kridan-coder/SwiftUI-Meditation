@@ -15,8 +15,8 @@ class LoginViewModel: ObservableObject {
     email.contains("@") && !password.isEmpty
   }
   
-  func saveUserData() {
-    
+  func logIn() {
+    MainView()
   }
   
 }
@@ -33,10 +33,10 @@ struct LoginScreen: View {
         ZStack {
           Color("BackgroundColor")
             .ignoresSafeArea()
-
+          
           
           VStack(alignment: .leading) {
-            Image("MiniLogo")
+            Image("Logo")
               .resizable()
               .scaledToFit()
               .frame(width: 60, height: 60)
@@ -85,20 +85,18 @@ struct LoginScreen: View {
             Spacer()
             Group {
               NavigationLink {
-                //loginViewModel.isValidatedCorrectly
-                // logIn()
+                MainView()
               } label: {
-                Button("Sign In") {}
-                .buttonStyle(CustomButtonStyle())
-                .frame(width: screen.size.width * 0.9, height: 60)
+                CustomButtonView(text: "Sign In")
+                  .frame(width: screen.size.width * 0.9, height: 60)
               }
               Spacer()
               NavigationLink {
                 RegisterScreen()
               } label: {
-                Button("Sign Up") {}
-                .buttonStyle(CustomButtonStyle())
-                .frame(width: screen.size.width * 0.9, height: 60)
+                CustomButtonView(text: "Sign Up")
+                  .frame(width: screen.size.width * 0.9, height: 60)
+                  .frame(width: screen.size.width * 0.9, height: 60)
               }
             }
             Spacer()
@@ -111,17 +109,13 @@ struct LoginScreen: View {
             .resizable()
             .scaledToFit()
             .allowsHitTesting(false)
-            
+          
         }
         .ignoresSafeArea(edges: .bottom)
-        
-
-        
       }
       
     }
-    
-    
+    .navigationBarHidden(true)
     
     
   }
