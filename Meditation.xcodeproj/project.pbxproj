@@ -122,11 +122,11 @@
 		446B7F67278E94D0002B38DD /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				446B7F6A278E94D0002B38DD /* ContentView.swift */,
 				44BAE309278EE4E9002FFFCE /* Common */,
 				3A9F80972793ED05004167DC /* Main */,
 				44BAE302278EDFB5002FFFCE /* Login Screen */,
 				44BAE301278EDFAA002FFFCE /* Register Screen */,
-				446B7F6A278E94D0002B38DD /* ContentView.swift */,
 				44BAE2FB278EC67F002FFFCE /* Welcome Screen */,
 				446B7F8E278EAE8E002B38DD /* Info.plist */,
 				446B7F68278E94D0002B38DD /* MeditationApp.swift */,

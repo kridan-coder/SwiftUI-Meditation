@@ -8,24 +8,51 @@
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
+  @AppStorage("isAuthorized") var isAuthorized: Bool?
+  
+  @AppStorage("nickName") var nickname: String?
+  @AppStorage("avatar") var avatarLink: String?
+  
   @Published var email: String = ""
   @Published var password: String = ""
   
   var isValidatedCorrectly: Bool {
-    email.contains("@") && !password.isEmpty
+    email.contains("@") && email.contains(".") && !password.isEmpty
   }
   
-  func logIn() {
-    MainView()
+  func logIn(showAlert: Binding<Bool>) {
+    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
+      showAlert.wrappedValue = true
+      return
+    }
+    APIClient().login(email: email, password: password) { result in
+      switch result {
+      case .success(let data):
+        withAnimation {
+          self.isAuthorized = true
+        }
+        self.nickname = data.nickName
+        self.avatarLink = data.nickName
+        
+      case .failure(_):
+        showAlert.wrappedValue = true
+      }
+      
+    }
+    
   }
   
 }
 
 struct LoginScreen: View {
   
+  @State private var showingAlert = false
+  
   @Environment(\.editMode) var editMode
   
   @StateObject var loginViewModel = LoginViewModel()
+  
+  @AppStorage("isAuthorized") var isAuthorized: Bool?
   
   var body: some View {
     NavigationView {
@@ -84,12 +111,20 @@ struct LoginScreen: View {
             
             Spacer()
             Group {
-              NavigationLink {
-                MainView()
+              Button {
+                loginViewModel.logIn(showAlert: $showingAlert)
               } label: {
-                CustomButtonView(text: "Sign In")
-                  .frame(width: screen.size.width * 0.9, height: 60)
+                Text("Sign In")
+                  .font(.custom("Alegreya-Medium", size: 24))
+                  .foregroundColor(.white)
+                  .frame(maxWidth: .infinity)
               }
+              .frame(width: screen.size.width * 0.9, height: 60)
+              .background(Color("ButtonColor"))
+              .cornerRadius(10)
+              .alert("Incorrect data", isPresented: $showingAlert) {
+                          Button("OK", role: .cancel) { }
+                      }
               Spacer()
               NavigationLink {
                 RegisterScreen()

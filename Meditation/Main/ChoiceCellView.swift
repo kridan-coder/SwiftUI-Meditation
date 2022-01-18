@@ -31,6 +31,7 @@ struct ChoiceCellView: View {
         .foregroundColor(.white)
         .font(.custom("Alegreya-Regular", size: 14))
         .lineLimit(1)
+        .frame(maxWidth: 95)
     }
   }
 }

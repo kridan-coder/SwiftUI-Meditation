@@ -33,7 +33,6 @@ class MainViewModel: ObservableObject {
       for feeling in sorted {
         self.choiceCellModels.append(ChoiceCellModel(title: feeling.title, imageURL: feeling.image))
       }
-      self.choiceCellModels.append(ChoiceCellModel(title: "Hehehehehehehehehe", imageURL: URL(string: "http://mskko2021.mad.hakta.pro//uploads//feeling//Focus.png")!))
 
     }
   }
@@ -97,7 +96,7 @@ struct MainView: View {
                 }
               }
             }
-            LazyVStack(alignment: .center, spacing: 15) {
+            LazyVStack(alignment: .center, spacing: 20) {
               ForEach(viewModel.cardCellModels) { cardModel in
                 CardView(viewModel: cardModel)
               }
