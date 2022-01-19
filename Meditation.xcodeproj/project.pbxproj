@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403F62797BD7000466FA4 /* ProfileView.swift */; };
+		3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FA2797E80400466FA4 /* ImageView.swift */; };
+		3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */; };
+		3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FE2797FB4700466FA4 /* ContentImageView.swift */; };
 		3A6878A2279403FD00069424 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6878A1279403FD00069424 /* MainView.swift */; };
 		3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */; };
 		3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */; };
@@ -38,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		3A6403F62797BD7000466FA4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3A6403FA2797E80400466FA4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAddView.swift; sourceTree = "<group>"; };
+		3A6403FE2797FB4700466FA4 /* ContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageView.swift; sourceTree = "<group>"; };
 		3A6878A1279403FD00069424 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellModel.swift; sourceTree = "<group>"; };
 		3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellView.swift; sourceTree = "<group>"; };
@@ -95,6 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				3A6403F62797BD7000466FA4 /* ProfileView.swift */,
+				3A6403FA2797E80400466FA4 /* ImageView.swift */,
+				3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */,
+				3A6403FE2797FB4700466FA4 /* ContentImageView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -358,6 +367,7 @@
 			files = (
 				44BAE304278EDFC4002FFFCE /* RegisterView.swift in Sources */,
 				3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */,
+				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
 				3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */,
@@ -365,9 +375,11 @@
 				3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
+				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */,
 				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
+				3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */,
 				3ABC93F227946F23006CA916 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

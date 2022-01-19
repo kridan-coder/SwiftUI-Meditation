@@ -78,6 +78,7 @@ struct MainView: View {
           }
           
         }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+        
         ScrollView(.vertical, showsIndicators: false) {
           VStack(alignment: .leading) {
             Text("С возвращением, \(viewModel.nickname)!")
