@@ -19,9 +19,10 @@ class ImageViewModel: ObservableObject {
   
 }
 
-struct ImageView: View {
+struct ImageView: View, Identifiable
+{
   var isNavigationBarHidden = true
-  
+    let id = UUID()
   @StateObject var viewModel: ImageViewModel
   
   var body: some View {

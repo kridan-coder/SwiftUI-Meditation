@@ -9,8 +9,12 @@
 import SwiftUI
 import Kingfisher
 
-struct ContentImagesData {
-  static var contentImages = [
+class ContentImagesData {
+  private init() {}
+  
+  static let shared = ContentImagesData()
+  
+  @Published var contentImages = [
     ImageView(viewModel: ImageViewModel(date: "11:00", image: Image("Content3"))),
     ImageView(viewModel: ImageViewModel(date: "15:55 ", image: Image("Content2"))),
     ImageView(viewModel: ImageViewModel(date: "19:11", image: Image("Content4"))),
@@ -20,6 +24,8 @@ struct ContentImagesData {
 
 class ProfileViewModel: ObservableObject {
   @Published var name = "Daniel"
+  
+  
 }
 
 struct ProfileView: View {
@@ -31,9 +37,12 @@ struct ProfileView: View {
   
   var isNavigationBarHidden = true
   
+  @State private var inputImage: UIImage?
+  
   @State var imageToShow = Image("Koala")
   
   @State private var isPresentingPhoto = false
+  @State private var isShowingImagePicker = false
   
   @StateObject var viewModel = ProfileViewModel()
   
@@ -41,6 +50,12 @@ struct ProfileView: View {
     GridItem(.flexible()),
     GridItem(.flexible())
   ]
+  
+  func loadImage() {
+      guard let inputImage = inputImage else { return }
+      let image = Image(uiImage: inputImage)
+    ContentImagesData.shared.contentImages.append(ImageView(viewModel: ImageViewModel(date: "11:00", image: image)))
+  }
   
   var body: some View {
     if isPresentingPhoto {
@@ -101,8 +116,7 @@ struct ProfileView: View {
                 
                 
                 LazyVGrid(columns: columns) {
-                  ForEach(0..<ContentImagesData.contentImages.count, id: \.self) { i in
-                    let imageView = ContentImagesData.contentImages[i]
+                  ForEach(ContentImagesData.shared.contentImages) { imageView in
                     imageView
                       .onTapGesture {
                         withAnimation {
@@ -113,6 +127,9 @@ struct ProfileView: View {
                     
                   }
                   ImageAddView()
+                    .onTapGesture {
+                      isShowingImagePicker = true
+                    }
                 }
                 .padding(.leading, 10).padding(.trailing, 10)
                 //Spacer()
@@ -121,11 +138,20 @@ struct ProfileView: View {
             }
           }
         }.navigationBarHidden(isNavigationBarHidden)
+          .sheet(isPresented: $isShowingImagePicker) {
+              ImagePicker(image: $inputImage)
+          }
+          .onChange(of: inputImage) { _ in loadImage() }
+        
       }
+      
+      
       
     }
     
+    
   }
+  
 }
 
 struct ProfileView_Previews: PreviewProvider {
