@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
   @AppStorage("isAuthorized") var isAuthorized: Bool?
-    var body: some View {
-      if isAuthorized ?? false {
-          CustomTabView()
-      } else {
-        WelcomeScreen()
-      }
-        
+  var body: some View {
+    if isAuthorized ?? false {
+      CustomTabView()
+    } else {
+      WelcomeView()
     }
+    
+  }
 }
 
 struct CustomTabView: View {
@@ -49,7 +49,7 @@ struct CustomTabView: View {
           Image("Sound")
         }.tag(1)
       
-      MainView()
+      ProfileView()
         .tabItem {
           if selection == 2
           {
@@ -66,7 +66,7 @@ struct CustomTabView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-      CustomTabView()
-    }
+  static var previews: some View {
+    CustomTabView()
+  }
 }

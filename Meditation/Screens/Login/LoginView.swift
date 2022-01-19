@@ -13,7 +13,8 @@ class LoginViewModel: ObservableObject {
   @AppStorage("nickName") var nickname: String?
   @AppStorage("avatar") var avatarLink: String?
   
-  @Published var email: String = ""
+  @AppStorage("email") var email: String = ""
+  
   @Published var password: String = ""
   
   var isValidatedCorrectly: Bool {
@@ -32,7 +33,7 @@ class LoginViewModel: ObservableObject {
           self.isAuthorized = true
         }
         self.nickname = data.nickName
-        self.avatarLink = data.nickName
+        self.avatarLink = data.avatar
         
       case .failure(_):
         showAlert.wrappedValue = true
@@ -44,7 +45,7 @@ class LoginViewModel: ObservableObject {
   
 }
 
-struct LoginScreen: View {
+struct LoginView: View {
   
   @State private var showingAlert = false
   
@@ -127,7 +128,7 @@ struct LoginScreen: View {
                       }
               Spacer()
               NavigationLink {
-                RegisterScreen()
+                RegisterView()
               } label: {
                 CustomButtonView(text: "Sign Up")
                   .frame(width: screen.size.width * 0.9, height: 60)
@@ -156,8 +157,8 @@ struct LoginScreen: View {
   }
 }
 
-struct LoginScreen_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
-    LoginScreen()
+    LoginView()
   }
 }

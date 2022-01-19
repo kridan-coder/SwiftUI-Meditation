@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegisterScreen: View {
+struct RegisterView: View {
     var body: some View {
       ZStack {
               Color("BackgroundColor")
@@ -18,8 +18,8 @@ struct RegisterScreen: View {
     }
 }
 
-struct RegisterScreen_Previews: PreviewProvider {
+struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterScreen()
+        RegisterView()
     }
 }

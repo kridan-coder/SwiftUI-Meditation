@@ -9,8 +9,9 @@ import SwiftUI
 import Kingfisher
 
 class MainViewModel: ObservableObject {
-  @Published var profileImageURL = ""
-  @Published var userName = "Эмиль"
+  @AppStorage("nickName") var nickname: String = "Эмиль"
+  @AppStorage("avatar") var avatarLink: String = ""
+  
   @Published var choiceCellModels: [ChoiceCellModel] =
   [
   ]
@@ -62,7 +63,7 @@ struct MainView: View {
             .scaledToFit()
             .frame(width: 50, height: 50)
           Spacer()
-          if let url = URL(string: viewModel.profileImageURL) {
+          if let url = URL(string: viewModel.avatarLink) {
             KFImage(url)
               .resizable()
               .scaledToFit()
@@ -79,7 +80,7 @@ struct MainView: View {
         }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         ScrollView(.vertical, showsIndicators: false) {
           VStack(alignment: .leading) {
-            Text("С возвращением, \(viewModel.userName)!")
+            Text("С возвращением, \(viewModel.nickname)!")
               .foregroundColor(.white)
               .font(.custom("Alegreya-Medium", size: 28))
               .padding(.leading).padding(.top)
