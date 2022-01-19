@@ -11,6 +11,8 @@ struct ContentImageView: View {
   
   @State private var isScaled = false
   
+  @Binding var isPresentingPhoto: Bool
+  
   var isNavigationBarHidden = true
   
   var image: Image
@@ -48,7 +50,11 @@ struct ContentImageView: View {
               Spacer()
               Button("удалить") {}
               Spacer()
-              Button("закрыть") {}
+              Button("закрыть") {
+                withAnimation {
+                  isPresentingPhoto = false
+                }
+              }
               Spacer()
             }.padding(.bottom, 40)
               .font(.custom("Alegreya-Medium", size: 20))
@@ -65,7 +71,7 @@ struct ContentImageView: View {
 
 struct ContentImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentImageView(image: Image("Content1"))
+    ContentImageView(isPresentingPhoto: .constant(false), image: Image("Content1"))
   }
 }
 

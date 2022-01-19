@@ -9,6 +9,15 @@
 import SwiftUI
 import Kingfisher
 
+struct ContentImagesData {
+  static var contentImages = [
+    ImageView(viewModel: ImageViewModel(date: "11:00", image: Image("Content3"))),
+    ImageView(viewModel: ImageViewModel(date: "15:55 ", image: Image("Content2"))),
+    ImageView(viewModel: ImageViewModel(date: "19:11", image: Image("Content4"))),
+    ImageView(viewModel: ImageViewModel(date: "11:11", image: Image("Content1")))
+  ]
+}
+
 class ProfileViewModel: ObservableObject {
   @Published var name = "Daniel"
 }
@@ -22,6 +31,10 @@ struct ProfileView: View {
   
   var isNavigationBarHidden = true
   
+  @State var imageToShow = Image("Koala")
+  
+  @State private var isPresentingPhoto = false
+  
   @StateObject var viewModel = ProfileViewModel()
   
   let columns = [
@@ -30,77 +43,86 @@ struct ProfileView: View {
   ]
   
   var body: some View {
-    NavigationView {
-      GeometryReader { screen in
-        ZStack(alignment: .top) {
-          Color("BackgroundColor")
-            .ignoresSafeArea()
-          
-          VStack {
-          HStack(alignment: .center) {
-            Image("Hamburger")
-              .resizable()
-              .scaledToFit()
-              .frame(width: 30, height: 30)
+    if isPresentingPhoto {
+      ContentImageView(isPresentingPhoto: $isPresentingPhoto, image: imageToShow)
+    } else {
+      
+      
+      NavigationView {
+        GeometryReader { screen in
+          ZStack(alignment: .top) {
+            Color("BackgroundColor")
+              .ignoresSafeArea()
             
-            Spacer()
-            Image("Logo")
-              .resizable()
-              .scaledToFit()
-              .frame(width: 50, height: 50)
-            Spacer()
-            
-            Button("exit") {
-              isAuthorized = false
-              withAnimation {
-                wasLoggedOut = true
-              }
-              
-            }
-            .font(.custom("Alegreya-Regular", size: 23))
-            .foregroundColor(.white)
-            
-          }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
-          ScrollView(.vertical, showsIndicators: false) {
-            
-              if let url = URL(string: avatarLink) {
-                KFImage(url)
+            VStack {
+              HStack(alignment: .center) {
+                Image("Hamburger")
                   .resizable()
                   .scaledToFit()
-                  .frame(height: screen.size.height / 4)
-                  .cornerRadius(screen.size.height / 8)
-              } else {
-                Image("Koala")
+                  .frame(width: 30, height: 30)
+                
+                Spacer()
+                Image("Logo")
                   .resizable()
                   .scaledToFit()
-                  .frame(height: screen.size.height / 4)
-                  .cornerRadius(screen.size.height / 8)
-              }
-              
-              Text(nickname ?? "Эмиль")
-                .foregroundColor(.white)
-                .font(.custom("Alegreya-Medium", size: 35))
-              
-              
-              LazyVGrid(columns: columns) {
-                ForEach(0...10, id: \.self) { _ in
-                  let imageView = ImageView(viewModel: ImageViewModel(date: "11:00", image: Image("Content2")))
-                  NavigationLink {
-                    ContentImageView(image: imageView.viewModel.image)
-                  } label: {
-                    imageView
+                  .frame(width: 50, height: 50)
+                Spacer()
+                
+                Button("exit") {
+                  isAuthorized = false
+                  withAnimation {
+                    wasLoggedOut = true
                   }
                   
                 }
-                ImageAddView()
+                .font(.custom("Alegreya-Regular", size: 23))
+                .foregroundColor(.white)
+                
+              }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+              ScrollView(.vertical, showsIndicators: false) {
+                
+                if let url = URL(string: avatarLink) {
+                  KFImage(url)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: screen.size.height / 4)
+                    .cornerRadius(screen.size.height / 8)
+                } else {
+                  Image("Koala")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: screen.size.height / 4)
+                    .cornerRadius(screen.size.height / 8)
+                }
+                
+                Text(nickname ?? "Эмиль")
+                  .foregroundColor(.white)
+                  .font(.custom("Alegreya-Medium", size: 35))
+                
+                
+                LazyVGrid(columns: columns) {
+                  ForEach(0..<ContentImagesData.contentImages.count, id: \.self) { i in
+                    let imageView = ContentImagesData.contentImages[i]
+                    imageView
+                      .onTapGesture {
+                        withAnimation {
+                          isPresentingPhoto = true
+                          imageToShow = imageView.viewModel.image
+                        }
+                      }
+                    
+                  }
+                  ImageAddView()
+                }
+                .padding(.leading, 10).padding(.trailing, 10)
+                //Spacer()
               }
-              .padding(.leading, 10).padding(.trailing, 10)
-            //Spacer()
+              
             }
-            
           }
-        }
-      }.navigationBarHidden(isNavigationBarHidden)
+        }.navigationBarHidden(isNavigationBarHidden)
+      }
+      
     }
     
   }
