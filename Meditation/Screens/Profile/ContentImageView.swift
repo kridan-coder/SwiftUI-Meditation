@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ContentImageView: View {
   
@@ -13,9 +14,32 @@ struct ContentImageView: View {
   
   @Binding var isPresentingPhoto: Bool
   
+  var filename: String
+  
   var isNavigationBarHidden = true
   
   var image: Image
+  
+  var documentsUrl: URL {
+      return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+  }
+  
+  func delete() {
+    let realm = try! Realm()
+    try! realm.write {
+      let objects = realm.objects(ImageStorage.self)
+      let filtered = objects.filter { $0.imagePath == filename }
+      print(filtered.count)
+      
+      realm.delete(filtered)
+    }
+    
+    try! FileManager.default.removeItem(at: documentsUrl.appendingPathComponent(filename))
+    
+    withAnimation {
+      isPresentingPhoto = false
+    }
+  }
   
   var body: some View {
     NavigationView {
@@ -42,13 +66,35 @@ struct ContentImageView: View {
                 .onTapGesture(count: 2) {
                   isScaled.toggle()
                 }
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                    .onEnded({ value in
+                                        if value.translation.width < 0 {
+                                            delete()
+                                        }
+
+                                        if value.translation.width > 0 {
+                                          withAnimation {
+                                            isPresentingPhoto = false
+                                          }
+                                        }
+                                        if value.translation.height < 0 {
+                                            // up
+                                        }
+
+                                        if value.translation.height > 0 {
+                                            // down
+                                        }
+                                    }))
               
             }
             
             Spacer()
             HStack {
               Spacer()
-              Button("удалить") {}
+              Button("удалить") {
+                delete()
+                
+              }
               Spacer()
               Button("закрыть") {
                 withAnimation {
@@ -64,14 +110,15 @@ struct ContentImageView: View {
         
         
       }
-      .navigationBarHidden(isNavigationBarHidden)
+      .navigationBarHidden(true)
+      
     }
   }
 }
 
 struct ContentImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentImageView(isPresentingPhoto: .constant(false), image: Image("Content1"))
+    ContentImageView(isPresentingPhoto: .constant(false), filename: "", image: Image("Content1"))
   }
 }
 

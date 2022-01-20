@@ -8,5 +8,6 @@ target 'Meditation' do
   # Pods for Meditation
   pod 'Alamofire'
   pod 'Kingfisher'
+  pod 'RealmSwift'
 
 end

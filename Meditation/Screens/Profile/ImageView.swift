@@ -8,8 +8,9 @@
 import SwiftUI
 import Kingfisher
 
-class ImageViewModel: ObservableObject {
+class ImageViewModel: ObservableObject, Identifiable {
   @Published var date: String
+  let id = UUID()
   var image: Image
   
   init(date: String, image: Image) {
@@ -19,10 +20,10 @@ class ImageViewModel: ObservableObject {
   
 }
 
-struct ImageView: View, Identifiable
+struct ImageView: View
 {
   var isNavigationBarHidden = true
-    let id = UUID()
+    
   @StateObject var viewModel: ImageViewModel
   
   var body: some View {

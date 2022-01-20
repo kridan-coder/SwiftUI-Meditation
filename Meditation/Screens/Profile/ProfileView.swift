@@ -8,18 +8,13 @@
 
 import SwiftUI
 import Kingfisher
+import RealmSwift
 
-class ContentImagesData {
+class ContentImagesData: ObservableObject {
   private init() {}
   
   static let shared = ContentImagesData()
   
-  @Published var contentImages = [
-    ImageView(viewModel: ImageViewModel(date: "11:00", image: Image("Content3"))),
-    ImageView(viewModel: ImageViewModel(date: "15:55 ", image: Image("Content2"))),
-    ImageView(viewModel: ImageViewModel(date: "19:11", image: Image("Content4"))),
-    ImageView(viewModel: ImageViewModel(date: "11:11", image: Image("Content1")))
-  ]
 }
 
 class ProfileViewModel: ObservableObject {
@@ -29,17 +24,27 @@ class ProfileViewModel: ObservableObject {
 }
 
 struct ProfileView: View {
+  var documentsUrl: URL {
+      return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+  }
+  
+  @ObservedResults(ImageStorage.self) var imagePaths
+  
   @AppStorage("isAuthorized") var isAuthorized: Bool?
   @AppStorage("wasLoggedOut") var wasLoggedOut: Bool?
   
   @AppStorage("avatar") var avatarLink: String = ""
   @AppStorage("nickName") var nickname: String?
   
+  @StateObject var contentImagesContainer = ContentImagesData.shared
+  
   var isNavigationBarHidden = true
   
   @State private var inputImage: UIImage?
   
   @State var imageToShow = Image("Koala")
+  
+  @State var filename = ""
   
   @State private var isPresentingPhoto = false
   @State private var isShowingImagePicker = false
@@ -51,15 +56,16 @@ struct ProfileView: View {
     GridItem(.flexible())
   ]
   
-  func loadImage() {
-      guard let inputImage = inputImage else { return }
-      let image = Image(uiImage: inputImage)
-    ContentImagesData.shared.contentImages.append(ImageView(viewModel: ImageViewModel(date: "11:00", image: image)))
-  }
+//  func loadImage() {
+//      guard let inputImage = inputImage else { return }
+//      let image = Image(uiImage: inputImage)
+//    $imagePaths.append()
+//    contentImagesContainer.contentImagesViewModels.append(ImageViewModel(date: "11:00", image: image))
+//  }
   
   var body: some View {
     if isPresentingPhoto {
-      ContentImageView(isPresentingPhoto: $isPresentingPhoto, image: imageToShow)
+      ContentImageView(isPresentingPhoto: $isPresentingPhoto, filename: filename, image: imageToShow)
     } else {
       
       
@@ -116,12 +122,14 @@ struct ProfileView: View {
                 
                 
                 LazyVGrid(columns: columns) {
-                  ForEach(ContentImagesData.shared.contentImages) { imageView in
-                    imageView
+                  ForEach(imagePaths) { imagePathContainer in
+                    let image = UIImage(data: try! Data(contentsOf: documentsUrl.appendingPathComponent(imagePathContainer.imagePath)))!
+                    ImageView(viewModel: ImageViewModel(date: imagePathContainer.time, image: Image(uiImage: image)))
                       .onTapGesture {
                         withAnimation {
                           isPresentingPhoto = true
-                          imageToShow = imageView.viewModel.image
+                          imageToShow = Image(uiImage: image)
+                          filename = imagePathContainer.imagePath
                         }
                       }
                     
@@ -139,9 +147,11 @@ struct ProfileView: View {
           }
         }.navigationBarHidden(isNavigationBarHidden)
           .sheet(isPresented: $isShowingImagePicker) {
-              ImagePicker(image: $inputImage)
+            ImagePicker(image: $inputImage, filename: $filename)
           }
-          .onChange(of: inputImage) { _ in loadImage() }
+          .onChange(of: inputImage) { _ in
+            //loadImage()
+          }
         
       }
       
