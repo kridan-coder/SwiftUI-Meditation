@@ -19,14 +19,14 @@ class MainViewModel: ObservableObject {
   ]
   
   init() {
-    APIClient().getQuotes { quotes in
+    NetworkService().getQuotes { quotes in
       self.cardCellModels = []
       for quote in quotes.data {
         self.cardCellModels.append(CardViewModel(id: quote.id, title: quote.title, description: quote.description, imageURL: quote.image))
       }
     }
     
-    APIClient().getFeelings { feelings in
+    NetworkService().getFeelings { feelings in
       self.choiceCellModels = []
       let sorted = feelings.data.sorted { $0.position < $1.position
       }

@@ -26,7 +26,7 @@ class LoginViewModel: ObservableObject {
       showAlert.wrappedValue = true
       return
     }
-    APIClient().login(email: email, password: password) { result in
+    NetworkService().login(email: email, password: password) { result in
       switch result {
       case .success(let data):
         withAnimation {

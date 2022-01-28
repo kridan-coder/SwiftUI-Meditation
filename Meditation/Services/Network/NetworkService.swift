@@ -46,8 +46,43 @@ struct UserDataToSend: Codable {
   let password: String
 }
 
-final class APIClient {
+final class NetworkService {
   let baseLink = "http://mskko2021.mad.hakta.pro/api/"
+  
+  private let decoder = JSONDecoder()
+  
+  private func execute<Receiving: Decodable>(url: URL,
+                                             method: HTTPMethod,
+                                             parameters: Parameters? = nil,
+                                             encoding: JSONEncoding = JSONEncoding.default,
+                                             completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
+    AF.request(url, method: method, parameters: parameters, encoding: encoding).response { response in
+      self.handleResponse(response) { result in
+        completionHandler(result)
+      }
+    }
+  }
+  
+  private func handleResponse<Receiving: Decodable>(_ response: AFDataResponse<Data?>, completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
+    switch response.result {
+    case .success(let data):
+      do {
+        guard let data = data else {
+          completionHandler(.failure(.noDataReceived))
+          return
+        }
+        let decodedData = try decoder.decode(Receiving.self, from: data)
+        completionHandler(.success(decodedData))
+      }
+      catch let error {
+        print(error)
+        completionHandler(.failure(.failedToDecode))
+      }
+    case .failure(let error):
+      print(error)
+      completionHandler(.failure(.unknown))
+    }
+  }
   
   func getQuotes(completion: @escaping (Quotes) -> Void) {
     AF.request(baseLink + "quotes", method: .get).response { response in
