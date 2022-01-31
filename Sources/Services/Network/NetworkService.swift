@@ -5,9 +5,10 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 final class NetworkService {
-  private enum RequestType {
+  enum RequestType {
     case common, authorization
   }
   
@@ -19,7 +20,7 @@ final class NetworkService {
     static let contentType = "application/json"
   }
   
-  private let urlProvider: URLProvider
+  let urlProvider: URLProvider
   private let decoder: JSONDecoder
   
   // MARK: - Init
@@ -28,91 +29,73 @@ final class NetworkService {
     self.decoder = decoder
   }
   
-  // MARK: - Quotes
-  func getQuotes(completionHandler: @escaping (Result<Quotes, NetworkServiceError>) -> Void) {
-    let url = urlProvider.makeURL(with: URLFactory.Quotes.getAllQuotes)
-    execute(url: url, method: .get) { result in
-      completionHandler(result)
-    }
-  }
-  
-  // MARK: - Feelings
-  func getFeelings(completionHandler: @escaping (Result<Feelings, NetworkServiceError>) -> Void) {
-    let url = urlProvider.makeURL(with: URLFactory.Feelings.getAllFeelings)
-    execute(url: url, method: .get) { result in
-      completionHandler(result)
-    }
-  }
-  
-  // MARK: - User
-  func login(email: String, password: String, completionHandler: @escaping (Result<ReceivedUserData, NetworkServiceError>) -> Void) {
-    let dataToSend = UserDataToSend(email: email, password: password)
-    let url = urlProvider.makeURL(with: URLFactory.Auth.login)
-    execute(url: url, method: .post, parameters: dataToSend, requestType: .authorization) { result in
-      completionHandler(result)
-    }
-  }
-  
-  // MARK: - Common
-  private func execute<Response: Decodable>(url: String,
-                                            method: HTTPMethod,
-                                            headers: [String: String] = [:],
-                                            requestType: RequestType = .common,
-                                            completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
+  // MARK: - Request
+  func execute<Response: Decodable>(url: String,
+                                    method: HTTPMethod,
+                                    headers: [String: String] = [:],
+                                    requestType: RequestType = .common) -> Promise<Response> {
     guard let url = URL(string: url) else {
-      completionHandler(.failure(.invalidURL))
-      return
+      return Promise(error: NetworkServiceError.invalidURL)
     }
-    AF.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType)).response { response in
-      self.handleResponse(response) { result in
-        completionHandler(result)
+    let request = AF.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType))
+    return Promise { seal in
+      firstly {
+        request.responseDataAsPromise()
+      }.then { response in
+        self.handleResponse(response)
+      }.done { result in
+        seal.fulfill(result)
+      }.catch { error in
+        seal.reject(error)
+      }
+    }
+    
+  }
+  
+  func execute <Request: Encodable,
+                Response: Decodable> (url: String,
+                                      method: HTTPMethod,
+                                      parameters: Request,
+                                      encoder: ParameterEncoder = JSONParameterEncoder.default,
+                                      headers: [String: String] = [:],
+                                      requestType: RequestType = .common) -> Promise<Response> {
+    guard let url = URL(string: url) else {
+      return Promise(error: NetworkServiceError.invalidURL)
+    }
+    let request = AF.request(url, method: method,
+                             parameters: parameters,
+                             encoder: encoder,
+                             headers: modifiedHeaders(from: headers, requestType: requestType))
+    return Promise { seal in
+      firstly {
+        request.responseDataAsPromise()
+      }.then { response in
+        self.handleResponse(response)
+      }.done { result in
+        seal.fulfill(result)
+      }.catch { error in
+        seal.reject(error)
       }
     }
   }
   
-  private func execute <Request: Encodable,
-                        Response: Decodable> (url: String,
-                                              method: HTTPMethod,
-                                              parameters: Request,
-                                              encoder: ParameterEncoder = JSONParameterEncoder.default,
-                                              headers: [String: String] = [:],
-                                              requestType: RequestType = .common,
-                                              completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
-    guard let url = URL(string: url) else {
-      completionHandler(.failure(.invalidURL))
-      return
-    }
-    AF.request(url, method: method,
-               parameters: parameters,
-               encoder: encoder,
-               headers: modifiedHeaders(from: headers, requestType: requestType)).response { response in
-      self.handleResponse(response) { result in
-        completionHandler(result)
-      }
-    }
-  }
-  
-  private func handleResponse<Response: Decodable>(_ response: AFDataResponse<Data?>,
-                                                   completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
+  private func handleResponse<Response: Decodable>(_ response: AFDataResponse<Data>) -> Promise<Response> {
     switch response.result {
     case .success(let data):
       do {
-        guard let data = data else {
-          completionHandler(.failure(.noDataReceived))
-          return
-        }
         let decodedData = try decoder.decode(Response.self, from: data)
-        completionHandler(.success(decodedData))
+        return Promise.value(decodedData)
       } catch let error {
         log?.debug(error)
-        completionHandler(.failure(.failedToDecode))
+        return Promise(error: NetworkServiceError.failedToDecode)
       }
     case .failure(let error):
       log?.debug(error)
-      completionHandler(.failure(.unknown))
+      return Promise(error: NetworkServiceError.unknown)
     }
   }
   
+  // MARK: - Headers
   private func modifiedHeaders(from headers: [String: String], requestType: RequestType) -> HTTPHeaders? {
     var headers = headers
     if requestType == .authorization {

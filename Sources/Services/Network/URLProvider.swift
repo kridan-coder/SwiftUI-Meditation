@@ -8,7 +8,7 @@ import Foundation
 final class URLProvider {
   enum BaseURL: String {
     case test = "http://mskko2021.mad.hakta.pro/api/"
-    case anotherTest = "http://mskko2022.mad.hakta.pro/api/"
+    case anotherTest = "http://mskko2022.mad.hakta.pro/api/" // can be switched to this (will not work though)
   }
   
   private var defaultBaseURL: BaseURL

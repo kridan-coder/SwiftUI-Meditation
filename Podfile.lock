@@ -1,6 +1,15 @@
 PODS:
   - Alamofire (5.5.0)
   - Kingfisher (7.1.2)
+  - PromiseKit (6.16.3):
+    - PromiseKit/CorePromise (= 6.16.3)
+    - PromiseKit/Foundation (= 6.16.3)
+    - PromiseKit/UIKit (= 6.16.3)
+  - PromiseKit/CorePromise (6.16.3)
+  - PromiseKit/Foundation (6.16.3):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.16.3):
+    - PromiseKit/CorePromise
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
@@ -15,6 +24,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
+  - PromiseKit
   - R.swift
   - RealmSwift
   - SwiftLint
@@ -24,6 +34,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Kingfisher
+    - PromiseKit
     - R.swift
     - R.swift.Library
     - Realm
@@ -34,6 +45,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
+  PromiseKit: ed0e2a8e3f3cd59d5d98ca0a6de481a2c5c59c0b
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: d9e4e5877095a6722145811f56fe89a531c9659d
@@ -41,6 +53,6 @@ SPEC CHECKSUMS:
   SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
 
-PODFILE CHECKSUM: 5346e501717315e884d07735d0a25268b9e0bc4d
+PODFILE CHECKSUM: 89cbd8b2407b4145b639181b728c7fab66dc7d42
 
 COCOAPODS: 1.10.1
