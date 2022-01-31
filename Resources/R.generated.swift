@@ -550,7 +550,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.string` struct is generated, and contains static references to 1 localization tables.
+  /// This `R.string` struct is generated, and contains static references to 2 localization tables.
   struct string {
     /// This `R.string.networkErrors` struct is generated, and contains static references to 4 localization keys.
     struct networkErrors {
@@ -613,6 +613,42 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("error.invalid.url.text", tableName: "NetworkErrors", bundle: bundle, comment: "")
+      }
+
+      fileprivate init() {}
+    }
+
+    /// This `R.string.storageErrors` struct is generated, and contains static references to 2 localization keys.
+    struct storageErrors {
+      /// Value: Неверный ответ сервера
+      static let errorCouldNotSaveFileText = Rswift.StringResource(key: "error.could.not.save.file.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неизвестная серверная ошибка
+      static let errorNoSavedDataText = Rswift.StringResource(key: "error.no.saved.data.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+
+      /// Value: Неверный ответ сервера
+      static func errorCouldNotSaveFileText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
+          return "error.could.not.save.file.text"
+        }
+
+        return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Неизвестная серверная ошибка
+      static func errorNoSavedDataText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.no.saved.data.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
+          return "error.no.saved.data.text"
+        }
+
+        return NSLocalizedString("error.no.saved.data.text", tableName: "StorageErrors", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

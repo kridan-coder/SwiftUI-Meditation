@@ -19,6 +19,11 @@
 		3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8727A7A96700DB84CC /* DataRequest+Promise.swift */; };
 		3A1F6D8A27A7AF3D00DB84CC /* NetworkService+Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8927A7AF3D00DB84CC /* NetworkService+Quotes.swift */; };
 		3A1F6D8C27A7AF6F00DB84CC /* NetworkService+Feelings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8B27A7AF6F00DB84CC /* NetworkService+Feelings.swift */; };
+		3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8E27A7BB7B00DB84CC /* Storage.swift */; };
+		3A1F6D9127A7BE8D00DB84CC /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9027A7BE8D00DB84CC /* StorageError.swift */; };
+		3A1F6D9327A7BEE600DB84CC /* StorageErrors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9227A7BEE600DB84CC /* StorageErrors.strings */; };
+		3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9427A7C79B00DB84CC /* StorageService.swift */; };
+		3A1F6D9827A7C84F00DB84CC /* StorageServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9727A7C84F00DB84CC /* StorageServiceProtocols.swift */; };
 		3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403F62797BD7000466FA4 /* ProfileView.swift */; };
 		3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FA2797E80400466FA4 /* ImageView.swift */; };
 		3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */; };
@@ -69,6 +74,11 @@
 		3A1F6D8727A7A96700DB84CC /* DataRequest+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+Promise.swift"; sourceTree = "<group>"; };
 		3A1F6D8927A7AF3D00DB84CC /* NetworkService+Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Quotes.swift"; sourceTree = "<group>"; };
 		3A1F6D8B27A7AF6F00DB84CC /* NetworkService+Feelings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Feelings.swift"; sourceTree = "<group>"; };
+		3A1F6D8E27A7BB7B00DB84CC /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		3A1F6D9027A7BE8D00DB84CC /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
+		3A1F6D9227A7BEE600DB84CC /* StorageErrors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = StorageErrors.strings; sourceTree = "<group>"; };
+		3A1F6D9427A7C79B00DB84CC /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		3A1F6D9727A7C84F00DB84CC /* StorageServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceProtocols.swift; sourceTree = "<group>"; };
 		3A6403F62797BD7000466FA4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3A6403FA2797E80400466FA4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAddView.swift; sourceTree = "<group>"; };
@@ -163,6 +173,7 @@
 		3A13C5FB27A39D900058E532 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3A1F6D8D27A7B0C600DB84CC /* Storage */,
 				3A13C5FC27A39DBC0058E532 /* Network */,
 			);
 			path = Services;
@@ -186,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFA773727A69C5700FDC987 /* NetworkErrors.strings */,
+				3A1F6D9227A7BEE600DB84CC /* StorageErrors.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -226,6 +238,25 @@
 				3A1F6D8327A7A37300DB84CC /* NetworkServiceProtocols.swift */,
 			);
 			path = "Concrete Requests";
+			sourceTree = "<group>";
+		};
+		3A1F6D8D27A7B0C600DB84CC /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F6D9627A7C83B00DB84CC /* Concrete Storages */,
+				3A1F6D8E27A7BB7B00DB84CC /* Storage.swift */,
+				3A1F6D9427A7C79B00DB84CC /* StorageService.swift */,
+				3A1F6D9027A7BE8D00DB84CC /* StorageError.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		3A1F6D9627A7C83B00DB84CC /* Concrete Storages */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F6D9727A7C84F00DB84CC /* StorageServiceProtocols.swift */,
+			);
+			path = "Concrete Storages";
 			sourceTree = "<group>";
 		};
 		3A6403F42797BADB00466FA4 /* Profile */ = {
@@ -455,6 +486,7 @@
 				446B7F6D278E94D1002B38DD /* Assets.xcassets in Resources */,
 				446B7F88278EAE17002B38DD /* Alegreya-BlackItalic.ttf in Resources */,
 				446B7F87278EAE17002B38DD /* Alegreya-Bold.ttf in Resources */,
+				3A1F6D9327A7BEE600DB84CC /* StorageErrors.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +581,7 @@
 				3A1F6D7A27A78C1E00DB84CC /* ReceivedUserData.swift in Sources */,
 				3AFA773427A696EB00FDC987 /* Logger.swift in Sources */,
 				44BAE304278EDFC4002FFFCE /* RegisterView.swift in Sources */,
+				3A1F6D9827A7C84F00DB84CC /* StorageServiceProtocols.swift in Sources */,
 				3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */,
 				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
 				3A1F6D7C27A78C3B00DB84CC /* UserDataToSend.swift in Sources */,
@@ -566,13 +599,16 @@
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				3A1F6D7127A77EBD00DB84CC /* URLFactory.swift in Sources */,
 				3A1F6D6F27A77C8400DB84CC /* URLProvider.swift in Sources */,
+				3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
 				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
+				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
 				3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */,
 				3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */,
 				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,
 				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
+				3A1F6D9127A7BE8D00DB84CC /* StorageError.swift in Sources */,
 				3A1F6D8627A7A4E000DB84CC /* NetworkService+Auth.swift in Sources */,
 				3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */,
 				3A13C60027A3A0E00058E532 /* NetworkServiceError.swift in Sources */,

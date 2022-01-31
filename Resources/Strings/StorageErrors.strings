@@ -1,0 +1,10 @@
+/* 
+  StorageErrors.strings
+  Meditation
+
+  Created by Daniel Krivelev on 31.01.2022.
+  
+*/
+
+"error.no.saved.data.text" = "Неизвестная серверная ошибка";
+"error.could.not.save.file.text" = "Неверный ответ сервера";
