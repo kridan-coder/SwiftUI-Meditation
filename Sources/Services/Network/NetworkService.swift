@@ -1,69 +1,99 @@
 //
-//  APIClient.swift
+//  NetworkService.swift
 //  Meditation
-//
-//  Created by Daniel Krivelev on 16.01.2022.
 //
 
 import Foundation
 import Alamofire
 
-struct Quotes: Codable {
-  let success: Bool
-  let data: [QuoteData]
-}
-
-struct QuoteData: Codable {
-  let id: Int
-  let title: String
-  let image: URL
-  let description: String
-}
-
-struct Feelings: Codable {
-  let success: Bool
-  let data: [FeelingData]
-}
-
-struct FeelingData: Codable {
-  let id: Int
-  let title: String
-  let image: URL
-  let position: Int
-}
-
-struct ReceivedUserData: Codable {
-  let id: String
-  let email: String
-  let nickName: String
-  let avatar: String
-  let token: String
-}
-
-struct UserDataToSend: Codable {
-  let email: String
-  let password: String
-}
-
 final class NetworkService {
-  let baseLink = "http://mskko2021.mad.hakta.pro/api/"
+  private enum RequestType {
+    case common, authorization
+  }
   
-  private let decoder = JSONDecoder()
+  private enum HeaderKeys {
+    static let contentType = "Content-Type"
+  }
   
-  private func execute<Receiving: Decodable>(url: URL,
-                                             method: HTTPMethod,
-                                             parameters: Parameters? = nil,
-                                             encoding: JSONEncoding = JSONEncoding.default,
-                                             completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
-    AF.request(url, method: method, parameters: parameters, encoding: encoding).response { response in
+  private enum HeaderValues {
+    static let contentType = "application/json"
+  }
+  
+  private let urlProvider: URLProvider
+  private let decoder: JSONDecoder
+  
+  // MARK: - Init
+  init(urlProvider: URLProvider = URLProvider(), decoder: JSONDecoder = JSONDecoder()) {
+    self.urlProvider = urlProvider
+    self.decoder = decoder
+  }
+  
+  // MARK: - Quotes
+  func getQuotes(completionHandler: @escaping (Result<Quotes, NetworkServiceError>) -> Void) {
+    let url = urlProvider.makeURL(with: URLFactory.Quotes.getAllQuotes)
+    execute(url: url, method: .get) { result in
+      completionHandler(result)
+    }
+  }
+  
+  // MARK: - Feelings
+  func getFeelings(completionHandler: @escaping (Result<Feelings, NetworkServiceError>) -> Void) {
+    let url = urlProvider.makeURL(with: URLFactory.Feelings.getAllFeelings)
+    execute(url: url, method: .get) { result in
+      completionHandler(result)
+    }
+  }
+  
+  // MARK: - User
+  func login(email: String, password: String, completionHandler: @escaping (Result<ReceivedUserData, NetworkServiceError>) -> Void) {
+    let dataToSend = UserDataToSend(email: email, password: password)
+    let url = urlProvider.makeURL(with: URLFactory.Auth.login)
+    execute(url: url, method: .post, parameters: dataToSend, requestType: .authorization) { result in
+      completionHandler(result)
+    }
+  }
+  
+  // MARK: - Common
+  private func execute<Response: Decodable>(url: String,
+                                            method: HTTPMethod,
+                                            headers: [String: String] = [:],
+                                            requestType: RequestType = .common,
+                                            completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
+    guard let url = URL(string: url) else {
+      completionHandler(.failure(.invalidURL))
+      return
+    }
+    AF.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType)).response { response in
       self.handleResponse(response) { result in
         completionHandler(result)
       }
     }
   }
   
-  private func handleResponse<Receiving: Decodable>(_ response: AFDataResponse<Data?>,
-                                                    completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
+  private func execute <Request: Encodable,
+                        Response: Decodable> (url: String,
+                                              method: HTTPMethod,
+                                              parameters: Request,
+                                              encoder: ParameterEncoder = JSONParameterEncoder.default,
+                                              headers: [String: String] = [:],
+                                              requestType: RequestType = .common,
+                                              completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
+    guard let url = URL(string: url) else {
+      completionHandler(.failure(.invalidURL))
+      return
+    }
+    AF.request(url, method: method,
+               parameters: parameters,
+               encoder: encoder,
+               headers: modifiedHeaders(from: headers, requestType: requestType)).response { response in
+      self.handleResponse(response) { result in
+        completionHandler(result)
+      }
+    }
+  }
+  
+  private func handleResponse<Response: Decodable>(_ response: AFDataResponse<Data?>,
+                                                   completionHandler: @escaping (Result<Response, NetworkServiceError>) -> Void) {
     switch response.result {
     case .success(let data):
       do {
@@ -71,7 +101,7 @@ final class NetworkService {
           completionHandler(.failure(.noDataReceived))
           return
         }
-        let decodedData = try decoder.decode(Receiving.self, from: data)
+        let decodedData = try decoder.decode(Response.self, from: data)
         completionHandler(.success(decodedData))
       } catch let error {
         log?.debug(error)
@@ -83,39 +113,15 @@ final class NetworkService {
     }
   }
   
-  func getQuotes(completion: @escaping (Quotes) -> Void) {
-    AF.request(baseLink + "quotes", method: .get).response { response in
-      switch response.result {case .success(let data):
-        completion(try! JSONDecoder().decode(Quotes.self, from: data!))
-      case .failure(_):
-        return
-      }
+  private func modifiedHeaders(from headers: [String: String], requestType: RequestType) -> HTTPHeaders? {
+    var headers = headers
+    if requestType == .authorization {
+      headers[HeaderKeys.contentType] = HeaderValues.contentType
     }
-  }
-  
-  func getFeelings(completion: @escaping (Feelings) -> Void) {
-    AF.request(baseLink + "feelings", method: .get).response { response in
-      switch response.result {case .success(let data):
-        completion(try! JSONDecoder().decode(Feelings.self, from: data!))
-      case .failure(_):
-        return
-      }
+    guard !headers.isEmpty else {
+      return nil
     }
-  }
-  
-  func login(email: String, password: String, completion: @escaping (Result<ReceivedUserData, Error>) -> Void) {
-    let dataToSend = UserDataToSend(email: email, password: password)
-    let headers: HTTPHeaders = ["Content-Type" : "application/json"]
-    AF.request(baseLink + "user/login", method: .post, parameters: dataToSend, encoder: JSONParameterEncoder.default, headers: headers)
-      .validate(statusCode: 200..<250)
-      .response { response in
-      switch response.result {case .success(let data):
-        completion(.success(try! JSONDecoder().decode(ReceivedUserData.self, from: data!)))
-      case .failure(let error):
-        log?.debug(error)
-        completion(.failure(error))
-      }
-    }
+    return HTTPHeaders(headers)
   }
   
 }

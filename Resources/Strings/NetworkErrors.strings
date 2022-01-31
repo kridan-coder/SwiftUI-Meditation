@@ -9,3 +9,4 @@
 "error.unknown.text" = "Неизвестная серверная ошибка";
 "error.decoding.text" = "Неверный ответ сервера";
 "error.no.data.received.text" = "Не удалось получить запрошенные данные с сервера";
+"error.invalid.url.text" = "Ссылка составлена некорректно";
