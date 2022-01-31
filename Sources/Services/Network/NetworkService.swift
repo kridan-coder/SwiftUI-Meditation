@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 
-
 struct Quotes: Codable {
   let success: Bool
   let data: [QuoteData]
@@ -63,7 +62,8 @@ final class NetworkService {
     }
   }
   
-  private func handleResponse<Receiving: Decodable>(_ response: AFDataResponse<Data?>, completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
+  private func handleResponse<Receiving: Decodable>(_ response: AFDataResponse<Data?>,
+                                                    completionHandler: @escaping (Result<Receiving, NetworkServiceError>) -> Void) {
     switch response.result {
     case .success(let data):
       do {
@@ -73,13 +73,12 @@ final class NetworkService {
         }
         let decodedData = try decoder.decode(Receiving.self, from: data)
         completionHandler(.success(decodedData))
-      }
-      catch let error {
-        print(error)
+      } catch let error {
+        log?.debug(error)
         completionHandler(.failure(.failedToDecode))
       }
     case .failure(let error):
-      print(error)
+      log?.debug(error)
       completionHandler(.failure(.unknown))
     }
   }
@@ -111,10 +110,9 @@ final class NetworkService {
       .validate(statusCode: 200..<250)
       .response { response in
       switch response.result {case .success(let data):
-        print(data?.description)
         completion(.success(try! JSONDecoder().decode(ReceivedUserData.self, from: data!)))
       case .failure(let error):
-        print(error.errorDescription)
+        log?.debug(error)
         completion(.failure(error))
       }
     }

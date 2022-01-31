@@ -18,6 +18,10 @@
 		3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */; };
 		3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD92794585700B791F3 /* CardView.swift */; };
 		3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC93F127946F23006CA916 /* NetworkService.swift */; };
+		3AFA773427A696EB00FDC987 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773327A696EB00FDC987 /* Logger.swift */; };
+		3AFA773627A6972700FDC987 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773527A6972700FDC987 /* Constants.swift */; };
+		3AFA773827A69C5700FDC987 /* NetworkErrors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA773727A69C5700FDC987 /* NetworkErrors.strings */; };
+		3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773C27A6D30300FDC987 /* R.generated.swift */; };
 		446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446B7F68278E94D0002B38DD /* MeditationApp.swift */; };
 		446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446B7F6A278E94D0002B38DD /* ContentView.swift */; };
 		446B7F6D278E94D1002B38DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446B7F6C278E94D1002B38DD /* Assets.xcassets */; };
@@ -53,6 +57,10 @@
 		3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellView.swift; sourceTree = "<group>"; };
 		3A8E9BD92794585700B791F3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3ABC93F127946F23006CA916 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3AFA773327A696EB00FDC987 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		3AFA773527A6972700FDC987 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3AFA773727A69C5700FDC987 /* NetworkErrors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = NetworkErrors.strings; sourceTree = "<group>"; };
+		3AFA773C27A6D30300FDC987 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		446B7F65278E94D0002B38DD /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446B7F68278E94D0002B38DD /* MeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationApp.swift; sourceTree = "<group>"; };
 		446B7F6A278E94D0002B38DD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,10 +112,11 @@
 		3A13C5F827A392510058E532 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AFA773C27A6D30300FDC987 /* R.generated.swift */,
+				446B7F76278EADFD002B38DD /* Fonts */,
 				3A13C60127A3C0CC0058E532 /* Strings */,
 				446B7F6E278E94D1002B38DD /* Preview Content */,
 				446B7F6C278E94D1002B38DD /* Assets.xcassets */,
-				446B7F76278EADFD002B38DD /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -149,6 +158,7 @@
 		3A13C60127A3C0CC0058E532 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				3AFA773727A69C5700FDC987 /* NetworkErrors.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -189,10 +199,33 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		3AFA773127A68AA400FDC987 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3AFA773227A696DA00FDC987 /* Common */,
+				3A6403F52797BAE200466FA4 /* Modules */,
+				44BAE309278EE4E9002FFFCE /* View Components */,
+				3A13C5F927A392980058E532 /* Application */,
+				3A13C5FB27A39D900058E532 /* Services */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		3AFA773227A696DA00FDC987 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3AFA773327A696EB00FDC987 /* Logger.swift */,
+				3AFA773527A6972700FDC987 /* Constants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		446B7F5C278E94D0002B38DD = {
 			isa = PBXGroup;
 			children = (
-				446B7F67278E94D0002B38DD /* Meditation */,
+				3AFA773127A68AA400FDC987 /* Sources */,
+				3A13C5F827A392510058E532 /* Resources */,
+				3A13C5FA27A392A90058E532 /* Supporting Files */,
 				446B7F66278E94D0002B38DD /* Products */,
 				2E1E4DA5B02E25A172B6B646 /* Pods */,
 				BA47FBFDB8B807CDC3845D30 /* Frameworks */,
@@ -205,19 +238,6 @@
 				446B7F65278E94D0002B38DD /* Meditation.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		446B7F67278E94D0002B38DD /* Meditation */ = {
-			isa = PBXGroup;
-			children = (
-				3A13C5FB27A39D900058E532 /* Services */,
-				3A13C5F927A392980058E532 /* Application */,
-				3A13C5FA27A392A90058E532 /* Supporting Files */,
-				3A13C5F827A392510058E532 /* Resources */,
-				44BAE309278EE4E9002FFFCE /* View Components */,
-				3A6403F52797BAE200466FA4 /* Modules */,
-			);
-			path = Meditation;
 			sourceTree = "<group>";
 		};
 		446B7F6E278E94D1002B38DD /* Preview Content */ = {
@@ -302,6 +322,8 @@
 			buildConfigurationList = 446B7F73278E94D1002B38DD /* Build configuration list for PBXNativeTarget "Meditation" */;
 			buildPhases = (
 				DD7EE75F838F8F3848D9CF69 /* [CP] Check Pods Manifest.lock */,
+				3AFA773B27A6B66B00FDC987 /* R.Swift */,
+				3AFA773A27A6B60B00FDC987 /* SwiftLint */,
 				446B7F61278E94D0002B38DD /* Sources */,
 				446B7F62278E94D0002B38DD /* Frameworks */,
 				446B7F63278E94D0002B38DD /* Resources */,
@@ -360,6 +382,7 @@
 				446B7F8A278EAE17002B38DD /* Alegreya-Black.ttf in Resources */,
 				446B7F85278EAE17002B38DD /* Alegreya-MediumItalic.ttf in Resources */,
 				446B7F8C278EAE17002B38DD /* Alegreya-Regular.ttf in Resources */,
+				3AFA773827A69C5700FDC987 /* NetworkErrors.strings in Resources */,
 				446B7F70278E94D1002B38DD /* Preview Assets.xcassets in Resources */,
 				44BAE2F8278EBFD0002FFFCE /* LaunchScreen.storyboard in Resources */,
 				446B7F84278EAE17002B38DD /* Alegreya-ExtraBold.ttf in Resources */,
@@ -373,6 +396,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3AFA773A27A6B60B00FDC987 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		3AFA773B27A6B66B00FDC987 /* R.Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = R.Swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/Resources/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Resources/R.generated.swift\"\n";
+		};
 		8770D66B04249AF252AA0F28 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFA773427A696EB00FDC987 /* Logger.swift in Sources */,
 				44BAE304278EDFC4002FFFCE /* RegisterView.swift in Sources */,
 				3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */,
 				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
@@ -426,6 +489,7 @@
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
 				3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */,
+				3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */,
 				44BAE30B278EE4F9002FFFCE /* CustomButton.swift in Sources */,
 				3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
@@ -433,6 +497,7 @@
 				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */,
+				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,
 				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
 				3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */,
 				3A13C60027A3A0E00058E532 /* NetworkServiceError.swift in Sources */,
@@ -567,7 +632,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Meditation/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -600,7 +665,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Meditation/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

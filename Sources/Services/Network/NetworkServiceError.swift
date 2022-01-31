@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Accelerate
 
 enum NetworkServiceError: Error {
   case unknown
@@ -18,11 +17,11 @@ extension NetworkServiceError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .unknown:
-      <#code#>
+      return R.string.networkErrors.errorUnknownText()
     case .noDataReceived:
-      <#code#>
+      return R.string.networkErrors.errorNoDataReceivedText()
     case .failedToDecode:
-      <#code#>
+      return R.string.networkErrors.errorDecodingText()
     }
   }
 }

@@ -9,5 +9,8 @@ target 'Meditation' do
   pod 'Alamofire'
   pod 'Kingfisher'
   pod 'RealmSwift'
+  pod 'SwiftyBeaver'
+  pod 'R.swift'
+  pod 'SwiftLint'
 
 end
