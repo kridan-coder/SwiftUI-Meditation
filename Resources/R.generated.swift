@@ -550,8 +550,29 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.string` struct is generated, and contains static references to 2 localization tables.
+  /// This `R.string` struct is generated, and contains static references to 3 localization tables.
   struct string {
+    /// This `R.string.commonErrors` struct is generated, and contains static references to 1 localization keys.
+    struct commonErrors {
+      /// Value: Неизвестная ошибка
+      static let errorUnknownText = Rswift.StringResource(key: "error.unknown.text", tableName: "CommonErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+
+      /// Value: Неизвестная ошибка
+      static func errorUnknownText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.unknown.text", tableName: "CommonErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "CommonErrors", preferredLanguages: preferredLanguages) else {
+          return "error.unknown.text"
+        }
+
+        return NSLocalizedString("error.unknown.text", tableName: "CommonErrors", bundle: bundle, comment: "")
+      }
+
+      fileprivate init() {}
+    }
+
     /// This `R.string.networkErrors` struct is generated, and contains static references to 4 localization keys.
     struct networkErrors {
       /// Value: Не удалось получить запрошенные данные с сервера
@@ -618,27 +639,18 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.storageErrors` struct is generated, and contains static references to 2 localization keys.
+    /// This `R.string.storageErrors` struct is generated, and contains static references to 4 localization keys.
     struct storageErrors {
-      /// Value: Неверный ответ сервера
-      static let errorCouldNotSaveFileText = Rswift.StringResource(key: "error.could.not.save.file.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
-      /// Value: Неизвестная серверная ошибка
+      /// Value: Запрашиваемый файл не найден в системе
       static let errorNoSavedDataText = Rswift.StringResource(key: "error.no.saved.data.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось очистить хранилище
+      static let errorCouldNotClearStorageText = Rswift.StringResource(key: "error.could.not.clear.storage.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось преобразовать файл
+      static let errorCouldNotDecodeFileText = Rswift.StringResource(key: "error.could.not.decode.file.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось сохранить файл
+      static let errorCouldNotSaveFileText = Rswift.StringResource(key: "error.could.not.save.file.text", tableName: "StorageErrors", bundle: R.hostingBundle, locales: [], comment: nil)
 
-      /// Value: Неверный ответ сервера
-      static func errorCouldNotSaveFileText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
-          return "error.could.not.save.file.text"
-        }
-
-        return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: bundle, comment: "")
-      }
-
-      /// Value: Неизвестная серверная ошибка
+      /// Value: Запрашиваемый файл не найден в системе
       static func errorNoSavedDataText(preferredLanguages: [String]? = nil) -> String {
         guard let preferredLanguages = preferredLanguages else {
           return NSLocalizedString("error.no.saved.data.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
@@ -649,6 +661,45 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("error.no.saved.data.text", tableName: "StorageErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Не удалось очистить хранилище
+      static func errorCouldNotClearStorageText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.could.not.clear.storage.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
+          return "error.could.not.clear.storage.text"
+        }
+
+        return NSLocalizedString("error.could.not.clear.storage.text", tableName: "StorageErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Не удалось преобразовать файл
+      static func errorCouldNotDecodeFileText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.could.not.decode.file.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
+          return "error.could.not.decode.file.text"
+        }
+
+        return NSLocalizedString("error.could.not.decode.file.text", tableName: "StorageErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Не удалось сохранить файл
+      static func errorCouldNotSaveFileText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "StorageErrors", preferredLanguages: preferredLanguages) else {
+          return "error.could.not.save.file.text"
+        }
+
+        return NSLocalizedString("error.could.not.save.file.text", tableName: "StorageErrors", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

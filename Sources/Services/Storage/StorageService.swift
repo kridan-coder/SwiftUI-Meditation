@@ -8,11 +8,14 @@
 import Foundation
 
 final class StorageService {
-  private enum Keys: String {
-    case images
+  enum Keys: String {
+    case image
   }
   
-  private let imagesStorage = Storage<Data>()
+  let imagesStorage = Storage<Data>(folderName: "Images")
   
+  func generateFileName(for type: Keys, name: String) -> String {
+    type.rawValue + "_" + name
+  }
   
 }

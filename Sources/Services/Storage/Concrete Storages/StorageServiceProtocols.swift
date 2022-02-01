@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 protocol UIImagesStoring {
-  func store(uiImage: UIImage) throws
+  func store(uiImage: UIImage, name: String) throws
   func getUIImage(with key: String) throws -> UIImage
-  func getUIImages() throws -> UIImage
-  func clearImagesData()
+  func getUIImages() throws -> [UIImage]
+  func clearImagesData() throws
 }

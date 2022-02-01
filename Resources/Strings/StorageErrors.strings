@@ -6,5 +6,7 @@
   
 */
 
-"error.no.saved.data.text" = "Неизвестная серверная ошибка";
-"error.could.not.save.file.text" = "Неверный ответ сервера";
+"error.no.saved.data.text" = "Запрашиваемый файл не найден в системе";
+"error.could.not.save.file.text" = "Не удалось сохранить файл";
+"error.could.not.clear.storage.text" = "Не удалось очистить хранилище";
+"error.could.not.decode.file.text" = "Не удалось преобразовать файл";
