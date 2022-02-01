@@ -86,11 +86,11 @@ final class NetworkService {
         let decodedData = try decoder.decode(Response.self, from: data)
         return Promise.value(decodedData)
       } catch let error {
-        log?.debug(error)
+        log?.error(error)
         return Promise(error: NetworkServiceError.failedToDecode)
       }
     case .failure(let error):
-      log?.debug(error)
+      log?.error(error)
       return Promise(error: NetworkServiceError.unknown)
     }
   }

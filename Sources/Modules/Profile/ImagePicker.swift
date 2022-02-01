@@ -80,7 +80,13 @@ struct ImagePicker: UIViewControllerRepresentable {
           catch let error {
             print(error)
           }
-          let realm = try! Realm()
+          let realm: Realm
+          do {
+            
+            realm = try Realm()
+          } catch {
+            fatalError()
+          }
           
           
           
@@ -94,10 +100,14 @@ struct ImagePicker: UIViewControllerRepresentable {
           let storage = ImageStorage()
           storage.imagePath = filename
           storage.time = time
-          
-          try! realm.write {
-            realm.add(storage)
+          do {
+            try realm.write {
+              realm.add(storage)
+            }
+          } catch {
+            fatalError()
           }
+         
           self.parent.filename = filename
           self.parent.image = safeImage
           

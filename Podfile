@@ -13,5 +13,6 @@ target 'Meditation' do
   pod 'R.swift'
   pod 'SwiftLint'
   pod 'PromiseKit'
+  pod 'KeychainAccess'
 
 end

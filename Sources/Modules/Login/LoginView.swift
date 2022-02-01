@@ -22,24 +22,24 @@ class LoginViewModel: ObservableObject {
   }
   
   func logIn(showAlert: Binding<Bool>) {
-    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
-      showAlert.wrappedValue = true
-      return
-    }
-    NetworkService().login(email: email, password: password) { result in
-      switch result {
-      case .success(let data):
-        withAnimation {
-          self.isAuthorized = true
-        }
-        self.nickname = data.nickName
-        self.avatarLink = data.avatar
-        
-      case .failure(_):
-        showAlert.wrappedValue = true
-      }
-      
-    }
+//    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
+//      showAlert.wrappedValue = true
+//      return
+//    }
+//    NetworkService().login(email: email, password: password) { result in
+//      switch result {
+//      case .success(let data):
+//        withAnimation {
+//          self.isAuthorized = true
+//        }
+//        self.nickname = data.nickName
+//        self.avatarLink = data.avatar
+//        
+//      case .failure(_):
+//        showAlert.wrappedValue = true
+//      }
+//      
+//    }
     
   }
   

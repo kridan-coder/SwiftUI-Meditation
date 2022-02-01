@@ -7,15 +7,26 @@
 
 import SwiftUI
 
+final class ContentViewModel: ObservableObject {
+  @Environment(\.appDependencies) private var dependencies
+  @Published var hadFirstRunAlready: Bool = false
+  
+  func onAppear() {
+    hadFirstRunAlready = dependencies.userDataStorageService.hadFirstRunAlready
+  }
+  
+}
+
 struct ContentView: View {
-  @AppStorage("isAuthorized") var isAuthorized: Bool?
+  @ObservedObject private(set) var viewModel: ContentViewModel
+  
   var body: some View {
-    if isAuthorized ?? false {
+    if viewModel.hadFirstRunAlready {
       CustomTabView()
     } else {
       WelcomeView()
     }
-    
+     
   }
 }
 
@@ -34,7 +45,7 @@ struct CustomTabView: View {
   
   var body: some View {
     TabView(selection: $selection) {
-      MainView()
+      MainView(viewModel: MainViewModel())
         .tabItem {
           if selection == 0
           {
@@ -44,7 +55,7 @@ struct CustomTabView: View {
           }
         }.tag(0)
       
-      MainView()
+      MainView(viewModel: MainViewModel())
         .tabItem {
           Image("Sound")
         }.tag(1)

@@ -37,7 +37,11 @@
 		3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */; };
 		3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1227A91B5E004770D9 /* RealmStorage.swift */; };
 		3AC86F1527A91BB2004770D9 /* CommonErrors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AC86F1427A91BB2004770D9 /* CommonErrors.strings */; };
-		3AC86F1727A9291F004770D9 /* RealmStorageProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1627A9291F004770D9 /* RealmStorageProviding.swift */; };
+		3AC86F1727A9291F004770D9 /* RealmServiceProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1627A9291F004770D9 /* RealmServiceProviding.swift */; };
+		3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1927A92C38004770D9 /* AppDependencies.swift */; };
+		3AC86F1D27A936B1004770D9 /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */; };
+		3AC86F1F27A936DA004770D9 /* UserDataStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */; };
+		3AC86F2127A93D9D004770D9 /* StorePropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */; };
 		3AFA773427A696EB00FDC987 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773327A696EB00FDC987 /* Logger.swift */; };
 		3AFA773627A6972700FDC987 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773527A6972700FDC987 /* Constants.swift */; };
 		3AFA773827A69C5700FDC987 /* NetworkErrors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA773727A69C5700FDC987 /* NetworkErrors.strings */; };
@@ -96,7 +100,11 @@
 		3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		3AC86F1227A91B5E004770D9 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
 		3AC86F1427A91BB2004770D9 /* CommonErrors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = CommonErrors.strings; sourceTree = "<group>"; };
-		3AC86F1627A9291F004770D9 /* RealmStorageProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorageProviding.swift; sourceTree = "<group>"; };
+		3AC86F1627A9291F004770D9 /* RealmServiceProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmServiceProviding.swift; sourceTree = "<group>"; };
+		3AC86F1927A92C38004770D9 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStorage.swift; sourceTree = "<group>"; };
+		3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoring.swift; sourceTree = "<group>"; };
+		3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePropertyWrappers.swift; sourceTree = "<group>"; };
 		3AFA773327A696EB00FDC987 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		3AFA773527A6972700FDC987 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3AFA773727A69C5700FDC987 /* NetworkErrors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = NetworkErrors.strings; sourceTree = "<group>"; };
@@ -181,8 +189,9 @@
 		3A13C5FB27A39D900058E532 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3AC86F1B27A93660004770D9 /* UserDataStorage */,
 				3AC86F1127A91A3F004770D9 /* RealmStorage */,
-				3A1F6D8D27A7B0C600DB84CC /* Storage */,
+				3A1F6D8D27A7B0C600DB84CC /* SystemStorage */,
 				3A13C5FC27A39DBC0058E532 /* Network */,
 			);
 			path = Services;
@@ -250,7 +259,7 @@
 			path = "Concrete Requests";
 			sourceTree = "<group>";
 		};
-		3A1F6D8D27A7B0C600DB84CC /* Storage */ = {
+		3A1F6D8D27A7B0C600DB84CC /* SystemStorage */ = {
 			isa = PBXGroup;
 			children = (
 				3A1F6D9627A7C83B00DB84CC /* Concrete Storages */,
@@ -258,7 +267,7 @@
 				3A1F6D9427A7C79B00DB84CC /* StorageService.swift */,
 				3A1F6D9027A7BE8D00DB84CC /* StorageError.swift */,
 			);
-			path = Storage;
+			path = SystemStorage;
 			sourceTree = "<group>";
 		};
 		3A1F6D9627A7C83B00DB84CC /* Concrete Storages */ = {
@@ -309,15 +318,34 @@
 		3AC86F1127A91A3F004770D9 /* RealmStorage */ = {
 			isa = PBXGroup;
 			children = (
-				3AC86F1627A9291F004770D9 /* RealmStorageProviding.swift */,
+				3AC86F1627A9291F004770D9 /* RealmServiceProviding.swift */,
 				3AC86F1227A91B5E004770D9 /* RealmStorage.swift */,
 			);
 			path = RealmStorage;
 			sourceTree = "<group>";
 		};
+		3AC86F1827A92C20004770D9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3AC86F1927A92C38004770D9 /* AppDependencies.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3AC86F1B27A93660004770D9 /* UserDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */,
+				3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */,
+				3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */,
+			);
+			path = UserDataStorage;
+			sourceTree = "<group>";
+		};
 		3AFA773127A68AA400FDC987 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3AC86F1827A92C20004770D9 /* Utils */,
 				3AFA773227A696DA00FDC987 /* Common */,
 				3A6403F52797BAE200466FA4 /* Modules */,
 				44BAE309278EE4E9002FFFCE /* View Components */,
@@ -600,13 +628,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A1F6D7A27A78C1E00DB84CC /* ReceivedUserData.swift in Sources */,
+				3AC86F1F27A936DA004770D9 /* UserDataStoring.swift in Sources */,
 				3AFA773427A696EB00FDC987 /* Logger.swift in Sources */,
 				44BAE304278EDFC4002FFFCE /* RegisterView.swift in Sources */,
-				3AC86F1727A9291F004770D9 /* RealmStorageProviding.swift in Sources */,
+				3AC86F1727A9291F004770D9 /* RealmServiceProviding.swift in Sources */,
 				3A1F6D9827A7C84F00DB84CC /* StorageServiceProtocols.swift in Sources */,
 				3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */,
+				3AC86F1D27A936B1004770D9 /* UserDataStorage.swift in Sources */,
 				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
 				3A1F6D7C27A78C3B00DB84CC /* UserDataToSend.swift in Sources */,
+				3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */,
 				3A64040127980C3600466FA4 /* ImagePicker.swift in Sources */,
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
@@ -624,6 +655,7 @@
 				3A1F6D6F27A77C8400DB84CC /* URLProvider.swift in Sources */,
 				3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
+				3AC86F2127A93D9D004770D9 /* StorePropertyWrappers.swift in Sources */,
 				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
@@ -772,7 +804,7 @@
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Meditation/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -805,7 +837,7 @@
 				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Meditation/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

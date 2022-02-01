@@ -9,8 +9,10 @@ import SwiftUI
 import Kingfisher
 
 class MainViewModel: ObservableObject {
-  @AppStorage("nickName") var nickname: String = "Эмиль"
-  @AppStorage("avatar") var avatarLink: String = ""
+  
+  @Environment(\.appDependencies) private var dependencies
+  
+  @Published var isAuthorized: Bool = false
   
   @Published var choiceCellModels: [ChoiceCellModel] =
   [
@@ -18,30 +20,30 @@ class MainViewModel: ObservableObject {
   @Published var cardCellModels: [CardViewModel] = [
   ]
   
-  init() {
-    NetworkService().getQuotes { quotes in
-      self.cardCellModels = []
-      for quote in quotes.data {
-        self.cardCellModels.append(CardViewModel(id: quote.id, title: quote.title, description: quote.description, imageURL: quote.image))
-      }
-    }
-    
-    NetworkService().getFeelings { feelings in
-      self.choiceCellModels = []
-      let sorted = feelings.data.sorted { $0.position < $1.position
-      }
-      
-      for feeling in sorted {
-        self.choiceCellModels.append(ChoiceCellModel(title: feeling.title, imageURL: feeling.image))
-      }
-
-    }
-  }
+//  init() {
+//    NetworkService().getQuotes { quotes in
+//      self.cardCellModels = []
+//      for quote in quotes.data {
+//        self.cardCellModels.append(CardViewModel(id: quote.id, title: quote.title, description: quote.description, imageURL: quote.image))
+//      }
+//    }
+//
+//    NetworkService().getFeelings { feelings in
+//      self.choiceCellModels = []
+//      let sorted = feelings.data.sorted { $0.position < $1.position
+//      }
+//
+//      for feeling in sorted {
+//        self.choiceCellModels.append(ChoiceCellModel(title: feeling.title, imageURL: feeling.image))
+//      }
+//
+//    }
+//  }
   
 }
 
 struct MainView: View {
-  @StateObject var viewModel = MainViewModel()
+  @ObservedObject var viewModel:  MainViewModel
   
   var body: some View {
     
@@ -63,7 +65,7 @@ struct MainView: View {
             .scaledToFit()
             .frame(width: 50, height: 50)
           Spacer()
-          if let url = URL(string: viewModel.avatarLink) {
+          if let url = URL(string: "viewModel.avatarLink") {
             KFImage(url)
               .resizable()
               .scaledToFit()
@@ -81,7 +83,7 @@ struct MainView: View {
         
         ScrollView(.vertical, showsIndicators: false) {
           VStack(alignment: .leading) {
-            Text("С возвращением, \(viewModel.nickname)!")
+            Text("С возвращением, (viewModel.nickname)!")
               .foregroundColor(.white)
               .font(.custom("Alegreya-Medium", size: 28))
               .padding(.leading).padding(.top)
@@ -117,7 +119,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
   static var previews: some View {
-    MainView()
+    MainView(viewModel: MainViewModel())
   }
 }
 

@@ -25,16 +25,21 @@ struct ContentImageView: View {
   }
   
   func delete() {
-    let realm = try! Realm()
-    try! realm.write {
-      let objects = realm.objects(ImageStorage.self)
-      let filtered = objects.filter { $0.imagePath == filename }
-      print(filtered.count)
+    do {
+      let realm = try Realm()
+      try realm.write {
+        let objects = realm.objects(ImageStorage.self)
+        let filtered = objects.filter { $0.imagePath == filename }
+        print(filtered.count)
+        
+        realm.delete(filtered)
+      }
       
-      realm.delete(filtered)
+      try FileManager.default.removeItem(at: documentsUrl.appendingPathComponent(filename))
+    } catch {
+      fatalError()
     }
-    
-    try! FileManager.default.removeItem(at: documentsUrl.appendingPathComponent(filename))
+
     
     withAnimation {
       isPresentingPhoto = false

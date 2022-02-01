@@ -1,9 +1,6 @@
 /* 
   StorageErrors.strings
   Meditation
-
-  Created by Daniel Krivelev on 31.01.2022.
-  
 */
 
 "error.no.saved.data.text" = "Запрашиваемый файл не найден в системе";

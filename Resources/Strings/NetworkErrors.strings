@@ -1,9 +1,6 @@
 /* 
   NetworkErrors.strings
   Meditation
-
-  Created by Daniel Krivelev on 30.01.2022.
-  
 */
 
 "error.unknown.text" = "Неизвестная серверная ошибка";

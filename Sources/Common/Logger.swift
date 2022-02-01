@@ -18,11 +18,11 @@ struct Logger {
     SwiftyBeaver.addDestination(console)
   }
   
-  func debug(_ message: @autoclosure () -> Any,
+  func error(_ message: @autoclosure () -> Any,
              _ file: String = #file,
              _ function: String = #function,
              _ line: Int = #line) {
-    SwiftyBeaver.debug(message(), file, function, line: line)
+    SwiftyBeaver.error(message(), file, function, line: line)
   }
   
 }

@@ -123,7 +123,8 @@ struct ProfileView: View {
                 
                 LazyVGrid(columns: columns) {
                   ForEach(imagePaths) { imagePathContainer in
-                    let image = UIImage(data: try! Data(contentsOf: documentsUrl.appendingPathComponent(imagePathContainer.imagePath)))!
+                    let data = try? Data(contentsOf: documentsUrl.appendingPathComponent(imagePathContainer.imagePath))
+                    let image = UIImage(data: data!)!
                     ImageView(viewModel: ImageViewModel(date: imagePathContainer.time, image: Image(uiImage: image)))
                       .onTapGesture {
                         withAnimation {

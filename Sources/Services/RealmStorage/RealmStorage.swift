@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct RealmService: RealmStorageProviding {
+struct RealmStorage: RealmServiceProviding {
   private let realm: Realm
   
   init(realm: Realm) {
@@ -28,7 +28,8 @@ struct RealmService: RealmStorageProviding {
       try realm.write {
         realm.add(object, update: .modified)
       }
-    } catch {
+    } catch let error {
+      log?.error(error)
       throw StorageError.couldNotSaveFile
     }
   }
@@ -43,7 +44,8 @@ struct RealmService: RealmStorageProviding {
       try realm.write {
         realm.delete(allObjects)
       }
-    } catch {
+    } catch let error {
+      log?.error(error)
       throw StorageError.couldNotClearStorage
     }
   }
