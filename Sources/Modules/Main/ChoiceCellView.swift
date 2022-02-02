@@ -40,7 +40,7 @@ struct ChoiceCellView_Previews: PreviewProvider {
   static var previews: some View {
     ChoiceCellView(model: ChoiceCellModel(title: "Сосредоточенным", imageURL: URL(string: "http://mskko2021.mad.hakta.pro//uploads//feeling//Focus.png")!))
       .background(Color.black)
-      .frame(width:125, height: 125)
+      .frame(width: 125, height: 125)
   }
 }
 //
@@ -51,11 +51,11 @@ struct ChoiceCellView_Previews: PreviewProvider {
 ////  Created by Daniel Krivelev on 16.01.2022.
 ////
 //
-//import SwiftUI
-//import Kingfisher
+// import SwiftUI
+// import Kingfisher
 //
 //
-//struct ChoiceCellView: View {
+// struct ChoiceCellView: View {
 //  var model: ChoiceCellModel
 //
 //  var body: some View {
@@ -84,13 +84,13 @@ struct ChoiceCellView_Previews: PreviewProvider {
 //
 //
 //  }
-//}
+// }
 //
-//struct ChoiceCellView_Previews: PreviewProvider {
+// struct ChoiceCellView_Previews: PreviewProvider {
 //  static var previews: some View {
 //    ChoiceCellView(model: ChoiceCellModel(title: "Сосредоточенным", imageURL: URL(string: "http://mskko2021.mad.hakta.pro//uploads//feeling//Focus.png")!))
 //      .background(Color.black)
 //      //.frame(width:125, height: 125)
 //  }
-//}
+// }
 //

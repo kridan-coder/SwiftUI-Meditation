@@ -5,7 +5,6 @@
 //  Created by Daniel Krivelev on 19.01.2022.
 //
 
-
 import SwiftUI
 import Kingfisher
 import RealmSwift
@@ -19,7 +18,6 @@ class ContentImagesData: ObservableObject {
 
 class ProfileViewModel: ObservableObject {
   @Published var name = "Daniel"
-  
   
 }
 
@@ -67,7 +65,6 @@ struct ProfileView: View {
     if isPresentingPhoto {
       ContentImageView(isPresentingPhoto: $isPresentingPhoto, filename: filename, image: imageToShow)
     } else {
-      
       
       NavigationView {
         GeometryReader { screen in
@@ -120,7 +117,6 @@ struct ProfileView: View {
                   .foregroundColor(.white)
                   .font(.custom("Alegreya-Medium", size: 35))
                 
-                
                 LazyVGrid(columns: columns) {
                   ForEach(imagePaths) { imagePathContainer in
                     let data = try? Data(contentsOf: documentsUrl.appendingPathComponent(imagePathContainer.imagePath))
@@ -141,7 +137,7 @@ struct ProfileView: View {
                     }
                 }
                 .padding(.leading, 10).padding(.trailing, 10)
-                //Spacer()
+                // Spacer()
               }
               
             }
@@ -151,15 +147,12 @@ struct ProfileView: View {
             ImagePicker(image: $inputImage, filename: $filename)
           }
           .onChange(of: inputImage) { _ in
-            //loadImage()
+            // loadImage()
           }
         
       }
       
-      
-      
     }
-    
     
   }
   
@@ -170,4 +163,3 @@ struct ProfileView_Previews: PreviewProvider {
     ProfileView()
   }
 }
-

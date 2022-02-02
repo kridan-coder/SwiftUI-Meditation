@@ -20,14 +20,13 @@ class ImageViewModel: ObservableObject, Identifiable {
   
 }
 
-struct ImageView: View
-{
+struct ImageView: View {
   var isNavigationBarHidden = true
     
   @StateObject var viewModel: ImageViewModel
   
   var body: some View {
-    GeometryReader { screen in
+    GeometryReader { _ in
       ZStack(alignment: .bottomLeading) {
         viewModel.image
           .resizable()
@@ -39,12 +38,10 @@ struct ImageView: View
           .offset(x: 15, y: -15)
       }
       
-      
     }
     .aspectRatio(1.3, contentMode: .fit)
     .padding(8)
   }
-  
   
 }
 
@@ -53,4 +50,3 @@ struct ImageView_Previews: PreviewProvider {
     ImageView(viewModel: ImageViewModel(date: "11:00", image: Image("Content1")))
   }
 }
-

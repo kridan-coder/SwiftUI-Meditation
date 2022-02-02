@@ -39,7 +39,6 @@ struct ContentImageView: View {
     } catch {
       fatalError()
     }
-
     
     withAnimation {
       isPresentingPhoto = false
@@ -48,7 +47,7 @@ struct ContentImageView: View {
   
   var body: some View {
     NavigationView {
-      GeometryReader { screen in
+      GeometryReader { _ in
         ZStack {
           Color("BackgroundColor")
             .ignoresSafeArea()
@@ -113,7 +112,6 @@ struct ContentImageView: View {
           }
         }
         
-        
       }
       .navigationBarHidden(true)
       
@@ -126,4 +124,3 @@ struct ContentImageView_Previews: PreviewProvider {
     ContentImageView(isPresentingPhoto: .constant(false), filename: "", image: Image("Content1"))
   }
 }
-

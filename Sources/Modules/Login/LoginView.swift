@@ -8,24 +8,27 @@
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-  @AppStorage("isAuthorized") var isAuthorized: Bool?
+  @Environment(\.appDependencies) private var dependencies
   
-  @AppStorage("nickName") var nickname: String?
-  @AppStorage("avatar") var avatarLink: String?
-  
-  @AppStorage("email") var email: String = ""
-  
+  @Published var isLoggedIn: Bool = false
   @Published var password: String = ""
+  @Published var email: String = ""
+  
+  func onAppear() {
+    email = dependencies.userDataStorageService.email ?? ""
+    isLoggedIn = dependencies.userDataStorageService.isLoggedIn
+  }
   
   var isValidatedCorrectly: Bool {
     email.contains("@") && email.contains(".") && !password.isEmpty
   }
   
   func logIn(showAlert: Binding<Bool>) {
-//    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
-//      showAlert.wrappedValue = true
-//      return
-//    }
+    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
+      showAlert.wrappedValue = true
+      return
+    }
+    dependencies.authNetworkService.login(email: email, password: password)
 //    NetworkService().login(email: email, password: password) { result in
 //      switch result {
 //      case .success(let data):
@@ -35,7 +38,7 @@ class LoginViewModel: ObservableObject {
 //        self.nickname = data.nickName
 //        self.avatarLink = data.avatar
 //        
-//      case .failure(_):
+//      case .failure:
 //        showAlert.wrappedValue = true
 //      }
 //      
@@ -46,119 +49,113 @@ class LoginViewModel: ObservableObject {
 }
 
 struct LoginView: View {
-  
   @State private var showingAlert = false
   
   @Environment(\.editMode) var editMode
   
-  @StateObject var loginViewModel = LoginViewModel()
-  
-  @AppStorage("isAuthorized") var isAuthorized: Bool?
+  @ObservedObject var loginViewModel: LoginViewModel
   
   var body: some View {
-    NavigationView {
-      GeometryReader { screen in
-        ZStack {
-          Color("BackgroundColor")
-            .ignoresSafeArea()
-          
-          
-          VStack(alignment: .leading) {
-            Image("Logo")
-              .resizable()
-              .scaledToFit()
-              .frame(width: 60, height: 60)
-            
-            Spacer()
-            
-            Text("Sign In")
-              .font(.custom("Alegreya-Medium", size: 35))
-              .foregroundColor(.white)
-            Spacer()
-            Spacer()
-            Group {
-              TextField("", text: $loginViewModel.email)
-                .placeholder(when: loginViewModel.email.isEmpty) {
-                  Text("Email").foregroundColor(.gray)
-                }
-                .foregroundColor(.white)
-                .font(.custom("Alegreya-Regular", size: 20))
-                .frame(width: screen.size.width * 0.9)
-                .overlay(alignment: .bottom) {
-                  GeometryReader { textField in
-                    Rectangle()
-                      .fill(Color("SecondaryColor"))
-                      .frame(width: textField.size.width + 10, height: 1, alignment: .center)
-                      .offset(x: -5, y: textField.size.height + 5)
-                  }
-                }
-              Spacer()
-              SecureField("", text: $loginViewModel.password)
-                .placeholder(when: loginViewModel.password.isEmpty) {
-                  Text("Пароль").foregroundColor(.gray)
-                }
-                .foregroundColor(.white)
-                .font(.custom("Alegreya-Regular", size: 20))
-                .frame(width: screen.size.width * 0.9)
-                .overlay(alignment: .bottom) {
-                  GeometryReader { textField in
-                    Rectangle()
-                      .fill(Color("SecondaryColor"))
-                      .frame(width: textField.size.width + 10, height: 1, alignment: .center)
-                      .offset(x: -5, y: textField.size.height + 5)
-                  }
-                }
-            }
-            
-            Spacer()
-            Group {
-              Button {
-                loginViewModel.logIn(showAlert: $showingAlert)
-              } label: {
-                Text("Sign In")
-                  .font(.custom("Alegreya-Medium", size: 24))
-                  .foregroundColor(.white)
-                  .frame(maxWidth: .infinity)
-              }
-              .frame(width: screen.size.width * 0.9, height: 60)
-              .background(Color("ButtonColor"))
-              .cornerRadius(10)
-              .alert("Incorrect data", isPresented: $showingAlert) {
-                          Button("OK", role: .cancel) { }
-                      }
-              Spacer()
-              NavigationLink {
-                RegisterView()
-              } label: {
-                CustomButtonView(text: "Sign Up")
-                  .frame(width: screen.size.width * 0.9, height: 60)
-                  .frame(width: screen.size.width * 0.9, height: 60)
-              }
-            }
-            Spacer()
-            Spacer()
-          }
-          
-        }
-        .overlay(alignment: .bottom) {
-          Image("Leafs")
+    GeometryReader { screen in
+      ZStack {
+        Color.backgroundColor
+          .ignoresSafeArea()
+        VStack(alignment: .leading) {
+          Image(.logo)
             .resizable()
             .scaledToFit()
-            .allowsHitTesting(false)
-          
+            .frame(width: 60, height: 60)
+          Spacer()
+          Text("Sign In".unlocalized)
+            .font(.mediumLargeTitle1)
+            .foregroundColor(.white)
+          Spacer()
+          Spacer()
+          makeFields(parentWidth: screen.size.width)
+          Spacer()
+          makeButtons(parentWidth: screen.size.width)
+          Spacer()
+          Spacer()
         }
-        .ignoresSafeArea(edges: .bottom)
       }
-      
     }
-    .navigationBarHidden(true)
-    
-    
+    .overlay(alignment: .bottom) {
+      Image(.leaves)
+        .resizable()
+        .scaledToFit()
+        .allowsHitTesting(false)
+    }
+    .ignoresSafeArea(.all, edges: .bottom)
+    .alert(R.string.commonErrors.errorUnknownText(), isPresented: $showingAlert) {
+      Button("OK".unlocalized, role: .cancel) { }
+    }
   }
+  
+  @ViewBuilder
+  private func makeFields(parentWidth: CGFloat) -> some View {
+    TextField("", text: $loginViewModel.email)
+      .placeholder(when: loginViewModel.email.isEmpty) {
+        Text("Email".unlocalized).foregroundColor(.gray)
+      }
+      .foregroundColor(.white)
+      .font(.regularBody)
+      .frame(width: parentWidth * 0.9)
+      .overlay(alignment: .bottom) {
+        GeometryReader { textField in
+          Rectangle()
+            .fill(Color.secondaryColor)
+            .frame(width: textField.size.width + 10, height: 1, alignment: .center)
+            .offset(x: -5, y: textField.size.height + 5)
+        }
+      }
+    Spacer()
+    SecureField("", text: $loginViewModel.password)
+      .placeholder(when: loginViewModel.password.isEmpty) {
+        Text("Пароль".unlocalized).foregroundColor(.gray)
+      }
+      .foregroundColor(.white)
+      .font(.regularBody)
+      .frame(width: parentWidth * 0.9)
+      .overlay(alignment: .bottom) {
+        GeometryReader { textField in
+          Rectangle()
+            .fill(Color.secondaryColor)
+            .frame(width: textField.size.width + 10, height: 1, alignment: .center)
+            .offset(x: -5, y: textField.size.height + 5)
+        }
+      }
+  }
+  
+  @ViewBuilder
+  private func makeButtons(parentWidth: CGFloat) -> some View {
+    Button {
+      loginViewModel.logIn(showAlert: $showingAlert)
+    } label: {
+      Text("Sign In".unlocalized)
+        .font(.mediumTitle3)
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
+    }
+    .frame(width: parentWidth * 0.9, height: 60)
+    .background(Color.buttonColor)
+    .cornerRadius(10)
+    Spacer()
+    NavigationLink {
+      RegisterView()
+    } label: {
+      CustomButtonView(text: "Sign Up".unlocalized)
+        .frame(width: parentWidth * 0.9, height: 60)
+        .frame(width: parentWidth * 0.9, height: 60)
+    }
+  }
+  
 }
 
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
-    LoginView()
+    NavigationView {
+      LoginView(loginViewModel: LoginViewModel())
+    }
+    .navigationBarHidden(true)
   }
 }

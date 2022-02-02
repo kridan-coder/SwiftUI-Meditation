@@ -15,6 +15,9 @@ final class UserDataStorage: UserDataStoring {
   
   private struct UserDefaultsKeys {
     static let hadFirstRunAlready = "hadFirstRunAlready"
+    static let nickname = "nickname"
+    static let avatarURL = "avatarURL"
+    static let email = "email"
   }
   
   private let keychain: Keychain
@@ -30,15 +33,19 @@ final class UserDataStorage: UserDataStoring {
   @UserDefault(key: UserDefaultsKeys.hadFirstRunAlready, defaultValue: false)
   var hadFirstRunAlready: Bool
   
-  @UserDefault(key: UserDefaultsKeys.hadFirstRunAlready, defaultValue: nil)
+  @UserDefault(key: UserDefaultsKeys.nickname, defaultValue: nil)
   var nickname: String?
   
-  @UserDefault(key: UserDefaultsKeys.hadFirstRunAlready, defaultValue: nil)
+  @UserDefault(key: UserDefaultsKeys.avatarURL, defaultValue: nil)
   var avatarURL: URL?
+  
+  @UserDefault(key: UserDefaultsKeys.email, defaultValue: nil)
+  var email: String?
   
   init(userDefaults: UserDefaults = UserDefaults.standard, keychain: Keychain = Keychain()) {
     self.keychain = keychain
     self.userDefaults = userDefaults
+    handleFirstLaunch()
   }
   
   private func handleFirstLaunch() {

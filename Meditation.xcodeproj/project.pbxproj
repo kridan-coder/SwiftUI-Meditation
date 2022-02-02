@@ -42,6 +42,12 @@
 		3AC86F1D27A936B1004770D9 /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */; };
 		3AC86F1F27A936DA004770D9 /* UserDataStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */; };
 		3AC86F2127A93D9D004770D9 /* StorePropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */; };
+		3ADEDF6D27AA52940006E96C /* String+Unlocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF6C27AA52940006E96C /* String+Unlocalized.swift */; };
+		3ADEDF6F27AA53E30006E96C /* Font+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */; };
+		3ADEDF7227AA5AB40006E96C /* AppImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF7127AA5AB40006E96C /* AppImageResource.swift */; };
+		3ADEDF7427AA5CF00006E96C /* Image+CustomInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF7327AA5CF00006E96C /* Image+CustomInit.swift */; };
+		3ADEDF7927AA6CDC0006E96C /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF7827AA6CDC0006E96C /* TabbarView.swift */; };
+		3ADEDF7B27AA6E7F0006E96C /* Color+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF7A27AA6E7F0006E96C /* Color+AppColors.swift */; };
 		3AFA773427A696EB00FDC987 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773327A696EB00FDC987 /* Logger.swift */; };
 		3AFA773627A6972700FDC987 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA773527A6972700FDC987 /* Constants.swift */; };
 		3AFA773827A69C5700FDC987 /* NetworkErrors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA773727A69C5700FDC987 /* NetworkErrors.strings */; };
@@ -105,6 +111,12 @@
 		3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStorage.swift; sourceTree = "<group>"; };
 		3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoring.swift; sourceTree = "<group>"; };
 		3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePropertyWrappers.swift; sourceTree = "<group>"; };
+		3ADEDF6C27AA52940006E96C /* String+Unlocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Unlocalized.swift"; sourceTree = "<group>"; };
+		3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+AppFonts.swift"; sourceTree = "<group>"; };
+		3ADEDF7127AA5AB40006E96C /* AppImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageResource.swift; sourceTree = "<group>"; };
+		3ADEDF7327AA5CF00006E96C /* Image+CustomInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CustomInit.swift"; sourceTree = "<group>"; };
+		3ADEDF7827AA6CDC0006E96C /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		3ADEDF7A27AA6E7F0006E96C /* Color+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+AppColors.swift"; sourceTree = "<group>"; };
 		3AFA773327A696EB00FDC987 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		3AFA773527A6972700FDC987 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3AFA773727A69C5700FDC987 /* NetworkErrors.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = NetworkErrors.strings; sourceTree = "<group>"; };
@@ -161,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFA773C27A6D30300FDC987 /* R.generated.swift */,
+				3ADEDF7027AA5A9C0006E96C /* Images */,
 				446B7F76278EADFD002B38DD /* Fonts */,
 				3A13C60127A3C0CC0058E532 /* Strings */,
 				446B7F6E278E94D1002B38DD /* Preview Content */,
@@ -295,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				446B7F6A278E94D0002B38DD /* ContentView.swift */,
+				3ADEDF7527AA6CA50006E96C /* Tabbar */,
 				44BAE2FB278EC67F002FFFCE /* Welcome */,
 				44BAE301278EDFAA002FFFCE /* Register */,
 				44BAE302278EDFB5002FFFCE /* Login */,
@@ -342,9 +356,37 @@
 			path = UserDataStorage;
 			sourceTree = "<group>";
 		};
+		3ADEDF6B27AA52790006E96C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3ADEDF6C27AA52940006E96C /* String+Unlocalized.swift */,
+				3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */,
+				3ADEDF7327AA5CF00006E96C /* Image+CustomInit.swift */,
+				3ADEDF7A27AA6E7F0006E96C /* Color+AppColors.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3ADEDF7027AA5A9C0006E96C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3ADEDF7127AA5AB40006E96C /* AppImageResource.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		3ADEDF7527AA6CA50006E96C /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				3ADEDF7827AA6CDC0006E96C /* TabbarView.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		3AFA773127A68AA400FDC987 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3ADEDF6B27AA52790006E96C /* Extensions */,
 				3AC86F1827A92C20004770D9 /* Utils */,
 				3AFA773227A696DA00FDC987 /* Common */,
 				3A6403F52797BAE200466FA4 /* Modules */,
@@ -558,7 +600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		3AFA773B27A6B66B00FDC987 /* R.Swift */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -638,12 +680,15 @@
 				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
 				3A1F6D7C27A78C3B00DB84CC /* UserDataToSend.swift in Sources */,
 				3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */,
+				3ADEDF7B27AA6E7F0006E96C /* Color+AppColors.swift in Sources */,
+				3ADEDF7427AA5CF00006E96C /* Image+CustomInit.swift in Sources */,
 				3A64040127980C3600466FA4 /* ImagePicker.swift in Sources */,
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
 				3A1F6D8A27A7AF3D00DB84CC /* NetworkService+Quotes.swift in Sources */,
 				3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */,
 				3A1F6D8C27A7AF6F00DB84CC /* NetworkService+Feelings.swift in Sources */,
+				3ADEDF7927AA6CDC0006E96C /* TabbarView.swift in Sources */,
 				3A1F6D7627A78BDF00DB84CC /* Quotes.swift in Sources */,
 				3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */,
 				3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */,
@@ -653,9 +698,11 @@
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				3A1F6D7127A77EBD00DB84CC /* URLFactory.swift in Sources */,
 				3A1F6D6F27A77C8400DB84CC /* URLProvider.swift in Sources */,
+				3ADEDF6F27AA53E30006E96C /* Font+AppFonts.swift in Sources */,
 				3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */,
 				446B7F69278E94D0002B38DD /* MeditationApp.swift in Sources */,
 				3AC86F2127A93D9D004770D9 /* StorePropertyWrappers.swift in Sources */,
+				3ADEDF6D27AA52940006E96C /* String+Unlocalized.swift in Sources */,
 				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
@@ -664,6 +711,7 @@
 				3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */,
 				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,
 				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
+				3ADEDF7227AA5AB40006E96C /* AppImageResource.swift in Sources */,
 				3A1F6D9127A7BE8D00DB84CC /* StorageError.swift in Sources */,
 				3A1F6D8627A7A4E000DB84CC /* NetworkService+Auth.swift in Sources */,
 				3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */,

@@ -76,8 +76,7 @@ struct ImagePicker: UIViewControllerRepresentable {
           do {
             try imageData.write(to: writePath, options: .atomic)
 
-          }
-          catch let error {
+          } catch let error {
             print(error)
           }
           let realm: Realm
@@ -87,8 +86,6 @@ struct ImagePicker: UIViewControllerRepresentable {
           } catch {
             fatalError()
           }
-          
-          
           
           let date = Date()
           

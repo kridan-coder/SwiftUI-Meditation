@@ -43,10 +43,9 @@ class MainViewModel: ObservableObject {
 }
 
 struct MainView: View {
-  @ObservedObject var viewModel:  MainViewModel
+  @ObservedObject var viewModel: MainViewModel
   
   var body: some View {
-    
     
     ZStack(alignment: .top) {
       Color("BackgroundColor")
@@ -70,13 +69,13 @@ struct MainView: View {
               .resizable()
               .scaledToFit()
               .cornerRadius(20)
-              .frame(width:40, height: 40)
+              .frame(width: 40, height: 40)
           } else {
             Image("Koala")
               .resizable()
               .scaledToFit()
               .cornerRadius(20)
-              .frame(width:40, height: 40)
+              .frame(width: 40, height: 40)
           }
           
         }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -114,7 +113,6 @@ struct MainView: View {
     .navigationBarHidden(true)
   }
   
-  
 }
 
 struct MainView_Previews: PreviewProvider {
@@ -122,4 +120,3 @@ struct MainView_Previews: PreviewProvider {
     MainView(viewModel: MainViewModel())
   }
 }
-

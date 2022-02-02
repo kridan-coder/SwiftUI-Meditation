@@ -11,19 +11,18 @@ struct CustomButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
       .foregroundColor(.white)
-      .font(.custom("Alegreya-Medium", size: 25))
-      .background(Color("ButtonColor"))
+      .font(.mediumTitle2)
+      .background(Color.buttonColor)
       .cornerRadius(10)
   }
 }
 
-
 struct CustomButtonView: View {
   var text: String
   var textColor: Color = .white
-  var backgroundColor: Color = Color("ButtonColor")
+  var backgroundColor: Color = Color.buttonColor
   var cornerRadius: CGFloat = 10
-  var font: Font = .custom("Alegreya-Medium", size: 25)
+  var font: Font = .mediumTitle2
   var body: some View {
     GeometryReader { view in
       Text(text)

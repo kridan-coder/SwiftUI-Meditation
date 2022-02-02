@@ -29,7 +29,7 @@ struct CardView: View {
   
   var body: some View {
     
-    GeometryReader { screen in
+    GeometryReader { _ in
       ZStack {
         Color.white
         
@@ -63,7 +63,6 @@ struct CardView: View {
         
       }
       .cornerRadius(15)
-    
       
     }
     .frame(idealWidth: 360, idealHeight: 175)
@@ -78,4 +77,3 @@ struct CardView_Previews: PreviewProvider {
     
   }
 }
-
