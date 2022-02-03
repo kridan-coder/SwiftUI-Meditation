@@ -25,14 +25,14 @@
 		3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9427A7C79B00DB84CC /* StorageService.swift */; };
 		3A1F6D9827A7C84F00DB84CC /* StorageServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D9727A7C84F00DB84CC /* StorageServiceProtocols.swift */; };
 		3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403F62797BD7000466FA4 /* ProfileView.swift */; };
-		3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FA2797E80400466FA4 /* ImageView.swift */; };
-		3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */; };
+		3A6403FB2797E80400466FA4 /* ImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FA2797E80400466FA4 /* ImageCellView.swift */; };
+		3A6403FD2797EE4F00466FA4 /* ImageCellAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FC2797EE4F00466FA4 /* ImageCellAddView.swift */; };
 		3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6403FE2797FB4700466FA4 /* ContentImageView.swift */; };
 		3A64040127980C3600466FA4 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A64040027980C3600466FA4 /* ImagePicker.swift */; };
 		3A6878A2279403FD00069424 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6878A1279403FD00069424 /* MainView.swift */; };
 		3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */; };
 		3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */; };
-		3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD92794585700B791F3 /* CardView.swift */; };
+		3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD92794585700B791F3 /* CardCellView.swift */; };
 		3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC93F127946F23006CA916 /* NetworkService.swift */; };
 		3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */; };
 		3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1227A91B5E004770D9 /* RealmStorage.swift */; };
@@ -94,14 +94,14 @@
 		3A1F6D9427A7C79B00DB84CC /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		3A1F6D9727A7C84F00DB84CC /* StorageServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceProtocols.swift; sourceTree = "<group>"; };
 		3A6403F62797BD7000466FA4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		3A6403FA2797E80400466FA4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAddView.swift; sourceTree = "<group>"; };
+		3A6403FA2797E80400466FA4 /* ImageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellView.swift; sourceTree = "<group>"; };
+		3A6403FC2797EE4F00466FA4 /* ImageCellAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddView.swift; sourceTree = "<group>"; };
 		3A6403FE2797FB4700466FA4 /* ContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageView.swift; sourceTree = "<group>"; };
 		3A64040027980C3600466FA4 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3A6878A1279403FD00069424 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellModel.swift; sourceTree = "<group>"; };
 		3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellView.swift; sourceTree = "<group>"; };
-		3A8E9BD92794585700B791F3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3A8E9BD92794585700B791F3 /* CardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellView.swift; sourceTree = "<group>"; };
 		3ABC93F127946F23006CA916 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		3AC86F1227A91B5E004770D9 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
@@ -296,8 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				3A6403F62797BD7000466FA4 /* ProfileView.swift */,
-				3A6403FA2797E80400466FA4 /* ImageView.swift */,
-				3A6403FC2797EE4F00466FA4 /* ImageAddView.swift */,
+				3A6403FA2797E80400466FA4 /* ImageCellView.swift */,
+				3A6403FC2797EE4F00466FA4 /* ImageCellAddView.swift */,
 				3A6403FE2797FB4700466FA4 /* ContentImageView.swift */,
 				3A64040027980C3600466FA4 /* ImagePicker.swift */,
 			);
@@ -324,7 +324,7 @@
 				3A6878A1279403FD00069424 /* MainView.swift */,
 				3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */,
 				3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */,
-				3A8E9BD92794585700B791F3 /* CardView.swift */,
+				3A8E9BD92794585700B791F3 /* CardCellView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -677,7 +677,7 @@
 				3A1F6D9827A7C84F00DB84CC /* StorageServiceProtocols.swift in Sources */,
 				3A6403F72797BD7000466FA4 /* ProfileView.swift in Sources */,
 				3AC86F1D27A936B1004770D9 /* UserDataStorage.swift in Sources */,
-				3A6403FD2797EE4F00466FA4 /* ImageAddView.swift in Sources */,
+				3A6403FD2797EE4F00466FA4 /* ImageCellAddView.swift in Sources */,
 				3A1F6D7C27A78C3B00DB84CC /* UserDataToSend.swift in Sources */,
 				3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */,
 				3ADEDF7B27AA6E7F0006E96C /* Color+AppColors.swift in Sources */,
@@ -707,14 +707,14 @@
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
 				3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */,
-				3A8E9BDA2794585700B791F3 /* CardView.swift in Sources */,
+				3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */,
 				3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */,
 				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,
 				449E21EB278FFCD300464D7E /* Placeholder.swift in Sources */,
 				3ADEDF7227AA5AB40006E96C /* AppImageResource.swift in Sources */,
 				3A1F6D9127A7BE8D00DB84CC /* StorageError.swift in Sources */,
 				3A1F6D8627A7A4E000DB84CC /* NetworkService+Auth.swift in Sources */,
-				3A6403FB2797E80400466FA4 /* ImageView.swift in Sources */,
+				3A6403FB2797E80400466FA4 /* ImageCellView.swift in Sources */,
 				3A13C60027A3A0E00058E532 /* NetworkServiceError.swift in Sources */,
 				3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */,
 				3A1F6D7827A78BF700DB84CC /* Feelings.swift in Sources */,

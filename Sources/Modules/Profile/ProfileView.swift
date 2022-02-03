@@ -9,42 +9,57 @@ import SwiftUI
 import Kingfisher
 import RealmSwift
 
-class ContentImagesData: ObservableObject {
-  private init() {}
-  
-  static let shared = ContentImagesData()
-  
-}
-
 class ProfileViewModel: ObservableObject {
-  
   @Environment(\.appDependencies) private var dependencies
   
-  @Published var name = "Daniel"
+  @Published var nickname = ""
+  @Published var avatarURL = ""
+  @Published var images: [Image] = []
+  
+  func onAppear() {
+    nickname = dependencies.userDataStorageService.nickname ?? ""
+    avatarURL = dependencies.userDataStorageService.avatarURL ?? ""
+    guard let uiImages = try? dependencies.uiImagesStorage.getUIImages() else {
+      return
+    }
+    images = uiImages.map { Image(uiImage: $0) }
+  }
   
   func logOut(isLoggedIn: Binding<Bool>) {
     dependencies.userDataStorageService.clearData()
     isLoggedIn.wrappedValue = false
   }
   
+  func getImage(with name: String) -> Image {
+    do {
+      let uiImage: UIImage
+      uiImage = try dependencies.uiImagesStorage.getUIImage(withKey: name)
+      return Image(uiImage: uiImage)
+    } catch let error {
+      log?.error(error)
+    }
+    return Image(.people)
+  }
+  
+  func saveImage(_ image: UIImage, name: String) {
+    do {
+      try dependencies.uiImagesStorage.store(uiImage: image, name: name)
+    } catch let error {
+      log?.error(error)
+    }
+  }
+  
 }
 
 struct ProfileView: View {
   var documentsUrl: URL {
-      return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    return FileManager.default.urls(for: .documentDirectory,
+                                       in: .userDomainMask).first!
   }
   
   @Binding var isLoggedIn: Bool
   
   @ObservedResults(ImageStorage.self) var imagePaths
-  
-  @AppStorage("isAuthorized") var isAuthorized: Bool?
-  @AppStorage("wasLoggedOut") var wasLoggedOut: Bool?
-  
-  @AppStorage("avatar") var avatarLink: String = ""
-  @AppStorage("nickName") var nickname: String?
-  
-  @StateObject var contentImagesContainer = ContentImagesData.shared
   
   var isNavigationBarHidden = true
   
@@ -64,12 +79,12 @@ struct ProfileView: View {
     GridItem(.flexible())
   ]
   
-//  func loadImage() {
-//      guard let inputImage = inputImage else { return }
-//      let image = Image(uiImage: inputImage)
-//    $imagePaths.append()
-//    contentImagesContainer.contentImagesViewModels.append(ImageViewModel(date: "11:00", image: image))
-//  }
+  //  func loadImage() {
+  //      guard let inputImage = inputImage else { return }
+  //      let image = Image(uiImage: inputImage)
+  //    $imagePaths.append()
+  //    contentImagesContainer.contentImagesViewModels.append(ImageViewModel(date: "11:00", image: image))
+  //  }
   
   var body: some View {
     if isPresentingPhoto {
@@ -79,76 +94,17 @@ struct ProfileView: View {
       NavigationView {
         GeometryReader { screen in
           ZStack(alignment: .top) {
-            Color("BackgroundColor")
+            Color.backgroundColor
               .ignoresSafeArea()
-            
             VStack {
-              HStack(alignment: .center) {
-                Image("Hamburger")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 30, height: 30)
-                
-                Spacer()
-                Image("Logo")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 50, height: 50)
-                Spacer()
-                
-                Button("exit") {
-                  withAnimation {
-                    isLoggedIn = false
-                  }
-                  
-                }
-                .font(.custom("Alegreya-Regular", size: 23))
-                .foregroundColor(.white)
-                
-              }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+              makeTopBar()
               ScrollView(.vertical, showsIndicators: false) {
-                
-                if let url = URL(string: avatarLink) {
-                  KFImage(url)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: screen.size.height / 4)
-                    .cornerRadius(screen.size.height / 8)
-                } else {
-                  Image("Koala")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: screen.size.height / 4)
-                    .cornerRadius(screen.size.height / 8)
-                }
-                
-                Text(nickname ?? "Эмиль")
+                makeImageView(parentHeight: screen.size.height)
+                Text(viewModel.nickname)
                   .foregroundColor(.white)
-                  .font(.custom("Alegreya-Medium", size: 35))
-                
-                LazyVGrid(columns: columns) {
-                  ForEach(imagePaths) { imagePathContainer in
-                    let data = try? Data(contentsOf: documentsUrl.appendingPathComponent(imagePathContainer.imagePath))
-                    let image = UIImage(data: data!)!
-                    ImageView(viewModel: ImageViewModel(date: imagePathContainer.time, image: Image(uiImage: image)))
-                      .onTapGesture {
-                        withAnimation {
-                          isPresentingPhoto = true
-                          imageToShow = Image(uiImage: image)
-                          filename = imagePathContainer.imagePath
-                        }
-                      }
-                    
-                  }
-                  ImageAddView()
-                    .onTapGesture {
-                      isShowingImagePicker = true
-                    }
-                }
-                .padding(.leading, 10).padding(.trailing, 10)
-                // Spacer()
+                  .font(.mediumLargeTitle1)
+                makeImageCells()
               }
-              
             }
           }
         }.navigationBarHidden(isNavigationBarHidden)
@@ -163,6 +119,73 @@ struct ProfileView: View {
       
     }
     
+  }
+  
+  @ViewBuilder
+  private func makeTopBar() -> some View {
+    HStack(alignment: .center) {
+      Image(.hamburger)
+        .resizable()
+        .scaledToFit()
+        .frame(width: 30, height: 30)
+      
+      Spacer()
+      Image(.logo)
+        .resizable()
+        .scaledToFit()
+        .frame(width: 50, height: 50)
+      Spacer()
+      
+      Button("exit".unlocalized) {
+        withAnimation {
+          isLoggedIn = false
+        }
+        
+      }
+      .font(.regularTitle3)
+      .foregroundColor(.white)
+      
+    }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+  }
+  
+  @ViewBuilder
+  private func makeImageView(parentHeight: CGFloat) -> some View {
+    if let url = URL(string: viewModel.avatarURL) {
+      KFImage(url)
+        .resizable()
+        .scaledToFit()
+        .frame(height: parentHeight / 4)
+        .cornerRadius(parentHeight / 8)
+    } else {
+      Image(.koala)
+        .resizable()
+        .scaledToFit()
+        .frame(height: parentHeight / 4)
+        .cornerRadius(parentHeight / 8)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeImageCells() -> some View {
+    LazyVGrid(columns: columns) {
+      ForEach(imagePaths) { imagePathContainer in
+        let image = viewModel.getImage(with: imagePathContainer.imagePath)
+        ImageCellView(viewModel: ImageCellModel(date: imagePathContainer.time,
+                                                image: image))
+          .onTapGesture {
+            withAnimation {
+              isPresentingPhoto = true
+              imageToShow = image
+              filename = imagePathContainer.imagePath
+            }
+          }
+      }
+      ImageCellAddView()
+        .onTapGesture {
+          isShowingImagePicker = true
+        }
+    }
+    .padding(.leading, 10).padding(.trailing, 10)
   }
   
 }

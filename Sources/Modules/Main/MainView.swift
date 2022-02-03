@@ -131,7 +131,7 @@ struct MainView: View {
         }
         LazyVStack(alignment: .center, spacing: 20) {
           ForEach(viewModel.cardModels) { cardModel in
-            CardView(viewModel: cardModel)
+            CardCellView(viewModel: cardModel)
           }
         }
         .padding(25)

@@ -24,7 +24,7 @@ class CardCellModel: ObservableObject, Identifiable {
   }
 }
 
-struct CardView: View {
+struct CardCellView: View {
   @StateObject var viewModel: CardCellModel
   
   var body: some View {
@@ -64,7 +64,7 @@ struct CardView_Previews: PreviewProvider {
   static var previews: some View {
     if let url = URL(string: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg") {
       NavigationView {
-        CardView(viewModel: CardCellModel(serverID: 0,
+        CardCellView(viewModel: CardCellModel(serverID: 0,
                                           title: "Заголовок блока".unlocalized,
                                           description: "Кратенькое описание блока с двумя строчками".unlocalized,
                                           imageURL: url))

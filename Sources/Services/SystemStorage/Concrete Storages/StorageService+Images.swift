@@ -17,7 +17,7 @@ extension StorageService: UIImagesStoring {
     try imagesStorage.setObject(data, forKey: key)
   }
   
-  func getUIImage(with name: String) throws -> UIImage {
+  func getUIImage(withKey name: String) throws -> UIImage {
     let key = generateFileName(for: .image, name: name)
     let data = try imagesStorage.object(forKey: key)
     guard let image = UIImage(data: data) else {
