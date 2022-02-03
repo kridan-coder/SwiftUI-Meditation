@@ -24,7 +24,7 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       if viewModel.isLoggedIn {
-        MainView(viewModel: MainViewModel())
+        TabbarView(isLoggedIn: $viewModel.isLoggedIn)
       } else {
         if viewModel.hadFirstRunAlready {
           LoginView(loginViewModel: LoginViewModel(), isLoggedIn: $viewModel.isLoggedIn)
@@ -34,6 +34,7 @@ struct ContentView: View {
       }
     }
     .navigationBarHidden(true)
+    .navigationBarTitle("")
     .onAppear {
       viewModel.onAppear()
     }

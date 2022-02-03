@@ -12,16 +12,20 @@ enum TabbarViewScreen: String {
 }
 
 struct TabbarView: View {
-  @Binding var currentTabbarView: TabbarViewScreen
+  @State var currentTabbarView: TabbarViewScreen = .profile
+  @Binding var isLoggedIn: Bool
   
-  init(currentTabbarView: Binding<TabbarViewScreen>) {
-    _currentTabbarView = currentTabbarView
+  @StateObject var mainViewModel = MainViewModel()
+  @StateObject var profileViewModel = ProfileViewModel()
+  
+  init(isLoggedIn: Binding<Bool>) {
+    _isLoggedIn = isLoggedIn
     configureTabBar()
   }
   
   var body: some View {
     TabView(selection: $currentTabbarView) {
-      MainView(viewModel: MainViewModel())
+      MainView(viewModel: mainViewModel)
         .tabItem {
           if currentTabbarView == .home {
             Image(.homeChosen)
@@ -29,13 +33,17 @@ struct TabbarView: View {
             Image(.home)
           }
         }.tag(TabbarViewScreen.home)
+        .navigationBarHidden(true).navigationTitle("")
       
-      MainView(viewModel: MainViewModel())
+      Rectangle()
+        .foregroundColor(.backgroundColor)
+        .ignoresSafeArea()
         .tabItem {
           Image(.sound)
         }.tag(TabbarViewScreen.sound)
+        .navigationBarHidden(true).navigationTitle("")
       
-      ProfileView()
+      ProfileView(isLoggedIn: $isLoggedIn)
         .tabItem {
           if currentTabbarView == .profile {
             Image(.profileChosen)
@@ -43,10 +51,11 @@ struct TabbarView: View {
             Image(.profile)
           }
         }.tag(TabbarViewScreen.profile)
-      
+        .navigationBarHidden(true).navigationTitle("")
     }
     .background(Color.clear)
   }
+  
   private func configureTabBar() {
     UITabBar.appearance().barTintColor = .clear
     let appearance = UITabBar().standardAppearance
@@ -56,10 +65,11 @@ struct TabbarView: View {
     UITabBar.appearance().scrollEdgeAppearance = appearance
     UITabBar.appearance().standardAppearance = appearance
   }
+  
 }
 
 struct TabbarView_Previews: PreviewProvider {
   static var previews: some View {
-    TabbarView(currentTabbarView: .constant(.home))
+    TabbarView(isLoggedIn: .constant(false))
   }
 }

@@ -37,7 +37,9 @@ class LoginViewModel: ObservableObject {
       dependencies.userDataStorageService.email = result.email
       dependencies.userDataStorageService.avatarURL = result.avatar.absoluteString
       dependencies.userDataStorageService.accessToken = result.token
-      isLoggedIn.wrappedValue = true
+      withAnimation {
+        isLoggedIn.wrappedValue = true
+      }
     }.catch { _ in
       showAlert.wrappedValue = true
     }

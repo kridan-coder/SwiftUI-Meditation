@@ -8,72 +8,67 @@
 import SwiftUI
 import Kingfisher
 
-class CardViewModel: ObservableObject, Identifiable {
+class CardCellModel: ObservableObject, Identifiable {
   @Published var title: String
   @Published var description: String
   @Published var imageURL: URL
   
-  var id: Int
+  var serverID: Int
+  let id = UUID()
   
-  init(id: Int, title: String, description: String, imageURL: URL) {
+  init(serverID: Int, title: String, description: String, imageURL: URL) {
     self.title = title
     self.description = description
     self.imageURL = imageURL
-    self.id = id
+    self.serverID = serverID
   }
 }
 
 struct CardView: View {
-  
-  @StateObject var viewModel: CardViewModel
+  @StateObject var viewModel: CardCellModel
   
   var body: some View {
-    
-    GeometryReader { _ in
-      ZStack {
-        Color.white
-        
-        HStack {
-          VStack(alignment: .leading) {
-            Text(viewModel.title)
-              .lineLimit(1)
-              .font(.custom("Alegreya-Bold", size: 26))
-              .foregroundColor(Color("BackgroundColor"))
-            
-            Text(viewModel.description)
-              .lineLimit(2)
-              .font(.custom("Alegreya-Medium", size: 16))
-              .foregroundColor(Color("BackgroundColor"))
-            
-            NavigationLink {
-              
-            } label: {
-              CustomButtonView(text: "подробнее", backgroundColor: Color("BackgroundColor"), font: .custom("Alegreya-Regular", size: 16))
-            }
-            .frame(width: 150, height: 40)
-            
+    ZStack {
+      Color.white
+      HStack {
+        VStack(alignment: .leading) {
+          Text(viewModel.title)
+            .lineLimit(1)
+            .font(.boldTitle2)
+            .foregroundColor(Color.backgroundColor)
+          
+          Text(viewModel.description)
+            .lineLimit(2)
+            .font(.mediumSubheadline)
+            .foregroundColor(Color.backgroundColor)
+          
+          NavigationLink {} label: {
+            CustomButtonView(text: "подробнее".unlocalized, backgroundColor: Color.backgroundColor, font: .regularSubheadline)
           }
-          .padding()
-          KFImage(viewModel.imageURL)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 100, height: 100)
-            .padding(.trailing)
+          .frame(width: 150, height: 40)
         }
-        
+        .padding()
+        KFImage(viewModel.imageURL)
+          .resizable()
+          .scaledToFit()
+          .frame(width: 100, height: 100)
+          .padding(.trailing)
       }
-      .cornerRadius(15)
-      
     }
+    .cornerRadius(15)
     .frame(idealWidth: 360, idealHeight: 175)
   }
 }
 
 struct CardView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationView {
-      CardView(viewModel: CardViewModel(id: 0, title: "Заголовок блока", description: "Кратенькое описание блока с двумя строчками", imageURL: URL(string: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg")!))
+    if let url = URL(string: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg") {
+      NavigationView {
+        CardView(viewModel: CardCellModel(serverID: 0,
+                                          title: "Заголовок блока".unlocalized,
+                                          description: "Кратенькое описание блока с двумя строчками".unlocalized,
+                                          imageURL: url))
+      }
     }
-    
   }
 }

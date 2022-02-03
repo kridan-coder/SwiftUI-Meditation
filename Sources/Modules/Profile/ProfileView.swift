@@ -17,7 +17,15 @@ class ContentImagesData: ObservableObject {
 }
 
 class ProfileViewModel: ObservableObject {
+  
+  @Environment(\.appDependencies) private var dependencies
+  
   @Published var name = "Daniel"
+  
+  func logOut(isLoggedIn: Binding<Bool>) {
+    dependencies.userDataStorageService.clearData()
+    isLoggedIn.wrappedValue = false
+  }
   
 }
 
@@ -25,6 +33,8 @@ struct ProfileView: View {
   var documentsUrl: URL {
       return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
   }
+  
+  @Binding var isLoggedIn: Bool
   
   @ObservedResults(ImageStorage.self) var imagePaths
   
@@ -87,9 +97,8 @@ struct ProfileView: View {
                 Spacer()
                 
                 Button("exit") {
-                  isAuthorized = false
                   withAnimation {
-                    wasLoggedOut = true
+                    isLoggedIn = false
                   }
                   
                 }
@@ -160,6 +169,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ProfileView()
+    ProfileView(isLoggedIn: .constant(false))
   }
 }

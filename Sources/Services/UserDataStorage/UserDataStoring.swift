@@ -14,4 +14,5 @@ protocol UserDataStoring: AnyObject {
   var avatarURL: String? { get set }
   var isLoggedIn: Bool { get }
   var hadFirstRunAlready: Bool { get set }
+  func clearData()
 }

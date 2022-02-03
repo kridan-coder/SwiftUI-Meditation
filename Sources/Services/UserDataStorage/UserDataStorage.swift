@@ -47,4 +47,11 @@ final class UserDataStorage: UserDataStoring {
     self.userDefaults = userDefaults
   }
   
+  func clearData() {
+    nickname = nil
+    avatarURL = nil
+    email = nil
+    accessToken = nil
+  }
+  
 }

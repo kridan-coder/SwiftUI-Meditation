@@ -84,6 +84,9 @@ empty_count: warning
 function_parameter_count:
   warning: 10
   error: 10
+  
+closure_body_length:
+  warning: 40
 
 variable_name:  
   excluded:
