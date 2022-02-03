@@ -37,7 +37,7 @@ final class UserDataStorage: UserDataStoring {
   var nickname: String?
   
   @UserDefault(key: UserDefaultsKeys.avatarURL, defaultValue: nil)
-  var avatarURL: URL?
+  var avatarURL: String?
   
   @UserDefault(key: UserDefaultsKeys.email, defaultValue: nil)
   var email: String?
@@ -45,13 +45,6 @@ final class UserDataStorage: UserDataStoring {
   init(userDefaults: UserDefaults = UserDefaults.standard, keychain: Keychain = Keychain()) {
     self.keychain = keychain
     self.userDefaults = userDefaults
-    handleFirstLaunch()
-  }
-  
-  private func handleFirstLaunch() {
-    if !hadFirstRunAlready {
-      hadFirstRunAlready = true
-    }
   }
   
 }

@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct MeditationApp: App {
-    var body: some Scene {
-        WindowGroup {
-            MainView(viewModel: MainViewModel())
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView(viewModel: ContentViewModel())
     }
+  }
 }

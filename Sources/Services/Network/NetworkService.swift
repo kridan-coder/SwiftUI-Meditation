@@ -66,6 +66,7 @@ final class NetworkService {
                              parameters: parameters,
                              encoder: encoder,
                              headers: modifiedHeaders(from: headers, requestType: requestType))
+      .validate(statusCode: 200..<250)
     return Promise { seal in
       firstly {
         request.responseDataAsPromise()

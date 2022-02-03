@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PromiseKit
 
 class LoginViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
@@ -23,27 +24,23 @@ class LoginViewModel: ObservableObject {
     email.contains("@") && email.contains(".") && !password.isEmpty
   }
   
-  func logIn(showAlert: Binding<Bool>) {
-    guard email.contains("@") && email.contains(".") && !password.isEmpty else {
+  func logIn(showAlert: Binding<Bool>, isLoggedIn: Binding<Bool>) {
+    guard isValidatedCorrectly else {
       showAlert.wrappedValue = true
       return
     }
-    dependencies.authNetworkService.login(email: email, password: password)
-//    NetworkService().login(email: email, password: password) { result in
-//      switch result {
-//      case .success(let data):
-//        withAnimation {
-//          self.isAuthorized = true
-//        }
-//        self.nickname = data.nickName
-//        self.avatarLink = data.avatar
-//        
-//      case .failure:
-//        showAlert.wrappedValue = true
-//      }
-//      
-//    }
     
+    firstly {
+      dependencies.authNetworkService.login(email: email, password: password)
+    }.done { [self] result in
+      dependencies.userDataStorageService.nickname = result.nickName
+      dependencies.userDataStorageService.email = result.email
+      dependencies.userDataStorageService.avatarURL = result.avatar.absoluteString
+      dependencies.userDataStorageService.accessToken = result.token
+      isLoggedIn.wrappedValue = true
+    }.catch { _ in
+      showAlert.wrappedValue = true
+    }
   }
   
 }
@@ -54,6 +51,8 @@ struct LoginView: View {
   @Environment(\.editMode) var editMode
   
   @ObservedObject var loginViewModel: LoginViewModel
+  
+  @Binding var isLoggedIn: Bool
   
   var body: some View {
     GeometryReader { screen in
@@ -129,7 +128,7 @@ struct LoginView: View {
   @ViewBuilder
   private func makeButtons(parentWidth: CGFloat) -> some View {
     Button {
-      loginViewModel.logIn(showAlert: $showingAlert)
+      loginViewModel.logIn(showAlert: $showingAlert, isLoggedIn: $isLoggedIn)
     } label: {
       Text("Sign In".unlocalized)
         .font(.mediumTitle3)
@@ -154,7 +153,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      LoginView(loginViewModel: LoginViewModel())
+      LoginView(loginViewModel: LoginViewModel(), isLoggedIn: .constant(false))
     }
     .navigationBarHidden(true)
   }

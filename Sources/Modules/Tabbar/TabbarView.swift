@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-enum TabbarCurrentView: String {
+enum TabbarViewScreen: String {
   case home, sound, profile
 }
 
 struct TabbarView: View {
-  @Binding var currentTabbarView: TabbarCurrentView
+  @Binding var currentTabbarView: TabbarViewScreen
   
-  init(currentTabbarView: Binding<TabbarCurrentView>) {
+  init(currentTabbarView: Binding<TabbarViewScreen>) {
     _currentTabbarView = currentTabbarView
     configureTabBar()
   }
@@ -28,12 +28,12 @@ struct TabbarView: View {
           } else {
             Image(.home)
           }
-        }.tag(TabbarCurrentView.home)
+        }.tag(TabbarViewScreen.home)
       
       MainView(viewModel: MainViewModel())
         .tabItem {
           Image(.sound)
-        }.tag(TabbarCurrentView.sound)
+        }.tag(TabbarViewScreen.sound)
       
       ProfileView()
         .tabItem {
@@ -42,7 +42,7 @@ struct TabbarView: View {
           } else {
             Image(.profile)
           }
-        }.tag(TabbarCurrentView.profile)
+        }.tag(TabbarViewScreen.profile)
       
     }
     .background(Color.clear)

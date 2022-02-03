@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+  @Binding var isLoggedIn: Bool
+  
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -45,7 +47,8 @@ struct WelcomeView: View {
   @ViewBuilder
   private func makeButtonsContainer(parentWidth: CGFloat) -> some View {
     NavigationLink {
-      LoginView(loginViewModel: LoginViewModel())
+      LoginView(loginViewModel: LoginViewModel(), isLoggedIn: $isLoggedIn)
+        .navigationBarHidden(true)
     } label: {
       CustomButtonView(text: "Войти в аккаунт".unlocalized)
     }
@@ -75,6 +78,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
   static var previews: some View {
-    WelcomeView()
+    WelcomeView(isLoggedIn: .constant(false))
   }
 }
