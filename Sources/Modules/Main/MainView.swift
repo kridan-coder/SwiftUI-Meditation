@@ -89,19 +89,10 @@ struct MainView: View {
         .scaledToFit()
         .frame(width: 50, height: 50)
       Spacer()
-      if let url = URL(string: viewModel.avatarURL) {
-        KFImage(url)
-          .resizable()
-          .scaledToFit()
-          .cornerRadius(20)
-          .frame(width: 40, height: 40)
-      } else {
-        Image(.koala)
-          .resizable()
-          .scaledToFit()
-          .cornerRadius(20)
-          .frame(width: 40, height: 40)
-      }
+      ImageWithOptionalURL(url: viewModel.avatarURL, defaultImage: Image(.koala))
+        .scaledToFit()
+        .cornerRadius(20)
+        .frame(width: 40, height: 40)
       
     }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
   }

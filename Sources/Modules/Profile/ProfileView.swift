@@ -135,19 +135,10 @@ struct ProfileView: View {
   
   @ViewBuilder
   private func makeImageView(parentHeight: CGFloat) -> some View {
-    if let url = URL(string: viewModel.avatarURL) {
-      KFImage(url)
-        .resizable()
-        .scaledToFit()
-        .frame(height: parentHeight / 4)
-        .cornerRadius(parentHeight / 8)
-    } else {
-      Image(.koala)
-        .resizable()
-        .scaledToFit()
-        .frame(height: parentHeight / 4)
-        .cornerRadius(parentHeight / 8)
-    }
+    ImageWithOptionalURL(url: viewModel.avatarURL, defaultImage: Image(.koala))
+      .scaledToFit()
+      .frame(height: parentHeight / 4)
+      .cornerRadius(parentHeight / 8)
   }
   
   @ViewBuilder

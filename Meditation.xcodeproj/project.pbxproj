@@ -37,6 +37,7 @@
 		3AB5D0AD27AD1EB800C2DF10 /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AC27AD1EB800C2DF10 /* ImageCellModel.swift */; };
 		3AB5D0B027AD205000C2DF10 /* CardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AF27AD205000C2DF10 /* CardCellModel.swift */; };
 		3AB5D0B227AD22D400C2DF10 /* DateFormatter+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */; };
+		3AB5D0B427AD2CD600C2DF10 /* ImageWithOptionalURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0B327AD2CD600C2DF10 /* ImageWithOptionalURL.swift */; };
 		3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC93F127946F23006CA916 /* NetworkService.swift */; };
 		3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */; };
 		3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1227A91B5E004770D9 /* RealmStorage.swift */; };
@@ -110,6 +111,7 @@
 		3AB5D0AC27AD1EB800C2DF10 /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
 		3AB5D0AF27AD205000C2DF10 /* CardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellModel.swift; sourceTree = "<group>"; };
 		3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Format.swift"; sourceTree = "<group>"; };
+		3AB5D0B327AD2CD600C2DF10 /* ImageWithOptionalURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithOptionalURL.swift; sourceTree = "<group>"; };
 		3ABC93F127946F23006CA916 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		3AC86F1227A91B5E004770D9 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				3A64040027980C3600466FA4 /* ImagePicker.swift */,
 				44BAE30A278EE4F9002FFFCE /* CustomButton.swift */,
 				449E21EA278FFCD300464D7E /* Placeholder.swift */,
+				3AB5D0B327AD2CD600C2DF10 /* ImageWithOptionalURL.swift */,
 			);
 			path = "View Components";
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,
 				3A1F6D7127A77EBD00DB84CC /* URLFactory.swift in Sources */,
+				3AB5D0B427AD2CD600C2DF10 /* ImageWithOptionalURL.swift in Sources */,
 				3A1F6D6F27A77C8400DB84CC /* URLProvider.swift in Sources */,
 				3ADEDF6F27AA53E30006E96C /* Font+AppFonts.swift in Sources */,
 				3A1F6D9527A7C79B00DB84CC /* StorageService.swift in Sources */,
