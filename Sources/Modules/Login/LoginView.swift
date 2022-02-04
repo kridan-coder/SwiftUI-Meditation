@@ -2,8 +2,6 @@
 //  LoginScreen.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 import PromiseKit
@@ -16,7 +14,7 @@ class LoginViewModel: ObservableObject {
   @Published var email: String = ""
   
   func onAppear() {
-    email = dependencies.userDataStorageService.email ?? ""
+    email = dependencies.userDataStorageService.email
     isLoggedIn = dependencies.userDataStorageService.isLoggedIn
   }
   
@@ -40,7 +38,8 @@ class LoginViewModel: ObservableObject {
       withAnimation {
         isLoggedIn.wrappedValue = true
       }
-    }.catch { _ in
+    }.catch { error in
+      log?.error(error)
       showAlert.wrappedValue = true
     }
   }

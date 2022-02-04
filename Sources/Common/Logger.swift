@@ -2,8 +2,6 @@
 //  Logger.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 30.01.2022.
-//
 
 import Foundation
 import SwiftyBeaver

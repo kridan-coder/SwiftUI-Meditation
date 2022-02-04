@@ -2,8 +2,6 @@
 //  ProfileView.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 19.01.2022.
-//
 
 import SwiftUI
 import Kingfisher
@@ -17,13 +15,15 @@ class ProfileViewModel: ObservableObject {
   @ObservedResults(ImageDescription.self) var imagePaths
   
   func onAppear() {
-    nickname = dependencies.userDataStorageService.nickname ?? ""
-    avatarURL = dependencies.userDataStorageService.avatarURL ?? ""
+    nickname = dependencies.userDataStorageService.nickname
+    avatarURL = dependencies.userDataStorageService.avatarURL
   }
   
   func logOut(isLoggedIn: Binding<Bool>) {
     dependencies.userDataStorageService.clearData()
-    isLoggedIn.wrappedValue = false
+    withAnimation {
+      isLoggedIn.wrappedValue = false
+    }
   }
   
   func getImage(with name: String) -> Image {
@@ -54,13 +54,7 @@ class ProfileViewModel: ObservableObject {
   }
   
   private func generateCurrentTime() -> String {
-    let date = Date()
-
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
-
-    let time = formatter.string(from: date)
-    return time
+    return DateFormatter.hoursMinutes.string(from: Date())
   }
   
 }
@@ -74,7 +68,7 @@ struct ProfileView: View {
   @State private var isPresentingPhoto = false
   @State private var isShowingImagePicker = false
   
-  @ObservedObject var viewModel: ProfileViewModel
+  @ObservedObject private(set) var viewModel: ProfileViewModel
   
   let columns = [
     GridItem(.flexible()),
@@ -131,10 +125,7 @@ struct ProfileView: View {
       Spacer()
       
       Button("exit".unlocalized) {
-        withAnimation {
-          isLoggedIn = false
-        }
-        
+        viewModel.logOut(isLoggedIn: $isLoggedIn)
       }
       .font(.regularTitle3)
       .foregroundColor(.white)
@@ -164,8 +155,8 @@ struct ProfileView: View {
     LazyVGrid(columns: columns) {
       ForEach(viewModel.imagePaths) { imagePathContainer in
         let image = viewModel.getImage(with: imagePathContainer.name)
-        ImageCellView(viewModel: ImageCellModel(date: imagePathContainer.time,
-                                                image: image))
+        ImageCellView(model: ImageCellModel(date: imagePathContainer.time,
+                                            image: image))
           .onTapGesture {
             withAnimation {
               isPresentingPhoto = true

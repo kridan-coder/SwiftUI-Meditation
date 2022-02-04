@@ -2,14 +2,11 @@
 //  ChoiceCellView.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 16.01.2022.
-//
-
 import SwiftUI
 import Kingfisher
 
 struct ChoiceCellView: View {
-  var model: ChoiceCellModel
+  let model: ChoiceCellModel
   
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
@@ -34,6 +31,7 @@ struct ChoiceCellView: View {
         .frame(maxWidth: 95)
     }
   }
+  
 }
 
 struct ChoiceCellView_Previews: PreviewProvider {

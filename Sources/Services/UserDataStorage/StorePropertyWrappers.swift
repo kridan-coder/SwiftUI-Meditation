@@ -2,8 +2,6 @@
 //  StorePropertyWrappers.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 01.02.2022.
-//
 
 import Foundation
 import KeychainAccess
@@ -57,4 +55,5 @@ struct Keychained {
       }
     }
   }
+  
 }

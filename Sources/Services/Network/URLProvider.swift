@@ -22,9 +22,9 @@ final class URLProvider {
     self.userDefaults = userDefaults
     guard let userDefaultsBaseURL = userDefaults.string(forKey: URLProviderUserDefaultsKeys.defaultBaseURL),
           let convertedUserDefaultsBaseURL = BaseURL(rawValue: userDefaultsBaseURL) else {
-      defaultBaseURL = BaseURL.test
-      return
-    }
+            defaultBaseURL = BaseURL.test
+            return
+          }
     defaultBaseURL = convertedUserDefaultsBaseURL
   }
   

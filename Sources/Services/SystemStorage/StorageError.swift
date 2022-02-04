@@ -2,8 +2,6 @@
 //  StorageError.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 31.01.2022.
-//
 
 import Foundation
 

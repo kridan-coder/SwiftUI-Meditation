@@ -2,8 +2,6 @@
 //  RegisterScreen.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 
@@ -16,6 +14,7 @@ struct RegisterView: View {
         .foregroundColor(.white)
     }
   }
+  
 }
 
 struct RegisterView_Previews: PreviewProvider {

@@ -2,8 +2,6 @@
 //  ContentView.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 
@@ -17,6 +15,7 @@ final class ContentViewModel: ObservableObject {
     isLoggedIn = dependencies.userDataStorageService.isLoggedIn
     dependencies.userDataStorageService.hadFirstRunAlready = true
   }
+  
 }
 
 struct ContentView: View {
@@ -39,6 +38,7 @@ struct ContentView: View {
       viewModel.onAppear()
     }
   }
+  
 }
 
 struct ContentView_Previews: PreviewProvider {

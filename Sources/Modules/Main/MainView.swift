@@ -2,8 +2,6 @@
 //  MainView.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 16.01.2022.
-//
 
 import SwiftUI
 import Kingfisher
@@ -18,8 +16,8 @@ class MainViewModel: ObservableObject {
   @Published var choiceModels: [ChoiceCellModel] = []
   
   func onAppear() {
-    nickname = dependencies.userDataStorageService.nickname ?? ""
-    avatarURL = dependencies.userDataStorageService.avatarURL ?? ""
+    nickname = dependencies.userDataStorageService.nickname
+    avatarURL = dependencies.userDataStorageService.avatarURL
   }
   
   init() {
@@ -31,10 +29,10 @@ class MainViewModel: ObservableObject {
     firstly {
       dependencies.quotesNetworkService.getAllQuotes()
     }.done { result in
-      let quotes = result.data.map { CardCellModel(serverID: $0.id,
-                                                   title: $0.title,
+      let quotes = result.data.map { CardCellModel(title: $0.title,
                                                    description: $0.description,
-                                                   imageURL: $0.image) }
+                                                   imageURL: $0.image,
+                                                   serverID: $0.id) }
       for quote in quotes {
         self.cardModels.append(quote)
       }
@@ -60,7 +58,7 @@ class MainViewModel: ObservableObject {
 }
 
 struct MainView: View {
-  @ObservedObject var viewModel: MainViewModel
+  @ObservedObject private(set) var viewModel: MainViewModel
   
   var body: some View {
     ZStack(alignment: .top) {
@@ -131,7 +129,7 @@ struct MainView: View {
         }
         LazyVStack(alignment: .center, spacing: 20) {
           ForEach(viewModel.cardModels) { cardModel in
-            CardCellView(viewModel: cardModel)
+            CardCellView(model: cardModel)
           }
         }
         .padding(25)

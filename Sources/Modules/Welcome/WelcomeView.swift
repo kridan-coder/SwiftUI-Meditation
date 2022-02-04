@@ -2,8 +2,6 @@
 //  WelcomeScreen.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 
@@ -66,9 +64,7 @@ struct WelcomeView: View {
           .font(.boldBody)
           .minimumScaleFactor(0.5)
           .lineLimit(1)
-        
       }
-      
     }
     .foregroundColor(.white)
     .frame(width: parentWidth * 0.9)

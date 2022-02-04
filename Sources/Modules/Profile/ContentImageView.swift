@@ -2,8 +2,6 @@
 //  ContentImageView.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 19.01.2022.
-//
 
 import SwiftUI
 import RealmSwift
@@ -33,10 +31,10 @@ struct ContentImageView: View {
   @ObservedObject private(set) var viewModel: ContentImageViewModel
   
   private func delete() {
-    viewModel.deleteImage(withName: imageName)
     withAnimation {
       isPresentingPhoto = false
     }
+    viewModel.deleteImage(withName: imageName)
   }
   
   var body: some View {

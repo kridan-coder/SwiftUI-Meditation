@@ -2,8 +2,6 @@
 //  UserDataStorage.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 01.02.2022.
-//
 
 import Foundation
 import KeychainAccess
@@ -33,14 +31,14 @@ final class UserDataStorage: UserDataStoring {
   @UserDefault(key: UserDefaultsKeys.hadFirstRunAlready, defaultValue: false)
   var hadFirstRunAlready: Bool
   
-  @UserDefault(key: UserDefaultsKeys.nickname, defaultValue: nil)
-  var nickname: String?
+  @UserDefault(key: UserDefaultsKeys.nickname, defaultValue: "")
+  var nickname: String
   
-  @UserDefault(key: UserDefaultsKeys.avatarURL, defaultValue: nil)
-  var avatarURL: String?
+  @UserDefault(key: UserDefaultsKeys.avatarURL, defaultValue: "")
+  var avatarURL: String
   
-  @UserDefault(key: UserDefaultsKeys.email, defaultValue: nil)
-  var email: String?
+  @UserDefault(key: UserDefaultsKeys.email, defaultValue: "")
+  var email: String
   
   init(userDefaults: UserDefaults = UserDefaults.standard, keychain: Keychain = Keychain()) {
     self.keychain = keychain
@@ -48,9 +46,9 @@ final class UserDataStorage: UserDataStoring {
   }
   
   func clearData() {
-    nickname = nil
-    avatarURL = nil
-    email = nil
+    nickname = ""
+    avatarURL = ""
+    email = ""
     accessToken = nil
   }
   

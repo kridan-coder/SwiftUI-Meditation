@@ -2,8 +2,6 @@
 //  CustomButton.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 
@@ -15,6 +13,7 @@ struct CustomButtonStyle: ButtonStyle {
       .background(Color.buttonColor)
       .cornerRadius(10)
   }
+  
 }
 
 struct CustomButtonView: View {
@@ -33,6 +32,7 @@ struct CustomButtonView: View {
         .cornerRadius(cornerRadius)
     }
   }
+  
 }
 
 struct CustomButton_Previews: PreviewProvider {

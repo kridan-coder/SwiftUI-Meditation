@@ -2,8 +2,6 @@
 //  ImagePicker.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 19.01.2022.
-//
 
 import Foundation
 
@@ -61,16 +59,16 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
     private func generateImageName(_ image: UIImage, provider: NSItemProvider) -> Promise<String> {
-        Promise<String> { seal in
-          provider.loadFileRepresentation(forTypeIdentifier: "public.item") { url, error in
-            if let url = url {
-              seal.fulfill(url.lastPathComponent)
-            } else {
-              log?.error(error ?? StorageError.couldNotDecodeFile)
-              seal.reject(error ?? StorageError.couldNotDecodeFile)
-            }
+      Promise<String> { seal in
+        provider.loadFileRepresentation(forTypeIdentifier: "public.item") { url, error in
+          if let url = url {
+            seal.fulfill(url.lastPathComponent)
+          } else {
+            log?.error(error ?? StorageError.couldNotDecodeFile)
+            seal.reject(error ?? StorageError.couldNotDecodeFile)
           }
         }
+      }
     }
     
   }

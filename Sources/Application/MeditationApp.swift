@@ -2,8 +2,6 @@
 //  MeditationApp.swift
 //  Meditation
 //
-//  Created by Developer on 12.01.2022.
-//
 
 import SwiftUI
 

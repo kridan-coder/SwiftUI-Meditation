@@ -2,8 +2,6 @@
 //  Placeholder.swift
 //  Meditation
 //
-//  Created by Developer on 13.01.2022.
-//
 
 import SwiftUI
 

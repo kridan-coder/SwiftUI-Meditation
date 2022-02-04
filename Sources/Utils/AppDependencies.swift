@@ -2,8 +2,6 @@
 //  AppDependencies.swift
 //  Meditation
 //
-//  Created by Daniel Krivelev on 01.02.2022.
-//
 
 import SwiftUI
 

@@ -34,6 +34,9 @@
 		3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */; };
 		3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD92794585700B791F3 /* CardCellView.swift */; };
 		3AB5D0AB27ACF49600C2DF10 /* ImageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */; };
+		3AB5D0AD27AD1EB800C2DF10 /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AC27AD1EB800C2DF10 /* ImageCellModel.swift */; };
+		3AB5D0B027AD205000C2DF10 /* CardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AF27AD205000C2DF10 /* CardCellModel.swift */; };
+		3AB5D0B227AD22D400C2DF10 /* DateFormatter+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */; };
 		3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC93F127946F23006CA916 /* NetworkService.swift */; };
 		3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */; };
 		3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1227A91B5E004770D9 /* RealmStorage.swift */; };
@@ -104,6 +107,9 @@
 		3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellView.swift; sourceTree = "<group>"; };
 		3A8E9BD92794585700B791F3 /* CardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellView.swift; sourceTree = "<group>"; };
 		3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDescription.swift; sourceTree = "<group>"; };
+		3AB5D0AC27AD1EB800C2DF10 /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
+		3AB5D0AF27AD205000C2DF10 /* CardCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellModel.swift; sourceTree = "<group>"; };
+		3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Format.swift"; sourceTree = "<group>"; };
 		3ABC93F127946F23006CA916 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		3AC86F1227A91B5E004770D9 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
@@ -323,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				3A6878A1279403FD00069424 /* MainView.swift */,
-				3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */,
 				3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */,
 				3A8E9BD92794585700B791F3 /* CardCellView.swift */,
 			);
@@ -336,6 +341,16 @@
 				3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3AB5D0AE27AD1F6800C2DF10 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3AB5D0AC27AD1EB800C2DF10 /* ImageCellModel.swift */,
+				3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */,
+				3AB5D0AF27AD205000C2DF10 /* CardCellModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3AC86F1127A91A3F004770D9 /* RealmStorage */ = {
@@ -373,6 +388,7 @@
 				3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */,
 				3ADEDF7327AA5CF00006E96C /* Image+CustomInit.swift */,
 				3ADEDF7A27AA6E7F0006E96C /* Color+AppColors.swift */,
+				3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -396,6 +412,7 @@
 		3AFA773127A68AA400FDC987 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3AB5D0AE27AD1F6800C2DF10 /* Models */,
 				3ADEDF6B27AA52790006E96C /* Extensions */,
 				3AC86F1827A92C20004770D9 /* Utils */,
 				3AFA773227A696DA00FDC987 /* Common */,
@@ -693,6 +710,7 @@
 				3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */,
 				3ADEDF7B27AA6E7F0006E96C /* Color+AppColors.swift in Sources */,
 				3ADEDF7427AA5CF00006E96C /* Image+CustomInit.swift in Sources */,
+				3AB5D0B027AD205000C2DF10 /* CardCellModel.swift in Sources */,
 				3A64040127980C3600466FA4 /* ImagePicker.swift in Sources */,
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
@@ -700,6 +718,7 @@
 				3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */,
 				3A1F6D8C27A7AF6F00DB84CC /* NetworkService+Feelings.swift in Sources */,
 				3ADEDF7927AA6CDC0006E96C /* TabbarView.swift in Sources */,
+				3AB5D0B227AD22D400C2DF10 /* DateFormatter+Format.swift in Sources */,
 				3A1F6D7627A78BDF00DB84CC /* Quotes.swift in Sources */,
 				3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */,
 				3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */,
@@ -719,6 +738,7 @@
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
 				3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */,
+				3AB5D0AD27AD1EB800C2DF10 /* ImageCellModel.swift in Sources */,
 				3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */,
 				3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */,
 				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,
