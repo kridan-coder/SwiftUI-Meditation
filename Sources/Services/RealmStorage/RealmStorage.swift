@@ -38,6 +38,17 @@ struct RealmStorage: RealmServiceProviding {
     Array(realm.objects(type))
   }
   
+  func delete<T: Object>(_ object: T) throws {
+    do {
+      try realm.write {
+        realm.delete(object)
+      }
+    } catch let error {
+      log?.error(error)
+      throw StorageError.couldNotClearStorage
+    }
+  }
+  
   func deleteAllObjects<T: Object>(ofType type: T.Type) throws {
     let allObjects = realm.objects(type)
     do {

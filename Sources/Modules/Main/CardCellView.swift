@@ -65,9 +65,9 @@ struct CardView_Previews: PreviewProvider {
     if let url = URL(string: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg") {
       NavigationView {
         CardCellView(viewModel: CardCellModel(serverID: 0,
-                                          title: "Заголовок блока".unlocalized,
-                                          description: "Кратенькое описание блока с двумя строчками".unlocalized,
-                                          imageURL: url))
+                                              title: "Заголовок блока".unlocalized,
+                                              description: "Кратенькое описание блока с двумя строчками".unlocalized,
+                                              imageURL: url))
       }
     }
   }

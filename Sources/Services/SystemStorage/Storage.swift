@@ -58,6 +58,13 @@ struct Storage<T: Codable> {
     return result
   }
   
+  func deleteObject(withKey key: String) throws {
+    let fileURL = try directoryURL().appendingPathComponent(key, isDirectory: false)
+    if fileManager.fileExists(atPath: fileURL.path) {
+      try fileManager.removeItem(at: fileURL)
+    }
+  }
+  
   func clearAllData() throws {
     let folderURL = try directoryURL()
     let contents = try fileManager.contentsOfDirectory(atPath: folderURL.path)

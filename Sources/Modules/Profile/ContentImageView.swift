@@ -8,119 +8,107 @@
 import SwiftUI
 import RealmSwift
 
+final class ContentImageViewModel: ObservableObject {
+  @Environment(\.appDependencies) private var dependencies
+  
+  func deleteImage(withName name: String) {
+    do {
+      try dependencies.uiImagesStorage.deleteImage(withName: name)
+      let imageDescription = dependencies.realmService.getAllObjects(ofType: ImageDescription.self).first { $0.name == name }
+      guard let safeImageDescription = imageDescription else { return }
+      try dependencies.realmService.delete(safeImageDescription)
+    } catch let error {
+      log?.error(error)
+    }
+  }
+}
+
 struct ContentImageView: View {
-  
   @State private var isScaled = false
-  
   @Binding var isPresentingPhoto: Bool
   
-  var filename: String
-  
-  var isNavigationBarHidden = true
-  
+  var imageName: String
   var image: Image
   
-  var documentsUrl: URL {
-      return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-  }
+  @ObservedObject private(set) var viewModel: ContentImageViewModel
   
-  func delete() {
-    do {
-      let realm = try Realm()
-      try realm.write {
-        let objects = realm.objects(ImageDescription.self)
-        let filtered = objects.filter { $0.name == filename }
-        print(filtered.count)
-        
-        realm.delete(filtered)
-      }
-      
-      try FileManager.default.removeItem(at: documentsUrl.appendingPathComponent(filename))
-    } catch {
-      fatalError()
-    }
-    
+  private func delete() {
+    viewModel.deleteImage(withName: imageName)
     withAnimation {
       isPresentingPhoto = false
     }
   }
   
   var body: some View {
-    NavigationView {
-      GeometryReader { _ in
-        ZStack {
-          Color("BackgroundColor")
-            .ignoresSafeArea()
-          
-          VStack {
-            Spacer()
-            
-            if isScaled {
-              image
-                .resizable()
-                .scaledToFit()
-                .onTapGesture(count: 2) {
-                  isScaled.toggle()
-                }
-                .scaleEffect(2)
-            } else {
-              image
-                .resizable()
-                .scaledToFit()
-                .onTapGesture(count: 2) {
-                  isScaled.toggle()
-                }
-                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                    .onEnded({ value in
-                                        if value.translation.width < 0 {
-                                            delete()
-                                        }
-
-                                        if value.translation.width > 0 {
-                                          withAnimation {
-                                            isPresentingPhoto = false
-                                          }
-                                        }
-                                        if value.translation.height < 0 {
-                                            // up
-                                        }
-
-                                        if value.translation.height > 0 {
-                                            // down
-                                        }
-                                    }))
-              
-            }
-            
-            Spacer()
-            HStack {
-              Spacer()
-              Button("удалить") {
-                delete()
-                
-              }
-              Spacer()
-              Button("закрыть") {
-                withAnimation {
-                  isPresentingPhoto = false
-                }
-              }
-              Spacer()
-            }.padding(.bottom, 40)
-              .font(.custom("Alegreya-Medium", size: 20))
-              .foregroundColor(.white)
-          }
-        }
-        
+    ZStack {
+      Color.backgroundColor
+        .ignoresSafeArea()
+      VStack {
+        Spacer()
+        makeImage()
+        Spacer()
+        makeButtons()
       }
-      .navigationBarHidden(true)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeImage() -> some View {
+    if isScaled {
+      image
+        .resizable()
+        .scaledToFit()
+        .onTapGesture(count: 2) {
+          isScaled.toggle()
+        }
+        .scaleEffect(2)
+    } else {
+      image
+        .resizable()
+        .scaledToFit()
+        .onTapGesture(count: 2) {
+          isScaled.toggle()
+        }
+        .gesture(DragGesture(minimumDistance: 15, coordinateSpace: .local)
+                  .onEnded { value in
+          if value.translation.width < 0 {
+            delete()
+          }
+          
+          if value.translation.width > 0 {
+            withAnimation {
+              isPresentingPhoto = false
+            }
+          }
+        })
       
     }
   }
+  
+  @ViewBuilder
+  private func makeButtons() -> some View {
+    HStack {
+      Spacer()
+      Button("удалить".unlocalized) {
+        delete()
+        
+      }
+      Spacer()
+      Button("закрыть".unlocalized) {
+        withAnimation {
+          isPresentingPhoto = false
+        }
+      }
+      Spacer()
+    }.padding(.bottom, 40)
+      .font(.mediumBody)
+      .foregroundColor(.white)
+  }
+  
 }
 
 struct ContentImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentImageView(isPresentingPhoto: .constant(false), filename: "", image: Image("Content1"))
+    ContentImageView(isPresentingPhoto: .constant(true), imageName: "h", image: Image(.people), viewModel: ContentImageViewModel())
   }
 }

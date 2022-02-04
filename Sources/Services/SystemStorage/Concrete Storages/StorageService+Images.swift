@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 extension StorageService: UIImagesStoring {
+  func deleteImage(withName name: String) throws {
+    let key = generateFileName(for: .image, name: name)
+    try imagesStorage.deleteObject(withKey: key)
+  }
+  
   func store(uiImage: UIImage, name: String) throws {
     let key = generateFileName(for: .image, name: name)
     guard let data = uiImage.pngData() ?? uiImage.jpegData(compressionQuality: 1) else {

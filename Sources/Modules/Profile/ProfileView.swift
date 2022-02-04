@@ -38,6 +38,10 @@ class ProfileViewModel: ObservableObject {
   }
   
   func saveImage(_ image: UIImage, imageName: String) {
+    if imagePaths.contains(where: { $0.name == imageName }) {
+      saveImage(image, imageName: imageName + "(copy)")
+      return // recursion until imageName is unique
+    }
     let description = ImageDescription()
     description.name = imageName
     description.time = generateCurrentTime()
@@ -79,9 +83,11 @@ struct ProfileView: View {
   
   var body: some View {
     if isPresentingPhoto {
-      ContentImageView(isPresentingPhoto: $isPresentingPhoto, filename: imageToShowName, image: imageToShow)
+      ContentImageView(isPresentingPhoto: $isPresentingPhoto,
+                       imageName: imageToShowName,
+                       image: imageToShow,
+                       viewModel: ContentImageViewModel())
     } else {
-      
       GeometryReader { screen in
         ZStack(alignment: .top) {
           Color.backgroundColor
@@ -106,9 +112,7 @@ struct ProfileView: View {
           viewModel.saveImage(newValue, imageName: imageToShowName)
         }
       }
-      
     }
-    
   }
   
   @ViewBuilder
