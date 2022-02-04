@@ -48,7 +48,7 @@ struct WelcomeView: View {
   private func makeButtonsContainer(parentWidth: CGFloat) -> some View {
     NavigationLink {
       LoginView(loginViewModel: LoginViewModel(), isLoggedIn: $isLoggedIn)
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     } label: {
       CustomButtonView(text: "Войти в аккаунт".unlocalized)
     }
