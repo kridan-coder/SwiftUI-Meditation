@@ -14,15 +14,11 @@ class ProfileViewModel: ObservableObject {
   
   @Published var nickname = ""
   @Published var avatarURL = ""
-  @Published var images: [Image] = []
+  @ObservedResults(ImageDescription.self) var imagePaths
   
   func onAppear() {
     nickname = dependencies.userDataStorageService.nickname ?? ""
     avatarURL = dependencies.userDataStorageService.avatarURL ?? ""
-    guard let uiImages = try? dependencies.uiImagesStorage.getUIImages() else {
-      return
-    }
-    images = uiImages.map { Image(uiImage: $0) }
   }
   
   func logOut(isLoggedIn: Binding<Bool>) {
@@ -41,80 +37,74 @@ class ProfileViewModel: ObservableObject {
     return Image(.people)
   }
   
-  func saveImage(_ image: UIImage, name: String) {
+  func saveImage(_ image: UIImage, imageName: String) {
+    let description = ImageDescription()
+    description.name = imageName
+    description.time = generateCurrentTime()
     do {
-      try dependencies.uiImagesStorage.store(uiImage: image, name: name)
+      try dependencies.realmService.add(description)
+      try dependencies.uiImagesStorage.store(uiImage: image, name: description.name)
     } catch let error {
       log?.error(error)
     }
   }
   
+  private func generateCurrentTime() -> String {
+    let date = Date()
+
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+
+    let time = formatter.string(from: date)
+    return time
+  }
+  
 }
 
 struct ProfileView: View {
-  var documentsUrl: URL {
-    return FileManager.default.urls(for: .documentDirectory,
-                                       in: .userDomainMask).first!
-  }
-  
   @Binding var isLoggedIn: Bool
-  
-  @ObservedResults(ImageStorage.self) var imagePaths
-  
-  var isNavigationBarHidden = true
-  
   @State private var inputImage: UIImage?
-  
-  @State var imageToShow = Image("Koala")
-  
-  @State var filename = ""
+  @State var imageToShow = Image(.people)
+  @State var imageToShowName = ""
   
   @State private var isPresentingPhoto = false
   @State private var isShowingImagePicker = false
   
-  @StateObject var viewModel = ProfileViewModel()
+  @ObservedObject var viewModel: ProfileViewModel
   
   let columns = [
     GridItem(.flexible()),
     GridItem(.flexible())
   ]
   
-  //  func loadImage() {
-  //      guard let inputImage = inputImage else { return }
-  //      let image = Image(uiImage: inputImage)
-  //    $imagePaths.append()
-  //    contentImagesContainer.contentImagesViewModels.append(ImageViewModel(date: "11:00", image: image))
-  //  }
-  
   var body: some View {
     if isPresentingPhoto {
-      ContentImageView(isPresentingPhoto: $isPresentingPhoto, filename: filename, image: imageToShow)
+      ContentImageView(isPresentingPhoto: $isPresentingPhoto, filename: imageToShowName, image: imageToShow)
     } else {
       
-      NavigationView {
-        GeometryReader { screen in
-          ZStack(alignment: .top) {
-            Color.backgroundColor
-              .ignoresSafeArea()
-            VStack {
-              makeTopBar()
-              ScrollView(.vertical, showsIndicators: false) {
-                makeImageView(parentHeight: screen.size.height)
-                Text(viewModel.nickname)
-                  .foregroundColor(.white)
-                  .font(.mediumLargeTitle1)
-                makeImageCells()
-              }
+      GeometryReader { screen in
+        ZStack(alignment: .top) {
+          Color.backgroundColor
+            .ignoresSafeArea()
+          VStack {
+            makeTopBar()
+            ScrollView(.vertical, showsIndicators: false) {
+              makeImageView(parentHeight: screen.size.height)
+              Text(viewModel.nickname)
+                .foregroundColor(.white)
+                .font(.mediumLargeTitle1)
+              makeImageCells()
             }
           }
-        }.navigationBarHidden(isNavigationBarHidden)
-          .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(image: $inputImage, filename: $filename)
-          }
-          .onChange(of: inputImage) { _ in
-            // loadImage()
-          }
-        
+        }
+      }
+      .sheet(isPresented: $isShowingImagePicker) {
+        ImagePicker(image: $inputImage, imageName: $imageToShowName)
+      }
+      .onChange(of: inputImage) { newValue in
+        if let newValue = newValue {
+          viewModel.saveImage(newValue, imageName: imageToShowName)
+        }
       }
       
     }
@@ -168,15 +158,15 @@ struct ProfileView: View {
   @ViewBuilder
   private func makeImageCells() -> some View {
     LazyVGrid(columns: columns) {
-      ForEach(imagePaths) { imagePathContainer in
-        let image = viewModel.getImage(with: imagePathContainer.imagePath)
+      ForEach(viewModel.imagePaths) { imagePathContainer in
+        let image = viewModel.getImage(with: imagePathContainer.name)
         ImageCellView(viewModel: ImageCellModel(date: imagePathContainer.time,
                                                 image: image))
           .onTapGesture {
             withAnimation {
               isPresentingPhoto = true
               imageToShow = image
-              filename = imagePathContainer.imagePath
+              imageToShowName = imagePathContainer.name
             }
           }
       }
@@ -192,6 +182,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ProfileView(isLoggedIn: .constant(false))
+    ProfileView(isLoggedIn: .constant(false),
+                viewModel: ProfileViewModel())
   }
 }

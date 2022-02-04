@@ -28,8 +28,8 @@ struct ContentImageView: View {
     do {
       let realm = try Realm()
       try realm.write {
-        let objects = realm.objects(ImageStorage.self)
-        let filtered = objects.filter { $0.imagePath == filename }
+        let objects = realm.objects(ImageDescription.self)
+        let filtered = objects.filter { $0.name == filename }
         print(filtered.count)
         
         realm.delete(filtered)

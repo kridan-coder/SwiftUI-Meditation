@@ -22,7 +22,7 @@ struct Storage<T: Codable> {
   }
   
   func setObject(_ object: T, forKey key: String) throws {
-    let fileURL = try directoryURL()
+    let fileURL = try directoryURL().appendingPathComponent(key, isDirectory: false)
     let data = try encoder.encode(object)
     if fileManager.fileExists(atPath: fileURL.path) {
       try fileManager.removeItem(at: fileURL) // delete existing

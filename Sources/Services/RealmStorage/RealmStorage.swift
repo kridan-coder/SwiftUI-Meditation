@@ -23,10 +23,10 @@ struct RealmStorage: RealmServiceProviding {
     }
   }
   
-  func createOrUpdate<T: Object>(_ object: T) throws {
+  func add<T: Object>(_ object: T) throws {
     do {
       try realm.write {
-        realm.add(object, update: .modified)
+        realm.add(object, update: .error)
       }
     } catch let error {
       log?.error(error)

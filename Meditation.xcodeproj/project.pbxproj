@@ -33,6 +33,7 @@
 		3A8E9BD42794164700B791F3 /* ChoiceCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */; };
 		3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */; };
 		3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E9BD92794585700B791F3 /* CardCellView.swift */; };
+		3AB5D0AB27ACF49600C2DF10 /* ImageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */; };
 		3ABC93F227946F23006CA916 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC93F127946F23006CA916 /* NetworkService.swift */; };
 		3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */; };
 		3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1227A91B5E004770D9 /* RealmStorage.swift */; };
@@ -102,6 +103,7 @@
 		3A8E9BD32794164700B791F3 /* ChoiceCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellModel.swift; sourceTree = "<group>"; };
 		3A8E9BD5279417F800B791F3 /* ChoiceCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceCellView.swift; sourceTree = "<group>"; };
 		3A8E9BD92794585700B791F3 /* CardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellView.swift; sourceTree = "<group>"; };
+		3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDescription.swift; sourceTree = "<group>"; };
 		3ABC93F127946F23006CA916 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3AC86F0F27A912A2004770D9 /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		3AC86F1227A91B5E004770D9 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
@@ -299,7 +301,6 @@
 				3A6403FA2797E80400466FA4 /* ImageCellView.swift */,
 				3A6403FC2797EE4F00466FA4 /* ImageCellAddView.swift */,
 				3A6403FE2797FB4700466FA4 /* ContentImageView.swift */,
-				3A64040027980C3600466FA4 /* ImagePicker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -329,9 +330,18 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		3AB5D0A927ACF48B00C2DF10 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3AB5D0AA27ACF49600C2DF10 /* ImageDescription.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3AC86F1127A91A3F004770D9 /* RealmStorage */ = {
 			isa = PBXGroup;
 			children = (
+				3AB5D0A927ACF48B00C2DF10 /* Model */,
 				3AC86F1627A9291F004770D9 /* RealmServiceProviding.swift */,
 				3AC86F1227A91B5E004770D9 /* RealmStorage.swift */,
 			);
@@ -486,6 +496,7 @@
 		44BAE309278EE4E9002FFFCE /* View Components */ = {
 			isa = PBXGroup;
 			children = (
+				3A64040027980C3600466FA4 /* ImagePicker.swift */,
 				44BAE30A278EE4F9002FFFCE /* CustomButton.swift */,
 				449E21EA278FFCD300464D7E /* Placeholder.swift */,
 			);
@@ -693,6 +704,7 @@
 				3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */,
 				3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */,
 				3A1F6D8427A7A37300DB84CC /* NetworkServiceProtocols.swift in Sources */,
+				3AB5D0AB27ACF49600C2DF10 /* ImageDescription.swift in Sources */,
 				44BAE30B278EE4F9002FFFCE /* CustomButton.swift in Sources */,
 				3A8E9BD6279417F800B791F3 /* ChoiceCellView.swift in Sources */,
 				446B7F6B278E94D0002B38DD /* ContentView.swift in Sources */,

@@ -43,7 +43,7 @@ struct TabbarView: View {
         }.tag(TabbarViewScreen.sound)
         .navigationBarHidden(true).navigationTitle("")
       
-      ProfileView(isLoggedIn: $isLoggedIn)
+      ProfileView(isLoggedIn: $isLoggedIn, viewModel: ProfileViewModel())
         .tabItem {
           if currentTabbarView == .profile {
             Image(.profileChosen)
