@@ -45,12 +45,17 @@ struct WelcomeView: View {
   @ViewBuilder
   private func makeButtonsContainer(parentWidth: CGFloat) -> some View {
     NavigationLink {
-      LoginView(loginViewModel: LoginViewModel(), isLoggedIn: $isLoggedIn)
+      LoginView(viewModel: LoginViewModel(isLoggedIn: $isLoggedIn))
         .navigationBarBackButtonHidden(true)
     } label: {
-      CustomButtonView(text: "Войти в аккаунт".unlocalized)
+      Text("Войти в аккаунт".unlocalized)
+        .font(.mediumTitle3)
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
     }
     .frame(width: parentWidth * 0.9, height: 65)
+    .background(Color.buttonColor)
+    .cornerRadius(10)
     
     HStack(alignment: .center) {
       Text("Еще нет аккаунта?".unlocalized)

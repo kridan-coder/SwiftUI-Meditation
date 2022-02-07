@@ -20,13 +20,17 @@ final class ContentViewModel: ObservableObject {
 
 struct ContentView: View {
   @ObservedObject private(set) var viewModel: ContentViewModel
+  @State private var currentTabbarView: TabbarViewScreen = .profile
   var body: some View {
     NavigationView {
       if viewModel.isLoggedIn {
-        TabbarView(isLoggedIn: $viewModel.isLoggedIn)
+        TabbarView(currentTabbarView: $currentTabbarView,
+                   viewModel: TabbarViewModel(isLoggedIn: $viewModel.isLoggedIn,
+                                              mainViewModel: MainViewModel(),
+                                              profileViewModel: ProfileViewModel(isLoggedIn: $viewModel.isLoggedIn)))
       } else {
         if viewModel.hadFirstRunAlready {
-          LoginView(loginViewModel: LoginViewModel(), isLoggedIn: $viewModel.isLoggedIn)
+          LoginView(viewModel: LoginViewModel(isLoggedIn: $viewModel.isLoggedIn))
         } else {
           WelcomeView(isLoggedIn: $viewModel.isLoggedIn)
         }

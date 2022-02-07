@@ -9,21 +9,36 @@ enum TabbarViewScreen: String {
   case home, sound, profile
 }
 
-struct TabbarView: View {
-  @State var currentTabbarView: TabbarViewScreen = .profile
+final class TabbarViewModel: ObservableObject {
+  @ObservedObject var mainViewModel: MainViewModel
+  @ObservedObject var profileViewModel: ProfileViewModel
+  
   @Binding var isLoggedIn: Bool
   
-  @StateObject var mainViewModel = MainViewModel()
-  @StateObject var profileViewModel = ProfileViewModel()
-  
-  init(isLoggedIn: Binding<Bool>) {
+  init(isLoggedIn: Binding<Bool>,
+       mainViewModel: MainViewModel,
+       profileViewModel: ProfileViewModel) {
     _isLoggedIn = isLoggedIn
+    self.mainViewModel = mainViewModel
+    self.profileViewModel = profileViewModel
+  }
+  
+}
+
+struct TabbarView: View {
+  @Binding var currentTabbarView: TabbarViewScreen
+  
+  @ObservedObject private(set) var viewModel: TabbarViewModel
+  
+  init(currentTabbarView: Binding<TabbarViewScreen>, viewModel: TabbarViewModel) {
+    _currentTabbarView = currentTabbarView
+    self.viewModel = viewModel
     configureTabBar()
   }
   
   var body: some View {
     TabView(selection: $currentTabbarView) {
-      MainView(viewModel: mainViewModel)
+      MainView(viewModel: viewModel.mainViewModel)
         .tabItem {
           if currentTabbarView == .home {
             Image(.homeChosen)
@@ -41,7 +56,7 @@ struct TabbarView: View {
         }.tag(TabbarViewScreen.sound)
         .navigationBarHidden(true).navigationTitle("")
       
-      ProfileView(isLoggedIn: $isLoggedIn, viewModel: ProfileViewModel())
+      ProfileView(viewModel: viewModel.profileViewModel)
         .tabItem {
           if currentTabbarView == .profile {
             Image(.profileChosen)
@@ -68,6 +83,9 @@ struct TabbarView: View {
 
 struct TabbarView_Previews: PreviewProvider {
   static var previews: some View {
-    TabbarView(isLoggedIn: .constant(false))
+    TabbarView(currentTabbarView: .constant(.home),
+               viewModel: TabbarViewModel(isLoggedIn: .constant(false),
+                                          mainViewModel: MainViewModel(),
+                                          profileViewModel: ProfileViewModel(isLoggedIn: .constant(false))))
   }
 }

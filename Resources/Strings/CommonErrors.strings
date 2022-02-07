@@ -4,3 +4,4 @@
 */
 
 "error.unknown.text" = "Неизвестная ошибка";
+"error.validation.text" = "Ошибка валидации";

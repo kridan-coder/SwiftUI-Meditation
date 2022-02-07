@@ -552,10 +552,12 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 3 localization tables.
   struct string {
-    /// This `R.string.commonErrors` struct is generated, and contains static references to 1 localization keys.
+    /// This `R.string.commonErrors` struct is generated, and contains static references to 2 localization keys.
     struct commonErrors {
       /// Value: Неизвестная ошибка
       static let errorUnknownText = Rswift.StringResource(key: "error.unknown.text", tableName: "CommonErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Ошибка валидации
+      static let errorValidationText = Rswift.StringResource(key: "error.validation.text", tableName: "CommonErrors", bundle: R.hostingBundle, locales: [], comment: nil)
 
       /// Value: Неизвестная ошибка
       static func errorUnknownText(preferredLanguages: [String]? = nil) -> String {
@@ -568,6 +570,19 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("error.unknown.text", tableName: "CommonErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Ошибка валидации
+      static func errorValidationText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.validation.text", tableName: "CommonErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "CommonErrors", preferredLanguages: preferredLanguages) else {
+          return "error.validation.text"
+        }
+
+        return NSLocalizedString("error.validation.text", tableName: "CommonErrors", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

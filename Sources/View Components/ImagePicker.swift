@@ -13,7 +13,7 @@ import PromiseKit
 struct ImagePicker: UIViewControllerRepresentable {
   func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
   
-  @Binding var image: UIImage?
+  @Binding var image: UIImage
   @Binding var imageName: String
   
   func makeUIViewController(context: Context) -> PHPickerViewController {

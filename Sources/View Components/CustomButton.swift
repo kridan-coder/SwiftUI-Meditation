@@ -5,17 +5,6 @@
 
 import SwiftUI
 
-struct CustomButtonStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    configuration.label
-      .foregroundColor(.white)
-      .font(.mediumTitle2)
-      .background(Color.buttonColor)
-      .cornerRadius(10)
-  }
-  
-}
-
 struct CustomButtonView: View {
   var text: String
   var textColor: Color = .white

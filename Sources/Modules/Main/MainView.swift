@@ -7,7 +7,7 @@ import SwiftUI
 import Kingfisher
 import PromiseKit
 
-class MainViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
   
   @Published var nickname: String = ""

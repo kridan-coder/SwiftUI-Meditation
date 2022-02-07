@@ -6,25 +6,32 @@
 import SwiftUI
 import PromiseKit
 
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
   
-  @Published var isLoggedIn: Bool = false
+  @Binding var isLoggedIn: Bool
+  @Published var shouldShowAlert: Bool = false
+  @Published var alertText: String
   @Published var password: String = ""
   @Published var email: String = ""
   
+  init(isLoggedIn: Binding<Bool>) {
+    _isLoggedIn = isLoggedIn
+    alertText = R.string.commonErrors.errorValidationText()
+  }
+  
   func onAppear() {
     email = dependencies.userDataStorageService.email
-    isLoggedIn = dependencies.userDataStorageService.isLoggedIn
   }
   
   var isValidatedCorrectly: Bool {
     email.contains("@") && email.contains(".") && !password.isEmpty
   }
   
-  func logIn(showAlert: Binding<Bool>, isLoggedIn: Binding<Bool>) {
+  func logIn() {
     guard isValidatedCorrectly else {
-      showAlert.wrappedValue = true
+      alertText = R.string.commonErrors.errorValidationText()
+      shouldShowAlert = true
       return
     }
     
@@ -36,24 +43,19 @@ class LoginViewModel: ObservableObject {
       dependencies.userDataStorageService.avatarURL = result.avatar.absoluteString
       dependencies.userDataStorageService.accessToken = result.token
       withAnimation {
-        isLoggedIn.wrappedValue = true
+        isLoggedIn = true
       }
     }.catch { error in
       log?.error(error)
-      showAlert.wrappedValue = true
+      self.alertText = error.localizedDescription
+      self.shouldShowAlert = true
     }
   }
   
 }
 
 struct LoginView: View {
-  @State private var showingAlert = false
-  
-  @Environment(\.editMode) var editMode
-  
-  @ObservedObject var loginViewModel: LoginViewModel
-  
-  @Binding var isLoggedIn: Bool
+  @ObservedObject private(set) var viewModel: LoginViewModel
   
   var body: some View {
     GeometryReader { screen in
@@ -86,15 +88,16 @@ struct LoginView: View {
         .allowsHitTesting(false)
     }
     .ignoresSafeArea(.all, edges: .bottom)
-    .alert(R.string.commonErrors.errorUnknownText(), isPresented: $showingAlert) {
+    .alert(viewModel.alertText,
+           isPresented: $viewModel.shouldShowAlert) {
       Button("OK".unlocalized, role: .cancel) { }
     }
   }
   
   @ViewBuilder
   private func makeFields(parentWidth: CGFloat) -> some View {
-    TextField("", text: $loginViewModel.email)
-      .placeholder(when: loginViewModel.email.isEmpty) {
+    TextField("", text: $viewModel.email)
+      .placeholderShowing(when: viewModel.email.isEmpty) {
         Text("Email".unlocalized).foregroundColor(.gray)
       }
       .foregroundColor(.white)
@@ -109,8 +112,8 @@ struct LoginView: View {
         }
       }
     Spacer()
-    SecureField("", text: $loginViewModel.password)
-      .placeholder(when: loginViewModel.password.isEmpty) {
+    SecureField("", text: $viewModel.password)
+      .placeholderShowing(when: viewModel.password.isEmpty) {
         Text("Пароль".unlocalized).foregroundColor(.gray)
       }
       .foregroundColor(.white)
@@ -129,7 +132,7 @@ struct LoginView: View {
   @ViewBuilder
   private func makeButtons(parentWidth: CGFloat) -> some View {
     Button {
-      loginViewModel.logIn(showAlert: $showingAlert, isLoggedIn: $isLoggedIn)
+      viewModel.logIn()
     } label: {
       Text("Sign In".unlocalized)
         .font(.mediumTitle3)
@@ -143,10 +146,14 @@ struct LoginView: View {
     NavigationLink {
       RegisterView()
     } label: {
-      CustomButtonView(text: "Sign Up".unlocalized)
-        .frame(width: parentWidth * 0.9, height: 60)
-        .frame(width: parentWidth * 0.9, height: 60)
+      Text("Sign Up".unlocalized)
+        .font(.mediumTitle3)
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
     }
+    .frame(width: parentWidth * 0.9, height: 60)
+    .background(Color.buttonColor)
+    .cornerRadius(10)
   }
   
 }
@@ -154,7 +161,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      LoginView(loginViewModel: LoginViewModel(), isLoggedIn: .constant(false))
+      LoginView(viewModel: LoginViewModel(isLoggedIn: .constant(false)))
     }
     .navigationBarHidden(true)
   }

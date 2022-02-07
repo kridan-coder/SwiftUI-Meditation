@@ -10,37 +10,42 @@ import RealmSwift
 class ProfileViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
   
+  @Binding var isLoggedIn: Bool
+  
   @Published var nickname = ""
   @Published var avatarURL = ""
   @ObservedResults(ImageDescription.self) var imagePaths
+  
+  init(isLoggedIn: Binding<Bool>) {
+    _isLoggedIn = isLoggedIn
+  }
   
   func onAppear() {
     nickname = dependencies.userDataStorageService.nickname
     avatarURL = dependencies.userDataStorageService.avatarURL
   }
   
-  func logOut(isLoggedIn: Binding<Bool>) {
+  func logOut() {
     dependencies.userDataStorageService.clearData()
     withAnimation {
-      isLoggedIn.wrappedValue = false
+      isLoggedIn = false
     }
   }
   
-  func getImage(with name: String) -> Image {
+  func getImage(with name: String) -> UIImage {
     do {
-      let uiImage: UIImage
-      uiImage = try dependencies.uiImagesStorage.getUIImage(withKey: name)
-      return Image(uiImage: uiImage)
+      let image = try dependencies.uiImagesStorage.getUIImage(withKey: name)
+      return image
     } catch let error {
       log?.error(error)
     }
-    return Image(.people)
+    return UIImage()
   }
   
   func saveImage(_ image: UIImage, imageName: String) {
     if imagePaths.contains(where: { $0.name == imageName }) {
       saveImage(image, imageName: imageName + "(copy)")
-      return // recursion until imageName is unique
+      return // recursion until imageName becomes unique
     }
     let description = ImageDescription()
     description.name = imageName
@@ -60,13 +65,11 @@ class ProfileViewModel: ObservableObject {
 }
 
 struct ProfileView: View {
-  @Binding var isLoggedIn: Bool
-  @State private var inputImage: UIImage?
-  @State var imageToShow = Image(.people)
-  @State var imageToShowName = ""
-  
   @State private var isPresentingPhoto = false
   @State private var isShowingImagePicker = false
+  
+  @State private var imageToShow = UIImage()
+  @State private var imageToShowName = ""
   
   @ObservedObject private(set) var viewModel: ProfileViewModel
   
@@ -79,7 +82,7 @@ struct ProfileView: View {
     if isPresentingPhoto {
       ContentImageView(isPresentingPhoto: $isPresentingPhoto,
                        imageName: imageToShowName,
-                       image: imageToShow,
+                       image: Image(uiImage: imageToShow),
                        viewModel: ContentImageViewModel())
     } else {
       GeometryReader { screen in
@@ -99,12 +102,10 @@ struct ProfileView: View {
         }
       }
       .sheet(isPresented: $isShowingImagePicker) {
-        ImagePicker(image: $inputImage, imageName: $imageToShowName)
+        ImagePicker(image: $imageToShow, imageName: $imageToShowName)
       }
-      .onChange(of: inputImage) { newValue in
-        if let newValue = newValue {
-          viewModel.saveImage(newValue, imageName: imageToShowName)
-        }
+      .onChange(of: imageToShow) { newValue in
+        viewModel.saveImage(newValue, imageName: imageToShowName)
       }
     }
   }
@@ -125,7 +126,7 @@ struct ProfileView: View {
       Spacer()
       
       Button("exit".unlocalized) {
-        viewModel.logOut(isLoggedIn: $isLoggedIn)
+        viewModel.logOut()
       }
       .font(.regularTitle3)
       .foregroundColor(.white)
@@ -147,7 +148,7 @@ struct ProfileView: View {
       ForEach(viewModel.imagePaths) { imagePathContainer in
         let image = viewModel.getImage(with: imagePathContainer.name)
         ImageCellView(model: ImageCellModel(date: imagePathContainer.time,
-                                            image: image))
+                                            image: Image(uiImage: image)))
           .onTapGesture {
             withAnimation {
               isPresentingPhoto = true
@@ -168,7 +169,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ProfileView(isLoggedIn: .constant(false),
-                viewModel: ProfileViewModel())
+    ProfileView(viewModel: ProfileViewModel(isLoggedIn: .constant(false)))
   }
 }

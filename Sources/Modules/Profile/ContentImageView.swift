@@ -25,8 +25,8 @@ struct ContentImageView: View {
   @State private var isScaled = false
   @Binding var isPresentingPhoto: Bool
   
-  var imageName: String
-  var image: Image
+  let imageName: String
+  let image: Image
   
   @ObservedObject private(set) var viewModel: ContentImageViewModel
   
