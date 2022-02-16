@@ -28,7 +28,12 @@ final class CardCellViewModel: ObservableObject, Identifiable {
 struct CardCellView: View {
   let viewModel: CardCellViewModel
   
+  @State private var selected: Bool? = false
+  
   var body: some View {
+    NavigationLink(destination: EmptyView(),
+                   tag: true,
+                   selection: $selected) { EmptyView() }
     ZStack {
       Color.white
       HStack {
@@ -43,10 +48,13 @@ struct CardCellView: View {
             .font(.mediumSubheadline)
             .foregroundColor(Color.backgroundColor)
           
-          NavigationLink {} label: {
-            CustomButtonView(text: "подробнее".unlocalized, backgroundColor: Color.backgroundColor, font: .regularSubheadline)
+          Button("подробнее") {
+            selected?.toggle()
           }
+          .buttonStyle(CustomButtonStyle(backgroundColor: .backgroundColor,
+                                         font: .regularSubheadline))
           .frame(width: 150, height: 40)
+          
         }
         .padding()
         KFImage(viewModel.imageURL)
