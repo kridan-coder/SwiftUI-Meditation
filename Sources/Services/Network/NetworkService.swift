@@ -22,11 +22,15 @@ final class NetworkService {
   
   let urlProvider: URLProvider
   private let decoder: JSONDecoder
+  private let session: Session
   
   // MARK: - Init
-  init(urlProvider: URLProvider = URLProvider(), decoder: JSONDecoder = JSONDecoder()) {
+  init(urlProvider: URLProvider = URLProvider(),
+       decoder: JSONDecoder = JSONDecoder(),
+       session: Session = Session()) {
     self.urlProvider = urlProvider
     self.decoder = decoder
+    self.session = session
   }
   
   // MARK: - Request
@@ -37,7 +41,7 @@ final class NetworkService {
     guard let url = URL(string: url) else {
       return Promise(error: NetworkServiceError.invalidURL)
     }
-    let request = AF.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType))
+    let request = session.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType))
     return Promise { seal in
       firstly {
         request.responseDataAsPromise()
@@ -62,10 +66,10 @@ final class NetworkService {
     guard let url = URL(string: url) else {
       return Promise(error: NetworkServiceError.invalidURL)
     }
-    let request = AF.request(url, method: method,
-                             parameters: parameters,
-                             encoder: encoder,
-                             headers: modifiedHeaders(from: headers, requestType: requestType))
+    let request = session.request(url, method: method,
+                                  parameters: parameters,
+                                  encoder: encoder,
+                                  headers: modifiedHeaders(from: headers, requestType: requestType))
       .validate(statusCode: 200..<250)
     return Promise { seal in
       firstly {
