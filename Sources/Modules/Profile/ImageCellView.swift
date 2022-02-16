@@ -6,16 +6,26 @@
 import SwiftUI
 import Kingfisher
 
+final class ImageCellViewModel: ObservableObject {
+  @Published var date: String
+  @Published var image: Image
+  
+  init(date: String, image: Image) {
+    self.date = date
+    self.image = image
+  }
+}
+
 struct ImageCellView: View {
-  var model: ImageCellModel
+  var viewModel: ImageCellViewModel
   
   var body: some View {
     ZStack(alignment: .bottomLeading) {
-      model.image
+      viewModel.image
         .resizable()
         .cornerRadius(20)
       
-      Text(model.date)
+      Text(viewModel.date)
         .font(.mediumBody)
         .foregroundColor(.white)
         .offset(x: 15, y: -15)
@@ -28,7 +38,7 @@ struct ImageCellView: View {
 
 struct ImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ImageCellView(model: ImageCellModel(date: "11:00".unlocalized,
-                                        image: Image(.people)))
+    ImageCellView(viewModel: ImageCellViewModel(date: "11:00".unlocalized,
+                                            image: Image(.people)))
   }
 }

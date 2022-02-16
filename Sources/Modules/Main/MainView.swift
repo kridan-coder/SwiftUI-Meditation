@@ -12,8 +12,8 @@ final class MainViewModel: ObservableObject {
   
   @Published var nickname: String = ""
   @Published var avatarURL: String = ""
-  @Published var cardModels: [CardCellModel] = []
-  @Published var choiceModels: [ChoiceCellModel] = []
+  @Published var cardModels: [CardCellViewModel] = []
+  @Published var choiceModels: [ChoiceCellViewModel] = []
   
   func onAppear() {
     nickname = dependencies.userDataStorageService.nickname
@@ -29,10 +29,10 @@ final class MainViewModel: ObservableObject {
     firstly {
       dependencies.quotesNetworkService.getAllQuotes()
     }.done { result in
-      let quotes = result.data.map { CardCellModel(title: $0.title,
-                                                   description: $0.description,
-                                                   imageURL: $0.image,
-                                                   serverID: $0.id) }
+      let quotes = result.data.map { CardCellViewModel(title: $0.title,
+                                                       description: $0.description,
+                                                       imageURL: $0.image,
+                                                       serverID: $0.id) }
       for quote in quotes {
         self.cardModels.append(quote)
       }
@@ -45,7 +45,7 @@ final class MainViewModel: ObservableObject {
     firstly {
       dependencies.feelingsNetworkService.getAllFeelings()
     }.done { result in
-      let feelings = result.data.map { ChoiceCellModel(title: $0.title,
+      let feelings = result.data.map { ChoiceCellViewModel(title: $0.title,
                                                        imageURL: $0.image) }
       for feeling in feelings {
         self.choiceModels.append(feeling)
@@ -120,7 +120,7 @@ struct MainView: View {
         }
         LazyVStack(alignment: .center, spacing: 20) {
           ForEach(viewModel.cardModels) { cardModel in
-            CardCellView(model: cardModel)
+            CardCellView(viewModel: cardModel)
           }
         }
         .padding(25)

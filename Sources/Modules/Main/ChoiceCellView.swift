@@ -6,8 +6,20 @@
 import SwiftUI
 import Kingfisher
 
+final class ChoiceCellViewModel: ObservableObject, Identifiable {
+  @Published var title: String
+  @Published var imageURL: URL
+  
+  let id = UUID()
+  
+  init(title: String, imageURL: URL) {
+    self.title = title
+    self.imageURL = imageURL
+  }
+}
+
 struct ChoiceCellView: View {
-  let model: ChoiceCellModel
+  let model: ChoiceCellViewModel
   
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
@@ -38,7 +50,7 @@ struct ChoiceCellView: View {
 struct ChoiceCellView_Previews: PreviewProvider {
   static var previews: some View {
     if let url = URL(string: "http://mskko2021.mad.hakta.pro//uploads//feeling//Focus.png") {
-      ChoiceCellView(model: ChoiceCellModel(title: "Сосредоточенным".unlocalized, imageURL: url))
+      ChoiceCellView(model: ChoiceCellViewModel(title: "Сосредоточенным".unlocalized, imageURL: url))
         .background(Color.black)
         .frame(width: 125, height: 125)
     }

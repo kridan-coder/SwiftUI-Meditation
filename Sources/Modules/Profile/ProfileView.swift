@@ -7,7 +7,7 @@ import SwiftUI
 import Kingfisher
 import RealmSwift
 
-class ProfileViewModel: ObservableObject {
+final class ProfileViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
   
   @Binding var isLoggedIn: Bool
@@ -147,8 +147,8 @@ struct ProfileView: View {
     LazyVGrid(columns: columns) {
       ForEach(viewModel.imagePaths) { imagePathContainer in
         let image = viewModel.getImage(with: imagePathContainer.name)
-        ImageCellView(model: ImageCellModel(date: imagePathContainer.time,
-                                            image: Image(uiImage: image)))
+        ImageCellView(viewModel: ImageCellViewModel(date: imagePathContainer.time,
+                                                    image: Image(uiImage: image)))
           .onTapGesture {
             withAnimation {
               isPresentingPhoto = true
