@@ -39,6 +39,6 @@ struct ImageCellView: View {
 struct ImageView_Previews: PreviewProvider {
   static var previews: some View {
     ImageCellView(viewModel: ImageCellViewModel(date: "11:00".unlocalized,
-                                            image: Image(.people)))
+                                                image: Image(.people)))
   }
 }

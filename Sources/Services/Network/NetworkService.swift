@@ -5,7 +5,6 @@
 
 import Foundation
 import Alamofire
-import PromiseKit
 
 final class NetworkService {
   enum RequestType {
@@ -23,6 +22,7 @@ final class NetworkService {
   let urlProvider: URLProvider
   private let decoder: JSONDecoder
   private let session: Session
+  private let logger = RequestLogger()
   
   // MARK: - Init
   init(urlProvider: URLProvider = URLProvider(),
@@ -34,69 +34,48 @@ final class NetworkService {
   }
   
   // MARK: - Request
-  func execute<Response: Decodable>(url: String,
-                                    method: HTTPMethod,
-                                    headers: [String: String] = [:],
-                                    requestType: RequestType = .common) -> Promise<Response> {
+  @MainActor func execute<Response: Decodable>(url: String,
+                                               method: HTTPMethod,
+                                               headers: [String: String] = [:],
+                                               requestType: RequestType = .common) async throws -> Response {
     guard let url = URL(string: url) else {
-      return Promise(error: NetworkServiceError.invalidURL)
+      throw NetworkServiceError.invalidURL
     }
-    let request = session.request(url, method: method, headers: modifiedHeaders(from: headers, requestType: requestType))
-    return Promise { seal in
-      firstly {
-        request.responseDataAsPromise()
-      }.then { response in
-        self.handleResponse(response)
-      }.done { result in
-        seal.fulfill(result)
-      }.catch { error in
-        seal.reject(error)
-      }
-    }
-    
+    let request = session.request(url, method: method,
+                                  headers: modifiedHeaders(from: headers, requestType: requestType))
+      .validate(statusCode: 200..<250)
+    let data = try await request.data(logger: logger)
+    let result: Response = try await convertData(data)
+    return result
   }
   
-  func execute <Request: Encodable,
-                Response: Decodable> (url: String,
-                                      method: HTTPMethod,
-                                      parameters: Request,
-                                      encoder: ParameterEncoder = JSONParameterEncoder.default,
-                                      headers: [String: String] = [:],
-                                      requestType: RequestType = .common) -> Promise<Response> {
+  @MainActor func execute <Request: Encodable,
+                           Response: Decodable> (url: String,
+                                                 method: HTTPMethod,
+                                                 parameters: Request,
+                                                 encoder: ParameterEncoder = JSONParameterEncoder.default,
+                                                 headers: [String: String] = [:],
+                                                 requestType: RequestType = .common) async throws -> Response {
     guard let url = URL(string: url) else {
-      return Promise(error: NetworkServiceError.invalidURL)
+      throw NetworkServiceError.invalidURL
     }
     let request = session.request(url, method: method,
                                   parameters: parameters,
                                   encoder: encoder,
                                   headers: modifiedHeaders(from: headers, requestType: requestType))
       .validate(statusCode: 200..<250)
-    return Promise { seal in
-      firstly {
-        request.responseDataAsPromise()
-      }.then { response in
-        self.handleResponse(response)
-      }.done { result in
-        seal.fulfill(result)
-      }.catch { error in
-        seal.reject(error)
-      }
-    }
+    let data = try await request.data(logger: logger)
+    let result: Response = try await convertData(data)
+    return result
   }
   
-  private func handleResponse<Response: Decodable>(_ response: AFDataResponse<Data>) -> Promise<Response> {
-    switch response.result {
-    case .success(let data):
-      do {
-        let decodedData = try decoder.decode(Response.self, from: data)
-        return Promise.value(decodedData)
-      } catch let error {
-        log?.error(error)
-        return Promise(error: NetworkServiceError.failedToDecode)
-      }
-    case .failure(let error):
+  private func convertData<Response: Decodable>(_ data: Data) async throws -> Response {
+    do {
+      let decodedData = try decoder.decode(Response.self, from: data)
+      return decodedData
+    } catch let error {
       log?.error(error)
-      return Promise(error: NetworkServiceError.unknown)
+      throw NetworkServiceError.failedToDecode
     }
   }
   

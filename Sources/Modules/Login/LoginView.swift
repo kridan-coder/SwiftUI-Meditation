@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import PromiseKit
 
 final class LoginViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
@@ -34,22 +33,23 @@ final class LoginViewModel: ObservableObject {
       shouldShowAlert = true
       return
     }
-    
-    firstly {
-      dependencies.authNetworkService.login(email: email, password: password)
-    }.done { [self] result in
-      dependencies.userDataStorageService.nickname = result.nickName
-      dependencies.userDataStorageService.email = result.email
-      dependencies.userDataStorageService.avatarURL = result.avatar.absoluteString
-      dependencies.userDataStorageService.accessToken = result.token
-      withAnimation {
-        isLoggedIn = true
+    Task {
+      do {
+        let result = try await dependencies.authNetworkService.login(email: email, password: password)
+        dependencies.userDataStorageService.nickname = result.nickName
+        dependencies.userDataStorageService.email = result.email
+        dependencies.userDataStorageService.avatarURL = result.avatar.absoluteString
+        dependencies.userDataStorageService.accessToken = result.token
+        withAnimation {
+          isLoggedIn = true
+        }
+      } catch let error {
+        log?.error(error)
+        self.alertText = error.localizedDescription
+        self.shouldShowAlert = true
       }
-    }.catch { error in
-      log?.error(error)
-      self.alertText = error.localizedDescription
-      self.shouldShowAlert = true
     }
+    
   }
   
 }

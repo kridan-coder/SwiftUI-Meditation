@@ -588,7 +588,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.networkErrors` struct is generated, and contains static references to 4 localization keys.
+    /// This `R.string.networkErrors` struct is generated, and contains static references to 5 localization keys.
     struct networkErrors {
       /// Value: Не удалось получить запрошенные данные с сервера
       static let errorNoDataReceivedText = Rswift.StringResource(key: "error.no.data.received.text", tableName: "NetworkErrors", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -596,6 +596,8 @@ struct R: Rswift.Validatable {
       static let errorDecodingText = Rswift.StringResource(key: "error.decoding.text", tableName: "NetworkErrors", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Неизвестная серверная ошибка
       static let errorUnknownText = Rswift.StringResource(key: "error.unknown.text", tableName: "NetworkErrors", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Проверьте подключение к интернету
+      static let errorNoInternetText = Rswift.StringResource(key: "error.no.internet.text", tableName: "NetworkErrors", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Ссылка составлена некорректно
       static let errorInvalidUrlText = Rswift.StringResource(key: "error.invalid.url.text", tableName: "NetworkErrors", bundle: R.hostingBundle, locales: [], comment: nil)
 
@@ -636,6 +638,19 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("error.unknown.text", tableName: "NetworkErrors", bundle: bundle, comment: "")
+      }
+
+      /// Value: Проверьте подключение к интернету
+      static func errorNoInternetText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.no.internet.text", tableName: "NetworkErrors", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "NetworkErrors", preferredLanguages: preferredLanguages) else {
+          return "error.no.internet.text"
+        }
+
+        return NSLocalizedString("error.no.internet.text", tableName: "NetworkErrors", bundle: bundle, comment: "")
       }
 
       /// Value: Ссылка составлена некорректно

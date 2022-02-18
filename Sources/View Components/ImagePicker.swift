@@ -8,7 +8,6 @@ import Foundation
 import PhotosUI
 import SwiftUI
 import UIKit
-import PromiseKit
 
 struct ImagePicker: UIViewControllerRepresentable {
   func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
@@ -44,29 +43,29 @@ struct ImagePicker: UIViewControllerRepresentable {
           guard let safeImage = image as? UIImage else {
             return
           }
-          firstly {
-            self.generateImageName(safeImage, provider: provider)
-          }.done { result in
-            self.parent.imageName = result
-          }.catch { error in
-            log?.error(error)
-            self.parent.imageName = UUID().uuidString
-          }.finally {
+          self.generateImageName(safeImage, provider: provider) { result in
+            switch result {
+            case .success(let name):
+              self.parent.imageName = name
+            case .failure(let error):
+              log?.error(error)
+              self.parent.imageName = UUID().uuidString
+            }
             self.parent.image = safeImage
           }
         }
       }
     }
     
-    private func generateImageName(_ image: UIImage, provider: NSItemProvider) -> Promise<String> {
-      Promise<String> { seal in
-        provider.loadFileRepresentation(forTypeIdentifier: "public.item") { url, error in
-          if let url = url {
-            seal.fulfill(url.lastPathComponent)
-          } else {
-            log?.error(error ?? StorageError.couldNotDecodeFile)
-            seal.reject(error ?? StorageError.couldNotDecodeFile)
-          }
+    private func generateImageName(_ image: UIImage,
+                                   provider: NSItemProvider,
+                                   completionHandler: @escaping (Result<String, Error>) -> Void) {
+      provider.loadFileRepresentation(forTypeIdentifier: "public.item") { url, error in
+        if let url = url {
+          completionHandler(.success(url.lastPathComponent))
+        } else {
+          log?.error(error ?? StorageError.couldNotDecodeFile)
+          completionHandler(.failure(error ?? StorageError.couldNotDecodeFile))
         }
       }
     }

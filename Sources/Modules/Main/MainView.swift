@@ -5,7 +5,6 @@
 
 import SwiftUI
 import Kingfisher
-import PromiseKit
 
 final class MainViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
@@ -26,35 +25,30 @@ final class MainViewModel: ObservableObject {
   }
   
   private func getQuotes() {
-    firstly {
-      dependencies.quotesNetworkService.getAllQuotes()
-    }.done { result in
-      let quotes = result.data.map { CardCellViewModel(title: $0.title,
-                                                       description: $0.description,
-                                                       imageURL: $0.image,
-                                                       serverID: $0.id) }
-      for quote in quotes {
-        self.cardModels.append(quote)
+    Task {
+      do {
+        let result = try await dependencies.quotesNetworkService.getAllQuotes()
+        self.cardModels = result.data.map { CardCellViewModel(title: $0.title,
+                                                              description: $0.description,
+                                                              imageURL: $0.image,
+                                                              serverID: $0.id) }
+      } catch let error {
+        log?.error(error)
       }
-    }.catch { error in
-      log?.error(error)
     }
   }
   
   private func getFeelings() {
-    firstly {
-      dependencies.feelingsNetworkService.getAllFeelings()
-    }.done { result in
-      let feelings = result.data.map { ChoiceCellViewModel(title: $0.title,
-                                                       imageURL: $0.image) }
-      for feeling in feelings {
-        self.choiceModels.append(feeling)
+    Task {
+      do {
+        let result = try await dependencies.feelingsNetworkService.getAllFeelings()
+        self.choiceModels = result.data.map { ChoiceCellViewModel(title: $0.title,
+                                                                  imageURL: $0.image) }
+      } catch let error {
+        log?.error(error)
       }
-    }.catch { error in
-      log?.error(error)
     }
   }
-  
 }
 
 struct MainView: View {
@@ -99,7 +93,7 @@ struct MainView: View {
   
   @ViewBuilder
   private func makeScrollableContent() -> some View {
-    ScrollView(.vertical, showsIndicators: false) {
+    ScrollView(.vertical, showsIndicators: true) {
       VStack(alignment: .leading) {
         Text("С возвращением, \(viewModel.nickname)!".unlocalized)
           .foregroundColor(.white)

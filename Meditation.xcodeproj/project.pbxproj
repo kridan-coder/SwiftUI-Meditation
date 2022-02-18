@@ -16,7 +16,6 @@
 		3A1F6D7C27A78C3B00DB84CC /* UserDataToSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D7B27A78C3B00DB84CC /* UserDataToSend.swift */; };
 		3A1F6D8427A7A37300DB84CC /* NetworkServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8327A7A37300DB84CC /* NetworkServiceProtocols.swift */; };
 		3A1F6D8627A7A4E000DB84CC /* NetworkService+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8527A7A4E000DB84CC /* NetworkService+Auth.swift */; };
-		3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8727A7A96700DB84CC /* DataRequest+Promise.swift */; };
 		3A1F6D8A27A7AF3D00DB84CC /* NetworkService+Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8927A7AF3D00DB84CC /* NetworkService+Quotes.swift */; };
 		3A1F6D8C27A7AF6F00DB84CC /* NetworkService+Feelings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8B27A7AF6F00DB84CC /* NetworkService+Feelings.swift */; };
 		3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F6D8E27A7BB7B00DB84CC /* Storage.swift */; };
@@ -45,6 +44,9 @@
 		3AC86F1D27A936B1004770D9 /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */; };
 		3AC86F1F27A936DA004770D9 /* UserDataStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */; };
 		3AC86F2127A93D9D004770D9 /* StorePropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */; };
+		3AD4C3C927BF83AD00E3515E /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4C3C827BF83AD00E3515E /* Alamofire+Response.swift */; };
+		3AD4C3CB27BF844200E3515E /* RequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4C3CA27BF844200E3515E /* RequestLogger.swift */; };
+		3AD4C3CD27BF888400E3515E /* NetworkErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD4C3CC27BF888400E3515E /* NetworkErrorService.swift */; };
 		3ADEDF6D27AA52940006E96C /* String+Unlocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF6C27AA52940006E96C /* String+Unlocalized.swift */; };
 		3ADEDF6F27AA53E30006E96C /* Font+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */; };
 		3ADEDF7227AA5AB40006E96C /* AppImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEDF7127AA5AB40006E96C /* AppImageResource.swift */; };
@@ -88,7 +90,6 @@
 		3A1F6D7B27A78C3B00DB84CC /* UserDataToSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataToSend.swift; sourceTree = "<group>"; };
 		3A1F6D8327A7A37300DB84CC /* NetworkServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocols.swift; sourceTree = "<group>"; };
 		3A1F6D8527A7A4E000DB84CC /* NetworkService+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Auth.swift"; sourceTree = "<group>"; };
-		3A1F6D8727A7A96700DB84CC /* DataRequest+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+Promise.swift"; sourceTree = "<group>"; };
 		3A1F6D8927A7AF3D00DB84CC /* NetworkService+Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Quotes.swift"; sourceTree = "<group>"; };
 		3A1F6D8B27A7AF6F00DB84CC /* NetworkService+Feelings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+Feelings.swift"; sourceTree = "<group>"; };
 		3A1F6D8E27A7BB7B00DB84CC /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -117,6 +118,9 @@
 		3AC86F1C27A936B1004770D9 /* UserDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStorage.swift; sourceTree = "<group>"; };
 		3AC86F1E27A936D9004770D9 /* UserDataStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStoring.swift; sourceTree = "<group>"; };
 		3AC86F2027A93D9D004770D9 /* StorePropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePropertyWrappers.swift; sourceTree = "<group>"; };
+		3AD4C3C827BF83AD00E3515E /* Alamofire+Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Response.swift"; sourceTree = "<group>"; };
+		3AD4C3CA27BF844200E3515E /* RequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogger.swift; sourceTree = "<group>"; };
+		3AD4C3CC27BF888400E3515E /* NetworkErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorService.swift; sourceTree = "<group>"; };
 		3ADEDF6C27AA52940006E96C /* String+Unlocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Unlocalized.swift"; sourceTree = "<group>"; };
 		3ADEDF6E27AA53E30006E96C /* Font+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+AppFonts.swift"; sourceTree = "<group>"; };
 		3ADEDF7127AA5AB40006E96C /* AppImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageResource.swift; sourceTree = "<group>"; };
@@ -223,7 +227,8 @@
 				3A13C5FF27A3A0E00058E532 /* NetworkServiceError.swift */,
 				3A1F6D6E27A77C8400DB84CC /* URLProvider.swift */,
 				3A1F6D7027A77EBD00DB84CC /* URLFactory.swift */,
-				3A1F6D8727A7A96700DB84CC /* DataRequest+Promise.swift */,
+				3AD4C3CA27BF844200E3515E /* RequestLogger.swift */,
+				3AD4C3CC27BF888400E3515E /* NetworkErrorService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				3ADEDF7327AA5CF00006E96C /* Image+CustomInit.swift */,
 				3ADEDF7A27AA6E7F0006E96C /* Color+AppColors.swift */,
 				3AB5D0B127AD22D400C2DF10 /* DateFormatter+Format.swift */,
+				3AD4C3C827BF83AD00E3515E /* Alamofire+Response.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -697,6 +703,7 @@
 				3AC86F1A27A92C38004770D9 /* AppDependencies.swift in Sources */,
 				3ADEDF7B27AA6E7F0006E96C /* Color+AppColors.swift in Sources */,
 				3ADEDF7427AA5CF00006E96C /* Image+CustomInit.swift in Sources */,
+				3AD4C3CB27BF844200E3515E /* RequestLogger.swift in Sources */,
 				3A64040127980C3600466FA4 /* ImagePicker.swift in Sources */,
 				3A6878A2279403FD00069424 /* MainView.swift in Sources */,
 				44BAE2FA278EC2DD002FFFCE /* WelcomeView.swift in Sources */,
@@ -704,6 +711,7 @@
 				3A1F6D8C27A7AF6F00DB84CC /* NetworkService+Feelings.swift in Sources */,
 				3ADEDF7927AA6CDC0006E96C /* TabbarView.swift in Sources */,
 				3AB5D0B227AD22D400C2DF10 /* DateFormatter+Format.swift in Sources */,
+				3AD4C3C927BF83AD00E3515E /* Alamofire+Response.swift in Sources */,
 				3A1F6D7627A78BDF00DB84CC /* Quotes.swift in Sources */,
 				3AFA773D27A6D30300FDC987 /* R.generated.swift in Sources */,
 				3AC86F1027A912A2004770D9 /* StorageService+Images.swift in Sources */,
@@ -722,7 +730,7 @@
 				3A6403FF2797FB4700466FA4 /* ContentImageView.swift in Sources */,
 				44BAE306278EE41E002FFFCE /* LoginView.swift in Sources */,
 				3A1F6D8F27A7BB7B00DB84CC /* Storage.swift in Sources */,
-				3A1F6D8827A7A96700DB84CC /* DataRequest+Promise.swift in Sources */,
+				3AD4C3CD27BF888400E3515E /* NetworkErrorService.swift in Sources */,
 				3A8E9BDA2794585700B791F3 /* CardCellView.swift in Sources */,
 				3AC86F1327A91B5E004770D9 /* RealmStorage.swift in Sources */,
 				3AFA773627A6972700FDC987 /* Constants.swift in Sources */,

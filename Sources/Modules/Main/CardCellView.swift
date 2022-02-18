@@ -31,7 +31,7 @@ struct CardCellView: View {
   @State private var selected: Bool? = false
   
   var body: some View {
-    NavigationLink(destination: EmptyView(),
+    NavigationLink(destination: Text("Hello".unlocalized),
                    tag: true,
                    selection: $selected) { EmptyView() }
     ZStack {

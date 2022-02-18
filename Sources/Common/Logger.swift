@@ -23,4 +23,11 @@ struct Logger {
     SwiftyBeaver.error(message(), file, function, line: line)
   }
   
+  func debug(_ message: @autoclosure () -> Any,
+             _ file: String = #file,
+             _ function: String = #function,
+             _ line: Int = #line) {
+    SwiftyBeaver.debug(message(), file, function, line: line)
+  }
+  
 }

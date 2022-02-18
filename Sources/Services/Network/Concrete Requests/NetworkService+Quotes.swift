@@ -4,12 +4,11 @@
 //
 
 import Foundation
-import PromiseKit
 
 extension NetworkService: QuotesNetworkProtocol {
-  func getAllQuotes() -> Promise<Quotes> {
+  func getAllQuotes() async throws -> Quotes {
     let url = urlProvider.makeURL(with: URLFactory.Quotes.getAllQuotes)
-    return execute(url: url, method: .get)
+    return try await execute(url: url, method: .get)
   }
   
 }

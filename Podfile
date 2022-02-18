@@ -12,7 +12,6 @@ target 'Meditation' do
   pod 'SwiftyBeaver'
   pod 'R.swift'
   pod 'SwiftLint'
-  pod 'PromiseKit'
   pod 'KeychainAccess'
 
 end

@@ -4,12 +4,11 @@
 //
 
 import Foundation
-import PromiseKit
 
 extension NetworkService: FeelingsNetworkProtocol {
-  func getAllFeelings() -> Promise<Feelings> {
+  func getAllFeelings() async throws -> Feelings {
     let url = urlProvider.makeURL(with: URLFactory.Feelings.getAllFeelings)
-    return execute(url: url, method: .get)
+    return try await execute(url: url, method: .get)
   }
   
 }

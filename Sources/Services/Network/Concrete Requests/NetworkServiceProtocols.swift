@@ -4,16 +4,15 @@
 //
 
 import Foundation
-import PromiseKit
 
 protocol QuotesNetworkProtocol {
-  func getAllQuotes() -> Promise<Quotes>
+  func getAllQuotes() async throws -> Quotes
 }
 
 protocol FeelingsNetworkProtocol {
-  func getAllFeelings() -> Promise<Feelings>
+  func getAllFeelings() async throws -> Feelings
 }
 
 protocol AuthNetworkProtocol {
-  func login(email: String, password: String) -> Promise<ReceivedUserData>
+  func login(email: String, password: String) async throws -> ReceivedUserData
 }
