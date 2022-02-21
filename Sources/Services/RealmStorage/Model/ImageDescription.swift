@@ -4,6 +4,7 @@
 //
 
 import RealmSwift
+import Foundation
 
 class ImageDescription: Object, ObjectKeyIdentifiable {
   @objc dynamic var name: String = ""

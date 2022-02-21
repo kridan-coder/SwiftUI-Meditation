@@ -48,6 +48,9 @@ packages:
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess
     version: 4.2.2
+  Rswift:
+    url: https://github.com/mac-cain13/R.swift.Library
+    version: 5.4.0
 targets:
   Meditation:
     type: application
@@ -58,6 +61,7 @@ targets:
     - package: RealmSwift
     - package: SwiftyBeaver
     - package: KeychainAccess
+    - package: Rswift
     sources:
     - Sources
     - Resources
@@ -70,19 +74,7 @@ targets:
         TARGETED_DEVICE_FAMILY: 1
         VERSIONING_SYSTEM: apple-generic
         PRODUCT_BUNDLE_IDENTIFIER: meditation
-        CODE_SIGN_STYLE: Manual
-      configs:
-        Release:
-          CODE_SIGN_IDENTITY: iPhone Distribution
-          PROVISIONING_PROFILE_SPECIFIER: meditation-appstore
-          ENABLE_BITCODE: 'YES'
-          MTL_ENABLE_DEBUG_INFO: 'NO'
-          SWIFT_OPTIMIZATION_LEVEL: "-O"
-        Debug:
-          CODE_SIGN_IDENTITY: iPhone Developer
-          PROVISIONING_PROFILE_SPECIFIER: meditation-dev
-          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
-          SWIFT_COMPILATION_MODE: singlefile
+        CODE_SIGN_STYLE: Automatic
     preBuildScripts:
     - script: |
         if test -d "/opt/homebrew/bin/"; then
@@ -92,7 +84,7 @@ targets:
         export PATH
 
         if which rswift >/dev/null; then
-          rswift generate "$SRCROOT/$TARGET_NAME/Resources/R.generated.swift"
+          rswift generate "$SRCROOT/Resources/R.generated.swift"
         else
           echo "error: R.swift not installed; run 'mint bootstrap' to install"
           return -1
