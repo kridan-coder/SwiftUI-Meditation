@@ -48,6 +48,9 @@ packages:
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess
     version: 4.2.2
+  Rswift:
+    url: https://github.com/mac-cain13/R.swift.Library
+    version: 5.4.0
 targets:
   Meditation:
     type: application
@@ -92,7 +95,7 @@ targets:
         export PATH
 
         if which rswift >/dev/null; then
-          rswift generate "$SRCROOT/$TARGET_NAME/Resources/R.generated.swift"
+          rswift generate "$SRCROOT/Resources/R.generated.swift"
         else
           echo "error: R.swift not installed; run 'mint bootstrap' to install"
           return -1
