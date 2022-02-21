@@ -1,0 +1,140 @@
+---
+name: Meditation
+options:
+  xcodeVersion: 12.5
+configs:
+  Release: release
+  Debug: debug
+options:
+  deploymentTarget:
+    iOS: '15.0'
+    defaultConfig: Debug
+    groupSortPosition: top
+    developmentLanguage: "ru"
+    enableBaseInternalization: true
+    usesTabs: false
+    indentWidth: 2
+    tabWidth: 2
+    groupOrdering:
+      - order: [Sources, Resources, SupportingFiles]
+      - pattern: 'Sources'
+        order: [Application, Common, Protocols, Extensions, Model, Modules, View Components, Services, Utils]
+settings:
+  base:
+    SWIFT_VERSION: 5.5
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+    MTL_ENABLE_DEBUG_INFO: 'YES'
+    ENABLE_BITCODE: 'NO'
+    SWIFT_COMPILATION_MODE: wholemodule
+    SUPPORTS_MACCATALYST: 'NO'
+  configs:
+    Debug:
+      SWIFT_COMPILATION_MODE: "incremental"
+    Release:
+      SWIFT_COMPILATION_MODE: "wholemodule"
+packages:
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire
+    version: 5.5.0
+  Kingfisher:
+    url: https://github.com/onevcat/Kingfisher
+    version: 7.1.2
+  RealmSwift:
+    url: https://github.com/realm/realm-swift
+    version: 10.22.0
+  SwiftyBeaver:
+    url: https://github.com/SwiftyBeaver/SwiftyBeaver
+    version:  1.9.5
+  KeychainAccess:
+    url: https://github.com/kishikawakatsumi/KeychainAccess
+    version: 4.2.2
+targets:
+  Meditation:
+    type: application
+    platform: iOS
+    dependencies:
+    - package: Alamofire
+    - package: Kingfisher
+    - package: RealmSwift
+    - package: SwiftyBeaver
+    - package: KeychainAccess
+    sources:
+    - Sources
+    - Resources
+    - Supporting Files
+    settings:
+      base:
+        MARKETING_VERSION: 0.0.1
+        CURRENT_PROJECT_VERSION: 1
+        INFOPLIST_FILE: Supporting Files/Info.plist
+        TARGETED_DEVICE_FAMILY: 1
+        VERSIONING_SYSTEM: apple-generic
+        PRODUCT_BUNDLE_IDENTIFIER: meditation
+        CODE_SIGN_STYLE: Manual
+      configs:
+        Release:
+          CODE_SIGN_IDENTITY: iPhone Distribution
+          PROVISIONING_PROFILE_SPECIFIER: meditation-appstore
+          ENABLE_BITCODE: 'YES'
+          MTL_ENABLE_DEBUG_INFO: 'NO'
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
+        Debug:
+          CODE_SIGN_IDENTITY: iPhone Developer
+          PROVISIONING_PROFILE_SPECIFIER: meditation-dev
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+          SWIFT_COMPILATION_MODE: singlefile
+    preBuildScripts:
+    - script: |
+        if test -d "/opt/homebrew/bin/"; then
+        PATH="/opt/homebrew/bin/:${PATH}"
+        fi
+
+        export PATH
+
+        if which rswift >/dev/null; then
+          rswift generate "$SRCROOT/$TARGET_NAME/Resources/R.generated.swift"
+        else
+          echo "error: R.swift not installed; run 'mint bootstrap' to install"
+          return -1
+        fi
+      name: R.swift
+      inputFiles:
+      - "$TEMP_DIR/rswift-lastrun"
+      outputFiles:
+      - "$SRCROOT/Resources/R.generated.swift"
+    postBuildScripts:
+    - script: |
+        if test -d "/opt/homebrew/bin/"; then
+        PATH="/opt/homebrew/bin/:${PATH}"
+        fi
+
+        export PATH
+
+        if which swiftlint >/dev/null; then
+          swiftlint
+        else
+          echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+        fi
+      name: SwiftLint
+    - script: |
+        TAGS="TODO:|FIXME:"
+        echo "searching ${SRCROOT} for ${TAGS}"
+        find "${SRCROOT}" \( -name "*.swift" \) \( -not -path "*/Pods/*" \) -print0 | xargs -0 egrep --with-filename --line-number --only-matching "($TAGS).*\$" | perl -p -e "s/($TAGS)/ warning: \$1/"
+      name: Highlight TODOs and FIXMEs
+schemes:
+  Meditation:
+    build:
+      targets:
+        Meditation: all
+    run:
+      config: Debug
+      environmentVariables:
+      - variable: OS_ACTIVITY_MODE
+      - value: disable
+      - isEnabled: false
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Release
