@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 enum TabbarViewScreen: String {
   case home, sound, profile
@@ -14,6 +15,12 @@ final class TabbarViewModel: ObservableObject {
   @ObservedObject var profileViewModel: ProfileViewModel
   
   @Binding var isLoggedIn: Bool
+  
+  var coreDataViewContext: NSManagedObjectContext {
+    dependencies.coreDataService.viewContext
+  }
+  
+  @Environment(\.appDependencies) private var dependencies
   
   init(isLoggedIn: Binding<Bool>,
        mainViewModel: MainViewModel,
@@ -57,6 +64,7 @@ struct TabbarView: View {
         .navigationBarHidden(true).navigationTitle("")
       
       ProfileView(viewModel: viewModel.profileViewModel)
+        .environment(\.managedObjectContext, viewModel.coreDataViewContext)
         .tabItem {
           if currentTabbarView == .profile {
             Image(.profileChosen)

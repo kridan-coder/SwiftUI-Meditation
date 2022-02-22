@@ -10,6 +10,7 @@ final class AppDependencies: ObservableObject {
   private let storageService: StorageService
   private let networkService: NetworkService
   private let userStorage: UserDataStorage
+  private let coreDataStorage: CoreDataStorage
   
   var authNetworkService: AuthNetworkProtocol {
     networkService
@@ -35,18 +36,28 @@ final class AppDependencies: ObservableObject {
     userStorage
   }
   
-  init(realmStorage: RealmStorage, storageService: StorageService, networkService: NetworkService, userStorage: UserDataStorage) {
+  var coreDataService: CoreDataStorageProviding {
+    coreDataStorage
+  }
+  
+  init(realmStorage: RealmStorage,
+       storageService: StorageService,
+       networkService: NetworkService,
+       userStorage: UserDataStorage,
+       coreDataStorage: CoreDataStorage) {
     self.realmStorage = realmStorage
     self.storageService = storageService
     self.networkService = networkService
     self.userStorage = userStorage
+    self.coreDataStorage = coreDataStorage
   }
   
   static func makeDefault() -> AppDependencies {
     AppDependencies(realmStorage: RealmStorage(),
                     storageService: StorageService(),
                     networkService: NetworkService(),
-                    userStorage: UserDataStorage())
+                    userStorage: UserDataStorage(),
+                    coreDataStorage: CoreDataStorage())
   }
   
 }

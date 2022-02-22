@@ -6,7 +6,7 @@
 import Foundation
 import CoreData
 
-struct CoreDataStorage: CoreDataStorageProviding {
+final class CoreDataStorage: CoreDataStorageProviding {
   let container = NSPersistentContainer(name: "Meditation")
   
   var viewContext: NSManagedObjectContext {
@@ -15,6 +15,7 @@ struct CoreDataStorage: CoreDataStorageProviding {
   
   init() {
     container.loadPersistentStores { description, error in
+      log?.debug(description)
       if let error = error {
         fatalError("Core Data failed to load: \(error.localizedDescription)")
       }

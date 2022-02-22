@@ -4,15 +4,18 @@
 //
 
 import SwiftUI
-import RealmSwift
+import CoreData
 
 final class ContentImageViewModel: ObservableObject {
   @Environment(\.appDependencies) private var dependencies
   
-  func deleteImage(withName name: String) {
+  func deleteImage(withInfo imageInfo: ImageInfo) {
+    guard let imageName = imageInfo.name else { return }
+    dependencies.coreDataService.viewContext.delete(imageInfo)
     do {
-      try dependencies.uiImagesStorage.deleteImage(withName: name)
-      let imageDescription = dependencies.realmService.getAllObjects(ofType: ImageDescription.self).first { $0.name == name }
+      try dependencies.coreDataService.viewContext.save()
+      try dependencies.uiImagesStorage.deleteImage(withName: imageName)
+      let imageDescription = dependencies.realmService.getAllObjects(ofType: ImageDescription.self).first { $0.name == imageName }
       guard let safeImageDescription = imageDescription else { return }
       try dependencies.realmService.delete(safeImageDescription)
     } catch let error {
@@ -25,7 +28,7 @@ struct ContentImageView: View {
   @State private var isScaled = false
   @Binding var isPresentingPhoto: Bool
   
-  let imageName: String
+  let imageInfo: ImageInfo
   let image: Image
   
   @ObservedObject private(set) var viewModel: ContentImageViewModel
@@ -34,7 +37,7 @@ struct ContentImageView: View {
     withAnimation {
       isPresentingPhoto = false
     }
-    viewModel.deleteImage(withName: imageName)
+    viewModel.deleteImage(withInfo: imageInfo)
   }
   
   var body: some View {
@@ -107,6 +110,9 @@ struct ContentImageView: View {
 
 struct ContentImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentImageView(isPresentingPhoto: .constant(true), imageName: "h", image: Image(.people), viewModel: ContentImageViewModel())
+    ContentImageView(isPresentingPhoto: .constant(true),
+                     imageInfo: ImageInfo(),
+                     image: Image(.people),
+                     viewModel: ContentImageViewModel())
   }
 }

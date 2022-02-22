@@ -5,16 +5,15 @@
 
 import SwiftUI
 import Kingfisher
-import RealmSwift
+import CoreData
 
 final class ProfileViewModel: ObservableObject {
-  @Environment(\.appDependencies) private var dependencies
-  
   @Binding var isLoggedIn: Bool
   
   @Published var nickname = ""
   @Published var avatarURL = ""
-  @ObservedResults(ImageDescription.self) var imagePaths
+  
+  @Environment(\.appDependencies) private var dependencies
   
   init(isLoggedIn: Binding<Bool>) {
     _isLoggedIn = isLoggedIn
@@ -32,7 +31,10 @@ final class ProfileViewModel: ObservableObject {
     }
   }
   
-  func getImage(with name: String) -> UIImage {
+  func getImage(with name: String?) -> UIImage {
+    guard let name = name else {
+      return UIImage()
+    }
     do {
       let image = try dependencies.uiImagesStorage.getUIImage(withKey: name)
       return image
@@ -42,17 +44,17 @@ final class ProfileViewModel: ObservableObject {
     return UIImage()
   }
   
-  func saveImage(_ image: UIImage, imageName: String) {
+  func saveImage(_ image: UIImage, imageName: String, imagePaths: [ImageInfo]) {
     if imagePaths.contains(where: { $0.name == imageName }) {
-      saveImage(image, imageName: imageName + "(copy)")
+      saveImage(image, imageName: imageName + "(copy)", imagePaths: imagePaths)
       return // recursion until imageName becomes unique
     }
-    let description = ImageDescription()
-    description.name = imageName
-    description.time = generateCurrentTime()
+    let imageInfo = ImageInfo(context: dependencies.coreDataService.viewContext)
+    imageInfo.name = imageName
+    imageInfo.timestamp = Date()
     do {
-      try dependencies.realmService.add(description)
-      try dependencies.uiImagesStorage.store(uiImage: image, name: description.name)
+      try dependencies.coreDataService.viewContext.save()
+      try dependencies.uiImagesStorage.store(uiImage: image, name: imageName)
     } catch let error {
       log?.error(error)
     }
@@ -68,8 +70,16 @@ struct ProfileView: View {
   @State private var isPresentingPhoto = false
   @State private var isShowingImagePicker = false
   
-  @State private var imageToShow = UIImage()
-  @State private var imageToShowName = ""
+  @State private var lastAddedImage = UIImage()
+  @State private var lastAddedImageName = ""
+  
+  @State private var pickedImage = UIImage()
+  @State private var pickedImageInfo = ImageInfo()
+  
+  @Environment(\.managedObjectContext) private var viewContext
+  
+  @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)])
+  private var imagePaths: FetchedResults<ImageInfo>
   
   @ObservedObject private(set) var viewModel: ProfileViewModel
   
@@ -81,8 +91,8 @@ struct ProfileView: View {
   var body: some View {
     if isPresentingPhoto {
       ContentImageView(isPresentingPhoto: $isPresentingPhoto,
-                       imageName: imageToShowName,
-                       image: Image(uiImage: imageToShow),
+                       imageInfo: pickedImageInfo,
+                       image: Image(uiImage: pickedImage),
                        viewModel: ContentImageViewModel())
     } else {
       GeometryReader { screen in
@@ -102,10 +112,15 @@ struct ProfileView: View {
         }
       }
       .sheet(isPresented: $isShowingImagePicker) {
-        ImagePicker(image: $imageToShow, imageName: $imageToShowName)
+        ImagePicker(image: $lastAddedImage, imageName: $lastAddedImageName)
       }
-      .onChange(of: imageToShow) { newValue in
-        viewModel.saveImage(newValue, imageName: imageToShowName)
+      .onChange(of: lastAddedImage) { newValue in
+        viewModel.saveImage(newValue,
+                            imageName: lastAddedImageName,
+                            imagePaths: Array(imagePaths))
+      }
+      .onAppear {
+        viewModel.onAppear()
       }
     }
   }
@@ -145,15 +160,15 @@ struct ProfileView: View {
   @ViewBuilder
   private func makeImageCells() -> some View {
     LazyVGrid(columns: columns) {
-      ForEach(viewModel.imagePaths) { imagePathContainer in
+      ForEach(imagePaths) { imagePathContainer in
         let image = viewModel.getImage(with: imagePathContainer.name)
-        ImageCellView(viewModel: ImageCellViewModel(date: imagePathContainer.time,
+        ImageCellView(viewModel: ImageCellViewModel(date: imagePathContainer.timestampString() ?? "12:02".unlocalized,
                                                     image: Image(uiImage: image)))
           .onTapGesture {
             withAnimation {
               isPresentingPhoto = true
-              imageToShow = image
-              imageToShowName = imagePathContainer.name
+              pickedImage = image
+              pickedImageInfo = imagePathContainer
             }
           }
       }
