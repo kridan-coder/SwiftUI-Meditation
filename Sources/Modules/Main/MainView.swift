@@ -14,14 +14,15 @@ final class MainViewModel: ObservableObject {
   @Published var cardModels: [CardCellViewModel] = []
   @Published var choiceModels: [ChoiceCellViewModel] = []
   
-  func onAppear() {
-    nickname = dependencies.userDataStorageService.nickname
-    avatarURL = dependencies.userDataStorageService.avatarURL
-  }
-  
   init() {
+    getUserInfo()
     getQuotes()
     getFeelings()
+  }
+  
+  private func getUserInfo() {
+    nickname = dependencies.userDataStorageService.nickname
+    avatarURL = dependencies.userDataStorageService.avatarURL
   }
   
   private func getQuotes() {
@@ -62,9 +63,6 @@ struct MainView: View {
         makeTopBar()
         makeScrollableContent()
       }
-    }
-    .onAppear {
-      viewModel.onAppear()
     }
     .navigationBarHidden(true)
   }
