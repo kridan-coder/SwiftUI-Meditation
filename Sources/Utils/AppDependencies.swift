@@ -6,7 +6,6 @@
 import SwiftUI
 
 final class AppDependencies: ObservableObject {
-  private let realmStorage: RealmStorage
   private let storageService: StorageService
   private let networkService: NetworkService
   private let userStorage: UserDataStorage
@@ -28,10 +27,6 @@ final class AppDependencies: ObservableObject {
     storageService
   }
   
-  var realmService: RealmServiceProviding {
-    realmStorage
-  }
-  
   var userDataStorageService: UserDataStoring {
     userStorage
   }
@@ -40,12 +35,10 @@ final class AppDependencies: ObservableObject {
     coreDataStorage
   }
   
-  init(realmStorage: RealmStorage,
-       storageService: StorageService,
+  init(storageService: StorageService,
        networkService: NetworkService,
        userStorage: UserDataStorage,
        coreDataStorage: CoreDataStorage) {
-    self.realmStorage = realmStorage
     self.storageService = storageService
     self.networkService = networkService
     self.userStorage = userStorage
@@ -53,8 +46,7 @@ final class AppDependencies: ObservableObject {
   }
   
   static func makeDefault() -> AppDependencies {
-    AppDependencies(realmStorage: RealmStorage(),
-                    storageService: StorageService(),
+    AppDependencies(storageService: StorageService(),
                     networkService: NetworkService(),
                     userStorage: UserDataStorage(),
                     coreDataStorage: CoreDataStorage())

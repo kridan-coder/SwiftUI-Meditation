@@ -15,9 +15,6 @@ final class ContentImageViewModel: ObservableObject {
     do {
       try dependencies.coreDataService.viewContext.save()
       try dependencies.uiImagesStorage.deleteImage(withName: imageName)
-      let imageDescription = dependencies.realmService.getAllObjects(ofType: ImageDescription.self).first { $0.name == imageName }
-      guard let safeImageDescription = imageDescription else { return }
-      try dependencies.realmService.delete(safeImageDescription)
     } catch let error {
       log?.error(error)
     }

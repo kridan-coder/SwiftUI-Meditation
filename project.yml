@@ -39,9 +39,6 @@ packages:
   Kingfisher:
     url: https://github.com/onevcat/Kingfisher
     version: 7.1.2
-  RealmSwift:
-    url: https://github.com/realm/realm-swift
-    version: 10.22.0
   SwiftyBeaver:
     url: https://github.com/SwiftyBeaver/SwiftyBeaver
     version:  1.9.5
@@ -58,7 +55,6 @@ targets:
     dependencies:
     - package: Alamofire
     - package: Kingfisher
-    - package: RealmSwift
     - package: SwiftyBeaver
     - package: KeychainAccess
     - package: Rswift
